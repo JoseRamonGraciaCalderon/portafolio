@@ -1,45 +1,117 @@
 ---
-// Componente para imágenes optimizadas con soporte WebP y fallback
+// Componente para imágenes optimizadas con soporte WebP, responsive y fallback
 interface Props {
   src: string;
   alt: string;
   class?: string;
   width?: number;
   height?: number;
+  sizes?: string;
+  priority?: boolean;
 }
 
-const { src, alt, class: className, width, height } = Astro.props;
+const {
+  src,
+  alt,
+  class: className,
+  width: propWidth,
+  height: propHeight,
+  sizes = '(max-width: 768px) 100vw, 800px',
+  priority = false
+} = Astro.props;
 
 // Determinar la ruta de la imagen WebP
 const srcPath = src.startsWith('/') ? src : `/${src}`;
 const extension = srcPath.substring(srcPath.lastIndexOf('.'));
 const basePath = srcPath.substring(0, srcPath.lastIndexOf('.'));
+const fileName = basePath.substring(basePath.lastIndexOf('/') + 1);
+
+// Rutas para imágenes responsive
+const responsiveImages = {
+  small: `/images/responsive/${fileName}-small.webp`,
+  medium: `/images/responsive/${fileName}-medium.webp`,
+  large: `/images/responsive/${fileName}-large.webp`
+};
+
+// Determinar dimensiones de la imagen según el tipo
+let width = propWidth;
+let height = propHeight;
+let aspectRatio;
+
+// Dimensiones predeterminadas para tipos comunes de imágenes
+if (!width || !height) {
+  if (fileName === 'avatar') {
+    width = 300;
+    height = 300;
+    aspectRatio = '1/1';
+  } else if (fileName.includes('preview')) {
+    width = 800;
+    height = 450;
+    aspectRatio = '16/9';
+  } else {
+    width = 800;
+    aspectRatio = 'auto';
+  }
+}
+
+// Determinar si la imagen es local (para aplicar WebP y responsive)
+const isLocalImage = !src.startsWith('http');
+
+// Generar srcset para imágenes responsive
+const srcset = isLocalImage
+  ? `${responsiveImages.small} 400w, ${responsiveImages.medium} 800w, ${responsiveImages.large} 1200w`
+  : '';
+
+// Fallback a WebP original si no hay versiones responsive
 const webpSrc = `/images/webp${basePath.substring(basePath.lastIndexOf('/'))}.webp`;
 
-// Determinar si la imagen es local (para aplicar WebP)
-const isLocalImage = !src.startsWith('http');
+// Determinar atributos de carga
+const loadingAttr = priority ? 'eager' : 'lazy';
+const fetchPriority = priority ? 'high' : 'auto';
 ---
 
 {isLocalImage ? (
   <picture>
-    <source srcset={webpSrc} type="image/webp" />
-    <source srcset={srcPath} type={`image/${extension.substring(1)}`} />
-    <img 
-      src={srcPath} 
-      alt={alt} 
-      class={className} 
-      width={width} 
+    {/* Versiones responsive WebP */}
+    <source
+      srcset={srcset}
+      sizes={sizes}
+      type="image/webp"
+    />
+
+    {/* Fallback a WebP original */}
+    <source
+      srcset={webpSrc}
+      type="image/webp"
+    />
+
+    {/* Fallback a imagen original */}
+    <source
+      srcset={srcPath}
+      type={`image/${extension.substring(1)}`}
+    />
+
+    <img
+      src={srcPath}
+      alt={alt}
+      class={className}
+      width={width}
       height={height}
-      loading="lazy"
+      loading={loadingAttr}
+      fetchpriority={fetchPriority}
+      decoding={priority ? 'sync' : 'async'}
+      style={`aspect-ratio: ${aspectRatio};`}
     />
   </picture>
 ) : (
-  <img 
-    src={src} 
-    alt={alt} 
-    class={className} 
-    width={width} 
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    width={width}
     height={height}
-    loading="lazy"
+    loading={loadingAttr}
+    fetchpriority={fetchPriority}
+    decoding={priority ? 'sync' : 'async'}
   />
 )}

@@ -14,7 +14,14 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="100">
         <div class="project-image pricetravel-image">
           <a href="https://www.pricetravel.com" target="_blank">
-            <OptimizedImage src="/images/pricetravel-preview.png" alt="PriceTravel Website" class="project-preview" />
+            <OptimizedImage
+              src="/images/pricetravel-preview.png"
+              alt="PriceTravel Website"
+              class="project-preview"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 400px, 800px"
+              width={800}
+              height={450}
+            />
           </a>
         </div>
         <div class="project-content">
@@ -39,7 +46,14 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="200">
         <div class="project-image">
           <a href="https://www.tiquetesbaratos.com/" target="_blank">
-            <OptimizedImage src="/images/tiquetesbaratos-preview.png" alt="Tiquetes Baratos Website" class="project-preview" />
+            <OptimizedImage
+              src="/images/tiquetesbaratos-preview.png"
+              alt="Tiquetes Baratos Website"
+              class="project-preview"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 400px, 800px"
+              width={800}
+              height={450}
+            />
           </a>
         </div>
         <div class="project-content">
@@ -64,7 +78,14 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="300">
         <div class="project-image">
           <a href="https://secure.azzule.com/supplychainprogram/login.aspx" target="_blank">
-            <OptimizedImage src="/images/azzule-preview.png" alt="Azzule Supply Chain Program" class="project-preview" />
+            <OptimizedImage
+              src="/images/azzule-preview.png"
+              alt="Azzule Supply Chain Program"
+              class="project-preview"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 400px, 800px"
+              width={800}
+              height={450}
+            />
           </a>
         </div>
         <div class="project-content">
@@ -91,7 +112,14 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="400">
         <div class="project-image">
           <a href="https://aforecoppel.com/" target="_blank">
-            <OptimizedImage src="/images/afore-preview.png" alt="Afore Coppel" class="project-preview" />
+            <OptimizedImage
+              src="/images/afore-preview.png"
+              alt="Afore Coppel"
+              class="project-preview"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 400px, 800px"
+              width={800}
+              height={450}
+            />
           </a>
         </div>
         <div class="project-content">
@@ -117,7 +145,14 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="500">
         <div class="project-image">
           <a href="http://alt.servifact.com.mx/SectorPrimario/Login/IniciarSesion" target="_blank">
-            <OptimizedImage src="/images/servifact-preview.png" alt="Servifact Sector Primario" class="project-preview" />
+            <OptimizedImage
+              src="/images/servifact-preview.png"
+              alt="Servifact Sector Primario"
+              class="project-preview"
+              sizes="(max-width: 480px) 100vw, (max-width: 768px) 400px, 800px"
+              width={800}
+              height={450}
+            />
           </a>
         </div>
         <div class="project-content">
@@ -207,7 +242,8 @@ const t = useTranslations(lang);
   }
 
   .project-image {
-    height: 200px;
+    height: auto;
+    aspect-ratio: 16/9;
     overflow: hidden;
     position: relative;
     display: flex;
@@ -228,6 +264,7 @@ const t = useTranslations(lang);
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s ease;
+    aspect-ratio: 16/9;
   }
 
   .project-image a {
