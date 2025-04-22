@@ -248,11 +248,13 @@ const t = useTranslations(lang);
   }
 
   .function {
-    color: #50fa7b;
+    color: #2bbb5e; /* Verde más oscuro para mejor contraste */
+    font-weight: 600; /* Texto más grueso */
   }
 
   .parameter {
-    color: #ffb86c;
+    color: #e67e22; /* Naranja más oscuro para mejor contraste */
+    font-weight: 600; /* Texto más grueso */
   }
 
   .operator {
@@ -280,7 +282,8 @@ const t = useTranslations(lang);
   }
 
   .comment {
-    color: #6272a4;
+    color: var(--comment-color); /* Usar la variable para mejor contraste */
+    font-weight: 500; /* Texto más grueso para mejor legibilidad */
   }
 
   .dot {
@@ -337,12 +340,14 @@ const t = useTranslations(lang);
     font-size: 1.5rem;
     color: var(--primary-color);
     margin-bottom: 0.5rem;
-    font-weight: 600;
+    font-weight: 700; /* Texto más grueso para mejor contraste */
+    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); /* Sombra sutil para mejorar legibilidad */
   }
 
   .form-subtitle {
     color: var(--light-text-color);
     font-size: 0.9rem;
+    font-weight: 500; /* Texto más grueso para mejor contraste */
   }
 
   .form-group {
@@ -413,10 +418,12 @@ const t = useTranslations(lang);
     padding: 0.75rem 1.5rem;
     font-family: 'Consolas', 'Monaco', monospace;
     font-size: 1rem;
+    font-weight: 600; /* Texto más grueso para mejor contraste */
     cursor: pointer;
     transition: all 0.3s ease;
     display: inline-block;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Sombra de texto para mejorar legibilidad */
   }
 
   .btn-code:hover {

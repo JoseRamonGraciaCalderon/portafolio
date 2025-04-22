@@ -252,31 +252,33 @@ const currentUrl = Astro.url.href;
 
 <style is:global>
 	:root {
-		--primary-color: #3b82f6;
+		--primary-color: #2563eb; /* Azul más oscuro para mejor contraste */
 		--secondary-color: #1e40af;
-		--accent-color: #60a5fa;
-		--text-color: #1f2937;
-		--light-text-color: #6b7280;
+		--accent-color: #3b82f6;
+		--text-color: #111827; /* Texto más oscuro */
+		--light-text-color: #4b5563; /* Texto gris más oscuro */
 		--background-color: #ffffff;
 		--light-background: #f3f4f6;
 		--border-color: #e5e7eb;
 		--card-background: #ffffff;
 		--header-background: rgba(255, 255, 255, 0.95);
 		--shadow-color: rgba(0, 0, 0, 0.1);
+		--comment-color: #374151; /* Color para comentarios con mejor contraste */
 	}
 
 	html.dark {
 		--primary-color: #60a5fa;
 		--secondary-color: #3b82f6;
 		--accent-color: #93c5fd;
-		--text-color: #e5e7eb;
-		--light-text-color: #9ca3af;
+		--text-color: #f3f4f6; /* Texto más claro para mejor contraste */
+		--light-text-color: #d1d5db; /* Texto gris más claro */
 		--background-color: #111827;
 		--light-background: #1f2937;
 		--border-color: #374151;
 		--card-background: #1f2937;
 		--header-background: rgba(17, 24, 39, 0.95);
 		--shadow-color: rgba(0, 0, 0, 0.3);
+		--comment-color: #9ca3af; /* Color para comentarios con mejor contraste */
 	}
 
 	* {
@@ -351,13 +353,14 @@ const currentUrl = Astro.url.href;
 		background-color: var(--primary-color);
 		color: white;
 		border-radius: 0.375rem;
-		font-weight: 500;
+		font-weight: 600; /* Texto más grueso para mejor contraste */
 		text-align: center;
 		cursor: pointer;
 		transition: all 0.3s ease;
 		position: relative;
 		overflow: hidden;
 		z-index: 1;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2); /* Sombra de texto para mejorar legibilidad */
 	}
 
 	.btn:before {
@@ -388,8 +391,9 @@ const currentUrl = Astro.url.href;
 
 	.btn-outline {
 		background-color: transparent;
-		border: 1px solid var(--primary-color);
+		border: 2px solid var(--primary-color); /* Borde más grueso */
 		color: var(--primary-color);
+		text-shadow: none; /* Sin sombra de texto para el outline */
 	}
 
 	.btn-outline:before {
