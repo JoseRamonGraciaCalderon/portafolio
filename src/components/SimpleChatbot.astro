@@ -1,0 +1,766 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Definir las respuestas del chatbot en ambos idiomas
+const botResponses = {
+  es: {
+    greeting: "¡Hola! Soy el asistente virtual de Ramón. ¿En qué puedo ayudarte?",
+    options: [
+      "¿Cuál es tu experiencia?",
+      "¿Qué tecnologías manejas?",
+      "¿Cómo puedo contactarte?",
+      "Cuéntame sobre tus proyectos",
+      "¿Dónde has trabajado?"
+    ],
+    responses: {
+      "experiencia": "Tengo más de 5 años de experiencia como desarrollador web y arquitecto de software, trabajando con diversas tecnologías y liderando equipos de desarrollo.",
+      "tecnologias": "Trabajo principalmente con Vue.js, Angular, React, JavaScript, TypeScript, C#, .NET, PHP, SQL Server y otras tecnologías web modernas.",
+      "contacto": "Puedes contactarme por email a gracia123ramon@hotmail.com, por teléfono al 667 121 0309 o a través de LinkedIn: linkedin.com/in/ramongracia",
+      "proyectos": "He trabajado en proyectos como PriceTravel, TiquetesBaratos, Azzule, AforeCoppel y Servifact. Puedes ver más detalles en la sección de proyectos.",
+      "trabajo": "He trabajado en empresas como Go1 Technologies (PriceTravel), Afore Coppel, Azzule, Servifact y Sys21, desempeñando roles de desarrollador y arquitecto de software."
+    },
+    navigation: {
+      "experiencia": "Te llevaré a la sección de experiencia.",
+      "proyectos": "Te llevaré a la sección de proyectos.",
+      "habilidades": "Te llevaré a la sección de habilidades.",
+      "contacto": "Te llevaré a la sección de contacto.",
+      "sobre mi": "Te llevaré a la sección sobre mí."
+    },
+    notFound: "Lo siento, no tengo información sobre eso. ¿Puedo ayudarte con algo más?",
+    placeholder: "Escribe tu pregunta aquí...",
+    send: "Enviar",
+    close: "Cerrar",
+    minimize: "Minimizar",
+    expand: "Expandir"
+  },
+  en: {
+    greeting: "Hello! I'm Ramón's virtual assistant. How can I help you?",
+    options: [
+      "What's your experience?",
+      "What technologies do you work with?",
+      "How can I contact you?",
+      "Tell me about your projects",
+      "Where have you worked?"
+    ],
+    responses: {
+      "experience": "I have over 5 years of experience as a web developer and software architect, working with various technologies and leading development teams.",
+      "technologies": "I mainly work with Vue.js, Angular, React, JavaScript, TypeScript, C#, .NET, PHP, SQL Server, and other modern web technologies.",
+      "contact": "You can contact me via email at gracia123ramon@hotmail.com, by phone at 667 121 0309, or through LinkedIn: linkedin.com/in/ramongracia",
+      "projects": "I've worked on projects like PriceTravel, TiquetesBaratos, Azzule, AforeCoppel, and Servifact. You can see more details in the projects section.",
+      "work": "I've worked at companies like Go1 Technologies (PriceTravel), Afore Coppel, Azzule, Servifact, and Sys21, performing roles as a developer and software architect."
+    },
+    navigation: {
+      "experience": "I'll take you to the experience section.",
+      "projects": "I'll take you to the projects section.",
+      "skills": "I'll take you to the skills section.",
+      "contact": "I'll take you to the contact section.",
+      "about me": "I'll take you to the about me section."
+    },
+    notFound: "I'm sorry, I don't have information about that. Can I help you with something else?",
+    placeholder: "Type your question here...",
+    send: "Send",
+    close: "Close",
+    minimize: "Minimize",
+    expand: "Expand"
+  }
+};
+
+// Seleccionar las respuestas según el idioma
+const responses = lang === 'es' ? botResponses.es : botResponses.en;
+---
+
+<div class="chatbot-container" id="chatbot">
+  <div class="chatbot-toggle" id="chatbot-toggle">
+    <div class="chatbot-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+        <line x1="9" y1="9" x2="9.01" y2="9"></line>
+        <line x1="15" y1="9" x2="15.01" y2="9"></line>
+      </svg>
+    </div>
+    <span class="chatbot-label">Chat</span>
+  </div>
+  
+  <div class="chatbot-window" id="chatbot-window">
+    <div class="chatbot-header">
+      <div class="chatbot-title">
+        <div class="chatbot-avatar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+          </svg>
+        </div>
+        <span>Ramón Bot</span>
+      </div>
+      <div class="chatbot-actions">
+        <button id="chatbot-minimize" class="chatbot-btn" title={responses.minimize}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+          </svg>
+        </button>
+        <button id="chatbot-close" class="chatbot-btn" title={responses.close}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="chatbot-messages" id="chatbot-messages">
+      <!-- Los mensajes se añadirán dinámicamente con JavaScript -->
+    </div>
+    
+    <div class="chatbot-suggestions" id="chatbot-suggestions">
+      <!-- Las sugerencias se añadirán dinámicamente con JavaScript -->
+    </div>
+    
+    <div class="chatbot-input">
+      <input type="text" id="chatbot-input-field" placeholder={responses.placeholder}>
+      <button id="chatbot-send">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ responses, lang }}>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
+    const chatbot = document.getElementById('chatbot');
+    const chatbotToggle = document.getElementById('chatbot-toggle');
+    const chatbotWindow = document.getElementById('chatbot-window');
+    const chatbotMessages = document.getElementById('chatbot-messages');
+    const chatbotSuggestions = document.getElementById('chatbot-suggestions');
+    const chatbotInputField = document.getElementById('chatbot-input-field');
+    const chatbotSend = document.getElementById('chatbot-send');
+    const chatbotMinimize = document.getElementById('chatbot-minimize');
+    const chatbotClose = document.getElementById('chatbot-close');
+    
+    // Estado del chatbot
+    let isChatbotOpen = false;
+    let isFirstOpen = true;
+    
+    // Función para abrir/cerrar el chatbot
+    function toggleChatbot() {
+      isChatbotOpen = !isChatbotOpen;
+      chatbotWindow.style.display = isChatbotOpen ? 'flex' : 'none';
+      
+      if (isChatbotOpen && isFirstOpen) {
+        // Mostrar mensaje de bienvenida la primera vez
+        addBotMessage(responses.greeting);
+        showSuggestions(responses.options);
+        isFirstOpen = false;
+      }
+    }
+    
+    // Función para añadir un mensaje del bot
+    function addBotMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'chatbot-message bot-message';
+      messageElement.innerHTML = `
+        <div class="message-wrapper">
+          <div class="message-sender">Ramón</div>
+          <div class="message-content">${message}</div>
+        </div>
+      `;
+      chatbotMessages.appendChild(messageElement);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      
+      // Añadir clase para animación
+      setTimeout(() => {
+        messageElement.classList.add('show');
+      }, 100);
+    }
+    
+    // Función para añadir un mensaje del usuario
+    function addUserMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'chatbot-message user-message';
+      messageElement.innerHTML = `
+        <div class="message-wrapper">
+          <div class="message-content">${message}</div>
+        </div>
+      `;
+      chatbotMessages.appendChild(messageElement);
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      
+      // Añadir clase para animación
+      setTimeout(() => {
+        messageElement.classList.add('show');
+      }, 100);
+    }
+    
+    // Función para mostrar sugerencias
+    function showSuggestions(suggestions) {
+      chatbotSuggestions.innerHTML = '';
+      
+      suggestions.forEach(suggestion => {
+        const suggestionElement = document.createElement('button');
+        suggestionElement.className = 'chatbot-suggestion';
+        suggestionElement.textContent = suggestion;
+        
+        suggestionElement.addEventListener('click', () => {
+          handleUserInput(suggestion);
+        });
+        chatbotSuggestions.appendChild(suggestionElement);
+      });
+      
+      // Mostrar las sugerencias con animación
+      setTimeout(() => {
+        const suggestionElements = chatbotSuggestions.querySelectorAll('.chatbot-suggestion');
+        suggestionElements.forEach((el, index) => {
+          setTimeout(() => {
+            el.classList.add('show');
+          }, index * 100);
+        });
+      }, 300);
+    }
+    
+    // Función para procesar la entrada del usuario
+    function handleUserInput(input) {
+      // Mostrar el mensaje del usuario
+      addUserMessage(input);
+      
+      // Limpiar el campo de entrada
+      chatbotInputField.value = '';
+      
+      // Simular tiempo de respuesta
+      setTimeout(() => {
+        // Procesar la entrada y generar respuesta
+        const response = generateResponse(input);
+        addBotMessage(response);
+        
+        // Mostrar nuevas sugerencias después de cada respuesta
+        showSuggestions(responses.options);
+      }, 500);
+    }
+    
+    // Función para generar respuestas basadas en palabras clave
+    function generateResponse(input) {
+      input = input.toLowerCase();
+      
+      // Verificar navegación
+      if (input.includes(lang === 'es' ? 'llévame' : 'take me') || 
+          input.includes(lang === 'es' ? 'ir a' : 'go to') || 
+          input.includes(lang === 'es' ? 'mostrar' : 'show')) {
+        
+        // Navegación a secciones
+        if (input.includes(lang === 'es' ? 'experiencia' : 'experience')) {
+          setTimeout(() => {
+            document.querySelector(lang === 'es' ? '#experiencia' : '#experience').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+          return responses.navigation[lang === 'es' ? 'experiencia' : 'experience'];
+        }
+        
+        if (input.includes(lang === 'es' ? 'proyectos' : 'projects')) {
+          setTimeout(() => {
+            document.querySelector(lang === 'es' ? '#proyectos' : '#projects').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+          return responses.navigation[lang === 'es' ? 'proyectos' : 'projects'];
+        }
+        
+        if (input.includes(lang === 'es' ? 'habilidades' : 'skills')) {
+          setTimeout(() => {
+            document.querySelector(lang === 'es' ? '#habilidades' : '#skills').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+          return responses.navigation[lang === 'es' ? 'habilidades' : 'skills'];
+        }
+        
+        if (input.includes(lang === 'es' ? 'contacto' : 'contact')) {
+          setTimeout(() => {
+            document.querySelector(lang === 'es' ? '#contacto' : '#contact').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+          return responses.navigation[lang === 'es' ? 'contacto' : 'contact'];
+        }
+        
+        if (input.includes(lang === 'es' ? 'sobre' : 'about')) {
+          setTimeout(() => {
+            document.querySelector(lang === 'es' ? '#sobre-mi' : '#about-me').scrollIntoView({ behavior: 'smooth' });
+          }, 1000);
+          return responses.navigation[lang === 'es' ? 'sobre mi' : 'about me'];
+        }
+      }
+      
+      // Respuestas basadas en palabras clave
+      if (input.includes(lang === 'es' ? 'experiencia' : 'experience')) {
+        return responses.responses[lang === 'es' ? 'experiencia' : 'experience'];
+      }
+      
+      if (input.includes(lang === 'es' ? 'tecnologías' : 'technologies') || 
+          input.includes(lang === 'es' ? 'tecnologias' : 'technologies') || 
+          input.includes('tech') || 
+          input.includes('stack')) {
+        return responses.responses[lang === 'es' ? 'tecnologias' : 'technologies'];
+      }
+      
+      if (input.includes(lang === 'es' ? 'contacto' : 'contact') || 
+          input.includes('email') || 
+          input.includes('correo') || 
+          input.includes('teléfono') || 
+          input.includes('phone')) {
+        return responses.responses[lang === 'es' ? 'contacto' : 'contact'];
+      }
+      
+      if (input.includes(lang === 'es' ? 'proyectos' : 'projects') || 
+          input.includes('portfolio')) {
+        return responses.responses[lang === 'es' ? 'proyectos' : 'projects'];
+      }
+      
+      if (input.includes(lang === 'es' ? 'trabajado' : 'worked') || 
+          input.includes(lang === 'es' ? 'empresas' : 'companies') || 
+          input.includes('jobs')) {
+        return responses.responses[lang === 'es' ? 'trabajo' : 'work'];
+      }
+      
+      // Respuesta por defecto si no se encuentra coincidencia
+      return responses.notFound;
+    }
+    
+    // Event listeners
+    chatbotToggle.addEventListener('click', toggleChatbot);
+    
+    chatbotSend.addEventListener('click', () => {
+      const input = chatbotInputField.value.trim();
+      if (input) {
+        handleUserInput(input);
+      }
+    });
+    
+    chatbotInputField.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        const input = chatbotInputField.value.trim();
+        if (input) {
+          handleUserInput(input);
+        }
+      }
+    });
+    
+    chatbotMinimize.addEventListener('click', toggleChatbot);
+    
+    chatbotClose.addEventListener('click', () => {
+      isChatbotOpen = false;
+      chatbotWindow.style.display = 'none';
+    });
+    
+    // Inicializar el chatbot cerrado
+    chatbotWindow.style.display = 'none';
+  });
+</script>
+
+<style>
+  .chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .chatbot-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3b82f6;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 998;
+    animation: pulse-chat 2s infinite;
+  }
+  
+  @keyframes pulse-chat {
+    0% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+  }
+  
+  .chatbot-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background-color: #2563eb;
+  }
+  
+  .chatbot-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .chatbot-label {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  
+  .chatbot-toggle:hover .chatbot-icon {
+    opacity: 0;
+  }
+  
+  .chatbot-toggle:hover .chatbot-label {
+    opacity: 1;
+  }
+  
+  .chatbot-window {
+    position: absolute;
+    bottom: 80px;
+    right: 0;
+    width: 350px;
+    height: 500px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+    z-index: 999;
+    animation: slide-up 0.5s ease-out;
+  }
+  
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .chatbot-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .chatbot-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+  }
+  
+  .chatbot-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+  }
+  
+  .chatbot-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .chatbot-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .chatbot-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .chatbot-messages {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #f7f7f7;
+  }
+  
+  .chatbot-message {
+    display: flex;
+    gap: 10px;
+    max-width: 80%;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  .chatbot-message.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .bot-message {
+    align-self: flex-start;
+  }
+  
+  .user-message {
+    align-self: flex-end;
+  }
+  
+  .message-wrapper {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+  }
+  
+  .message-sender {
+    font-size: 11px;
+    font-weight: 500;
+    margin-bottom: 3px;
+    color: #666666;
+    opacity: 0.8;
+    display: inline-block;
+  }
+  
+  .message-content {
+    background-color: #f0f0f0;
+    padding: 10px 15px;
+    border-radius: 18px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #303030;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    border: none;
+    max-width: 100%;
+    word-wrap: break-word;
+    position: relative;
+  }
+  
+  .user-message .message-sender {
+    display: none;
+  }
+  
+  .user-message .message-content {
+    background-color: #25D366;
+    color: white;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
+  
+  .chatbot-suggestions {
+    padding: 8px 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    border-top: 1px solid #e5e7eb;
+    background-color: white;
+    justify-content: center;
+    max-height: 120px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  }
+  
+  .chatbot-suggestions::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .chatbot-suggestions::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .chatbot-suggestions::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+  }
+  
+  .chatbot-suggestion {
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 16px;
+    padding: 6px 12px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: white;
+    opacity: 0;
+    transform: scale(0.9);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chatbot-suggestion.show {
+    opacity: 1;
+    transform: scale(1);
+    animation: pop-in 0.3s ease-out;
+  }
+  
+  @keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  .chatbot-suggestion:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .chatbot-suggestion:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    filter: brightness(0.95);
+  }
+  
+  .chatbot-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #e5e7eb;
+    background-color: white;
+  }
+  
+  .chatbot-input input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  .chatbot-input input:focus {
+    border-color: #3b82f6;
+  }
+  
+  .chatbot-input button {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .chatbot-input button:hover {
+    background-color: #2563eb;
+  }
+  
+  /* Estilos para modo oscuro */
+  html.dark .chatbot-window {
+    background-color: #1a1a2e;
+    border-color: #2a2a3a;
+  }
+  
+  html.dark .chatbot-messages {
+    background-color: #111122;
+  }
+  
+  html.dark .message-content {
+    background-color: #2a2a2a;
+    color: #e0e0e0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+  }
+  
+  html.dark .user-message .message-content {
+    background-color: #128C7E;
+    color: white;
+    border: none;
+  }
+  
+  html.dark .message-sender {
+    color: #aaaaaa;
+  }
+  
+  html.dark .chatbot-suggestions {
+    background-color: #1a1a2e;
+    border-color: #2a2a3a;
+  }
+  
+  html.dark .chatbot-input {
+    background-color: #1a1a2e;
+    border-color: #2a2a3a;
+  }
+  
+  html.dark .chatbot-input input {
+    background-color: #2a2a3a;
+    border-color: #3a3a4a;
+    color: #e1e1e1;
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .chatbot-window {
+      width: 300px;
+      height: 450px;
+      bottom: 70px;
+    }
+    
+    .chatbot-toggle {
+      width: 50px;
+      height: 50px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .chatbot-window {
+      width: calc(100vw - 40px);
+      right: -10px;
+    }
+  }
+</style>

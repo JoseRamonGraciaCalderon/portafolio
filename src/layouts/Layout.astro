@@ -1,22 +1,472 @@
+---
+import ScrollToTop from '../components/ScrollToTop.astro';
+import Chatbot from '../components/Chatbot.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	canonical?: string;
+	type?: string;
+	keywords?: string;
+	author?: string;
+}
+
+const {
+	title = "Ramón Gracia - Desarrollador Web & Arquitecto de Software",
+	description = "Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack",
+	image = "/images/ramon-gracia-preview.jpg",
+	canonical = Astro.url.href,
+	type = "website",
+	keywords = "desarrollador web, desarrollador software, frontend, backend, vue.js, angular, react, .NET, javascript, typescript, full-stack, Ramón Gracia, portfolio",
+	author = "Ramón Gracia"
+} = Astro.props;
+
+// Obtener la URL actual para el canonical
+const currentUrl = Astro.url.href;
+---
+
 <!doctype html>
-<html lang="en">
+<html lang="es" class="light">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="canonical" href={canonical} />
+		<link rel="manifest" href="/manifest.json" />
+		<meta name="theme-color" content="#3b82f6" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+		<link rel="apple-touch-icon" href="/favicon.svg" />
+		<link rel="author" href="/humans.txt" />
+
+		<!-- Metadatos primarios -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content={author} />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content={type} />
+		<meta property="og:url" content={currentUrl} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={new URL(image, currentUrl)} />
+		<meta property="og:site_name" content="Portfolio de Ramón Gracia" />
+		<meta property="og:locale" content="es_ES" />
+
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:url" content={currentUrl} />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+		<meta property="twitter:image" content={new URL(image, currentUrl)} />
+
+		<!-- Fuentes y estilos -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+
+		<!-- Structured Data / JSON-LD -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "Person",
+			"name": "Ramón Gracia",
+			"url": "https://ramongracia.com",
+			"image": "/images/ramon-gracia-preview.jpg",
+			"jobTitle": "Desarrollador Web & Arquitecto de Software",
+			"worksFor": {
+				"@type": "Organization",
+				"name": "Go1 Technologies (PriceTravel)"
+			},
+			"sameAs": [
+				"https://www.linkedin.com/in/ramongracia/"
+			],
+			"description": "Desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack"
+		}
+		</script>
 	</head>
 	<body>
+		<div id="particles-js"></div>
 		<slot />
+		<ScrollToTop />
+		<Chatbot />
+
+		<script is:inline src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+		<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<script>
+			// Función para alternar entre modo claro y oscuro
+			function toggleDarkMode() {
+				const html = document.documentElement;
+				if (html.classList.contains('dark')) {
+					html.classList.remove('dark');
+					html.classList.add('light');
+					localStorage.setItem('theme', 'light');
+					const darkModeToggles = document.querySelectorAll('.dark-mode-toggle');
+					darkModeToggles.forEach(toggle => {
+						toggle.setAttribute('aria-label', 'Activar modo oscuro');
+						toggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>';
+					});
+				} else {
+					html.classList.add('dark');
+					html.classList.remove('light');
+					localStorage.setItem('theme', 'dark');
+					const darkModeToggles = document.querySelectorAll('.dark-mode-toggle');
+					darkModeToggles.forEach(toggle => {
+						toggle.setAttribute('aria-label', 'Activar modo claro');
+						toggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+					});
+				}
+			}
+
+			// Inicializar el tema según la preferencia guardada o la preferencia del sistema
+			function initTheme() {
+				const savedTheme = localStorage.getItem('theme');
+				const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+				if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+					document.documentElement.classList.add('dark');
+					document.documentElement.classList.remove('light');
+					const darkModeToggles = document.querySelectorAll('.dark-mode-toggle');
+					darkModeToggles.forEach(toggle => {
+						toggle.setAttribute('aria-label', 'Activar modo claro');
+						toggle.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>';
+					});
+				}
+			}
+
+			// Esperar a que el DOM esté completamente cargado
+			window.addEventListener('load', function() {
+				initTheme();
+
+				// Añadir event listeners a los botones de cambio de tema
+				const darkModeToggles = document.querySelectorAll('.dark-mode-toggle');
+				darkModeToggles.forEach(toggle => {
+					toggle.addEventListener('click', toggleDarkMode);
+				});
+
+				// Inicializar AOS solo si está disponible
+				if (typeof AOS !== 'undefined') {
+					AOS.init({
+						duration: 800,
+						easing: 'ease-in-out',
+						once: false
+					});
+				}
+
+				// Inicializar Particles.js solo si está disponible
+				if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
+					particlesJS('particles-js', {
+						particles: {
+							number: {
+								value: 50,
+								density: {
+									enable: true,
+									value_area: 800
+								}
+							},
+							color: {
+								value: '#3b82f6'
+							},
+							shape: {
+								type: ['circle', 'triangle', 'edge'],
+								stroke: {
+									width: 0,
+									color: '#000000'
+								},
+							},
+							opacity: {
+								value: 0.2,
+								random: true,
+								anim: {
+									enable: true,
+									speed: 1,
+									opacity_min: 0.1,
+									sync: false
+								}
+							},
+							size: {
+								value: 3,
+								random: true,
+								anim: {
+									enable: true,
+									speed: 2,
+									size_min: 0.3,
+									sync: false
+								}
+							},
+							line_linked: {
+								enable: true,
+								distance: 150,
+								color: '#3b82f6',
+								opacity: 0.2,
+								width: 1
+							},
+							move: {
+								enable: true,
+								speed: 2,
+								direction: 'none',
+								random: true,
+								straight: false,
+								out_mode: 'out',
+								bounce: false,
+							}
+						},
+						interactivity: {
+							detect_on: 'canvas',
+							events: {
+								onhover: {
+									enable: true,
+									mode: 'grab'
+								},
+								onclick: {
+									enable: true,
+									mode: 'push'
+								},
+								resize: true
+							},
+							modes: {
+								grab: {
+									distance: 140,
+									line_linked: {
+										opacity: 1
+									}
+								},
+								push: {
+									particles_nb: 4
+								}
+							}
+						},
+						retina_detect: true
+					});
+				}
+			});
+		</script>
 	</body>
 </html>
 
-<style>
-	html,
+<style is:global>
+	:root {
+		--primary-color: #3b82f6;
+		--secondary-color: #1e40af;
+		--accent-color: #60a5fa;
+		--text-color: #1f2937;
+		--light-text-color: #6b7280;
+		--background-color: #ffffff;
+		--light-background: #f3f4f6;
+		--border-color: #e5e7eb;
+		--card-background: #ffffff;
+		--header-background: rgba(255, 255, 255, 0.95);
+		--shadow-color: rgba(0, 0, 0, 0.1);
+	}
+
+	html.dark {
+		--primary-color: #60a5fa;
+		--secondary-color: #3b82f6;
+		--accent-color: #93c5fd;
+		--text-color: #e5e7eb;
+		--light-text-color: #9ca3af;
+		--background-color: #111827;
+		--light-background: #1f2937;
+		--border-color: #374151;
+		--card-background: #1f2937;
+		--header-background: rgba(17, 24, 39, 0.95);
+		--shadow-color: rgba(0, 0, 0, 0.3);
+	}
+
+	* {
+		box-sizing: border-box;
+		margin: 0;
+		padding: 0;
+	}
+
+	html {
+		font-family: 'Inter', sans-serif;
+		scroll-behavior: smooth;
+	}
+
 	body {
 		margin: 0;
+		padding: 0;
+		width: 100%;
+		color: var(--text-color);
+		background-color: var(--background-color);
+		line-height: 1.6;
+		overflow-x: hidden;
+		position: relative;
+	}
+
+	#particles-js {
+		position: fixed;
 		width: 100%;
 		height: 100%;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		pointer-events: none;
+	}
+
+	a {
+		color: var(--primary-color);
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	a:hover {
+		color: var(--secondary-color);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		margin: 0 0 1rem 0;
+		line-height: 1.2;
+	}
+
+	img {
+		max-width: 100%;
+		height: auto;
+	}
+
+	.container {
+		width: 100%;
+		max-width: 1200px;
+		margin: 0 auto;
+		padding: 0 1.5rem;
+		position: relative;
+		z-index: 1;
+	}
+
+	.section {
+		padding: 5rem 0;
+		position: relative;
+	}
+
+	.btn {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		background-color: var(--primary-color);
+		color: white;
+		border-radius: 0.375rem;
+		font-weight: 500;
+		text-align: center;
+		cursor: pointer;
+		transition: all 0.3s ease;
+		position: relative;
+		overflow: hidden;
+		z-index: 1;
+	}
+
+	.btn:before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 0%;
+		height: 100%;
+		background-color: var(--secondary-color);
+		transition: width 0.3s ease;
+		z-index: -1;
+	}
+
+	.btn:hover:before {
+		width: 100%;
+	}
+
+	.btn:hover {
+		color: white;
+		transform: translateY(-3px);
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+	}
+
+	html.dark .btn:hover {
+		box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+	}
+
+	.btn-outline {
+		background-color: transparent;
+		border: 1px solid var(--primary-color);
+		color: var(--primary-color);
+	}
+
+	.btn-outline:before {
+		background-color: var(--primary-color);
+	}
+
+	.btn-outline:hover {
+		color: white;
+	}
+
+	html.dark .btn-outline {
+		color: var(--primary-color);
+		border-color: var(--primary-color);
+	}
+
+	html.dark .btn-outline:hover {
+		color: var(--background-color);
+		background-color: var(--primary-color);
+		border-color: var(--primary-color);
+	}
+
+	/* Clases para animaciones */
+	.fade-up {
+		opacity: 0;
+		transform: translateY(20px);
+		transition: opacity 0.5s ease, transform 0.5s ease;
+	}
+
+	.fade-up.active {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.typing-effect {
+		border-right: 3px solid var(--primary-color);
+		white-space: nowrap;
+		overflow: hidden;
+		animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
+	}
+
+	@keyframes typing {
+		from { width: 0 }
+		to { width: 100% }
+	}
+
+	@keyframes blink-caret {
+		from, to { border-color: transparent }
+		50% { border-color: var(--primary-color) }
+	}
+
+	/* Efecto de resaltado de texto */
+	.highlight-text {
+		position: relative;
+		display: inline-block;
+	}
+
+	.highlight-text::after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 30%;
+		background-color: rgba(59, 130, 246, 0.2);
+		z-index: -1;
+		transition: height 0.3s ease;
+	}
+
+	html.dark .highlight-text::after {
+		background-color: rgba(96, 165, 250, 0.2);
+	}
+
+	.highlight-text:hover::after {
+		height: 100%;
+	}
+
+	@media (max-width: 768px) {
+		.section {
+			padding: 3rem 0;
+		}
 	}
 </style>

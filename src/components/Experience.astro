@@ -1,0 +1,566 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id={lang === 'es' ? 'experiencia' : 'experience'} class="section experience">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">{t('experience.title')}</h2>
+    <div class="timeline">
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="25">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 - {lang === 'es' ? 'Actualidad' : 'Present'}</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Desarrollador Web' : 'Web Developer'}</h3>
+          <h4>Go1 Technologies - {lang === 'es' ? 'Remoto' : 'Remote'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Desarrollo y mantenimiento de plataformas web para PriceTravel, Tiquetes Baratos, PriceTravel US, PriceTravel ES y otras aplicaciones internas, asegurando una experiencia de usuario fluida y un rendimiento optimizado. Implementación de soluciones en múltiples tecnologías modernas, adaptando cada proyecto a las necesidades específicas de cada plataforma. Participación en el ciclo completo de desarrollo, desde la planificación y diseño hasta la implementación y pruebas, contribuyendo activamente a la mejora continua de las plataformas.' :
+              'Development and maintenance of web platforms for PriceTravel, Tiquetes Baratos, PriceTravel US, PriceTravel ES, and other internal applications, ensuring a smooth user experience and optimized performance. Implementation of solutions in multiple modern technologies, adapting each project to the specific needs of each platform. Participation in the complete development cycle, from planning and design to implementation and testing, actively contributing to the continuous improvement of the platforms.'}
+          </p>
+          <div class="tags">
+            <span>Vue.js</span>
+            <span>.NET 8</span>
+            <span>AngularJS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="50">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2021 - 2024</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Arquitecto de Software y Líder de Equipo' : 'Software Architect & Team Leader'}</h3>
+          <h4>Afore Coppel - {lang === 'es' ? 'Home Office, Culiacán, Sinaloa' : 'Home Office, Culiacan, Sinaloa'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Desempeñé el rol de arquitecto de software, liderando un equipo de cuatro desarrolladores en la creación y optimización de soluciones de software, asegurando una arquitectura sólida y escalable. Implementé cambios en componentes PHP, mejorando la seguridad y eficiencia mediante la eliminación de dependencias directas de APIs y bases de datos. Coordiné reuniones con el gerente y gestioné la comunicación con el equipo para canalizar dudas y asignar tareas, promoviendo un ambiente de trabajo colaborativo.' :
+              'I performed the role of software architect, leading a team of four developers in the creation and optimization of software solutions, ensuring a solid and scalable architecture. I implemented changes in PHP components, improving security and efficiency by eliminating direct dependencies on APIs and databases. I coordinated meetings with the manager and managed communication with the team to channel questions and assign tasks, promoting a collaborative work environment.'}
+          </p>
+          <div class="tags">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>JavaScript</span>
+            <span>Arquitectura de Software</span>
+            <span>Liderazgo de Equipo</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="100">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2021 - 2022</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Desarrollador Web' : 'Web Developer'}</h3>
+          <h4>Azzule - {lang === 'es' ? 'Home Office, Culiacán, Sinaloa' : 'Home Office, Culiacan, Sinaloa'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Diseñé y mantuve módulos de la plataforma principal, asegurando la funcionalidad y la estabilidad del sistema a través de mejoras continuas y soluciones rápidas a problemas de rendimiento. Trabajé con múltiples tecnologías y herramientas en el entorno .NET, asegurando una integración fluida y eficiente con otros sistemas y bases de datos.' :
+              'I designed and maintained modules of the main platform, ensuring the functionality and stability of the system through continuous improvements and quick solutions to performance issues. I worked with multiple technologies and tools in the .NET environment, ensuring smooth and efficient integration with other systems and databases.'}
+          </p>
+          <div class="tags">
+            <span>C#</span>
+            <span>JavaScript</span>
+            <span>.NET</span>
+            <span>Angular</span>
+            <span>Vue.js</span>
+            <span>TypeScript</span>
+            <span>SQL Server</span>
+            <span>HTML/CSS</span>
+            <span>JQuery</span>
+            <span>Tortoise</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="200">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2020 - 2021</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Desarrollador Web y Móvil' : 'Web and Mobile Developer'}</h3>
+          <h4>Spyral System - {lang === 'es' ? 'Home Office, Culiacán, Sinaloa' : 'Home Office, Culiacan, Sinaloa'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Desarrollé aplicaciones tanto web como móviles, enfocándome en brindar una experiencia de usuario intuitiva y optimizada en múltiples dispositivos. Colaboré en proyectos multidisciplinarios, utilizando una amplia variedad de tecnologías y adoptando metodologías ágiles para una entrega eficiente de los productos.' :
+              'I developed both web and mobile applications, focusing on providing an intuitive and optimized user experience across multiple devices. I collaborated on multidisciplinary projects, using a wide variety of technologies and adopting agile methodologies for efficient product delivery.'}
+          </p>
+          <div class="tags">
+            <span>C#</span>
+            <span>JavaScript</span>
+            <span>Angular</span>
+            <span>Vue.js</span>
+            <span>Ionic</span>
+            <span>Cordova</span>
+            <span>TypeScript</span>
+            <span>HTML/CSS</span>
+            <span>SQL Server</span>
+            <span>GitLab</span>
+            <span>GitHub</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="300">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2019 - 2020</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Analista de Soporte y Desarrollo' : 'Support and Development Analyst'}</h3>
+          <h4>Servifact - {lang === 'es' ? 'Culiacán, Sinaloa' : 'Culiacan, Sinaloa'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Proporcioné soporte técnico y realicé modificaciones en la plataforma de timbrado, asegurando la correcta operación del sistema y adaptando la plataforma a nuevos requerimientos de clientes y regulaciones.' :
+              'I provided technical support and made modifications to the electronic invoicing platform, ensuring the correct operation of the system and adapting the platform to new customer requirements and regulations.'}
+          </p>
+          <div class="tags">
+            <span>C#</span>
+            <span>JavaScript</span>
+            <span>SQL Server</span>
+            <span>ASP.NET</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-aos="fade-up" data-aos-delay="400">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2019</div>
+        <div class="timeline-content">
+          <h3>{lang === 'es' ? 'Soporte y Desarrollo de Sistema' : 'System Support and Development'}</h3>
+          <h4>Sys21 - {lang === 'es' ? 'Culiacán, Sinaloa' : 'Culiacan, Sinaloa'}</h4>
+          <p>
+            {lang === 'es' ?
+              'Atendí incidencias de soporte, realizando modificaciones y actualizaciones del sistema para satisfacer las necesidades de los clientes. Gestioné la instalación de versiones actualizadas en el sistema del cliente, asegurando una transición sin problemas y un soporte técnico oportuno.' :
+              'I attended to support incidents, making modifications and updates to the system to meet customer needs. I managed the installation of updated versions in the client\'s system, ensuring a smooth transition and timely technical support.'}
+          </p>
+          <div class="tags">
+            <span>Visual Basic 6</span>
+            <span>Access</span>
+            <span>Visual Basic .NET</span>
+            <span>Visual Studio</span>
+            <span>SQL Server</span>
+          </div>
+          <div class="timeline-code-animation">
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+            <div class="code-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience {
+    background-color: var(--background-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 120px;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to bottom, transparent, var(--primary-color), var(--secondary-color), transparent);
+    animation: pulse 2s infinite;
+    box-shadow: 0 0 8px var(--primary-color);
+  }
+
+  .timeline::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 120px;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary-color), transparent);
+    opacity: 0.3;
+    filter: blur(3px);
+    animation: flow 8s linear infinite;
+  }
+
+  @keyframes flow {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(100%);
+    }
+  }
+
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 6px rgba(59, 130, 246, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+    }
+  }
+
+  html.dark .timeline::before {
+    animation: pulse-dark 2s infinite;
+  }
+
+  @keyframes pulse-dark {
+    0% {
+      box-shadow: 0 0 0 0 rgba(96, 165, 250, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 6px rgba(96, 165, 250, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(96, 165, 250, 0);
+    }
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 3rem;
+    padding-left: 150px;
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-item:hover {
+    transform: translateX(5px);
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: 116px;
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    border: 3px solid var(--card-background);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+    z-index: 2;
+  }
+
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  html.dark .timeline-dot {
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.2);
+  }
+
+  .timeline-item:hover .timeline-dot {
+    background-color: var(--secondary-color);
+    transform: scale(1.2);
+  }
+
+  .timeline-item:hover .timeline-dot::before {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+    animation: pulse-ring 1.5s infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: translate(-50%, -50%) scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(1.5);
+      opacity: 0;
+    }
+  }
+
+  .timeline-date {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100px;
+    text-align: right;
+    font-weight: 600;
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-date {
+    color: var(--secondary-color);
+  }
+
+  .timeline-content {
+    background-color: var(--light-background);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 4px solid var(--primary-color);
+  }
+
+  .timeline-content::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+  }
+
+  .timeline-item:hover .timeline-content::before {
+    opacity: 1;
+    animation: shine 1.5s ease-out;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  .timeline-item:hover .timeline-content {
+    box-shadow: 0 10px 20px var(--shadow-color);
+    background-color: #f9fafb;
+  }
+
+  html.dark .timeline-item:hover .timeline-content {
+    background-color: #2d3748;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .timeline-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    color: var(--text-color);
+  }
+
+  .timeline-content h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+  }
+
+  .timeline-content p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tags span {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid transparent;
+  }
+
+  .tags span::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: all 0.5s ease;
+  }
+
+  html.dark .tags span {
+    background-color: rgba(96, 165, 250, 0.15);
+  }
+
+  .timeline-item:hover .tags span {
+    background-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+    border-color: var(--primary-color);
+    box-shadow: 0 3px 6px rgba(59, 130, 246, 0.2);
+  }
+
+  .timeline-item:hover .tags span::before {
+    left: 100%;
+    transition: all 0.5s ease;
+  }
+
+  .tags span:hover {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 5px 10px rgba(59, 130, 246, 0.3) !important;
+  }
+
+  html.dark .timeline-item:hover .tags span {
+    background-color: rgba(96, 165, 250, 0.25);
+  }
+
+  /* Animación de código */
+  .timeline-code-animation {
+    height: 15px;
+    width: 100%;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  html.dark .timeline-code-animation {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  .code-line {
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    position: absolute;
+    left: 0;
+    animation: typing 3s infinite;
+    opacity: 0;
+    box-shadow: 0 0 8px var(--primary-color);
+  }
+
+  .code-line:nth-child(1) {
+    top: 0;
+    animation-delay: 0s;
+  }
+
+  .code-line:nth-child(2) {
+    top: 6px;
+    animation-delay: 0.5s;
+  }
+
+  .code-line:nth-child(3) {
+    top: 12px;
+    animation-delay: 1s;
+  }
+
+  @keyframes typing {
+    0% {
+      width: 0;
+      opacity: 1;
+    }
+    50% {
+      width: 100%;
+      opacity: 1;
+    }
+    90%, 100% {
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .timeline::before {
+      left: 20px;
+    }
+
+    .timeline-item {
+      padding-left: 50px;
+    }
+
+    .timeline-dot {
+      left: 16px;
+    }
+
+    .timeline-date {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: auto;
+      text-align: left;
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,134 @@
+{
+  "site": {
+    "title": "Ramón Gracia - Desarrollador Web & Arquitecto de Software",
+    "description": "Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "experience": "Experiencia",
+    "projects": "Proyectos",
+    "skills": "Habilidades",
+    "contact": "Contacto",
+    "downloadCV": "Descargar CV",
+    "language": "Idioma"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "name": "Ramón Gracia",
+    "title": "Desarrollador Web & Arquitecto de Software",
+    "subtitle": "Especializado en crear experiencias digitales excepcionales",
+    "cta": "Conoce mi trabajo"
+  },
+  "about": {
+    "title": "Sobre Mí",
+    "subtitle": "Conoce un poco más sobre mi trayectoria",
+    "description": "Soy un desarrollador de software con experiencia en el desarrollo de aplicaciones web y móviles. Me especializo en tecnologías como Vue.js, Angular, React y .NET. Mi enfoque se centra en crear soluciones eficientes y escalables que resuelvan problemas reales.",
+    "experience": "Años de Experiencia",
+    "projects": "Proyectos Completados",
+    "clients": "Clientes Satisfechos"
+  },
+  "experience": {
+    "title": "Experiencia Profesional",
+    "subtitle": "Mi trayectoria laboral",
+    "current": "Actual",
+    "positions": [
+      {
+        "title": "Desarrollador Web",
+        "company": "Go1 Technologies (PriceTravel)",
+        "period": "2022 - Presente",
+        "location": "Remoto",
+        "description": "Desarrollo de plataformas web utilizando Vue.js, .NET 8, AngularJS y JavaScript."
+      },
+      {
+        "title": "Arquitecto de Software & Líder de Equipo",
+        "company": "Afore Coppel",
+        "period": "2021 - 2024",
+        "location": "Culiacán, Sinaloa",
+        "description": "Diseño de arquitecturas de software y liderazgo de equipos de desarrollo con PHP, HTML y JavaScript."
+      },
+      {
+        "title": "Desarrollador Web",
+        "company": "Azzule",
+        "period": "2021 - 2022",
+        "location": "Home Office - Culiacán, Sinaloa",
+        "description": "Desarrollo de aplicaciones web con C#, JavaScript, SQL Server, Angular, Vue.js, TypeScript, HTML, CSS y .NET."
+      },
+      {
+        "title": "Analista de Soporte y Desarrollo",
+        "company": "Servifact",
+        "period": "2019 - 2020",
+        "location": "Culiacán, Sinaloa",
+        "description": "Desarrollo con C#, JavaScript, SQL Server y ASP.NET."
+      },
+      {
+        "title": "Soporte y Desarrollo de Sistemas",
+        "company": "Sys21",
+        "period": "2019",
+        "location": "Culiacán, Sinaloa",
+        "description": "Desarrollo con Visual Basic 6, Access, VB.NET, Visual Studio 2013/2006 y SQL Server."
+      }
+    ]
+  },
+  "projects": {
+    "title": "Proyectos Destacados",
+    "subtitle": "Algunos de los proyectos en los que he trabajado",
+    "viewProject": "Ver Proyecto",
+    "items": [
+      {
+        "title": "PriceTravel",
+        "description": "Plataforma de reservaciones de viajes con tecnologías modernas.",
+        "technologies": ["Vue.js", ".NET 8", "JavaScript"]
+      },
+      {
+        "title": "TiquetesBaratos",
+        "description": "Sistema de venta de boletos de avión con integración de múltiples aerolíneas.",
+        "technologies": ["Vue.js", "JavaScript", "API Integration"]
+      },
+      {
+        "title": "Azzule",
+        "description": "Plataforma de gestión de cadena de suministro para la industria alimentaria.",
+        "technologies": ["C#", "Angular", "SQL Server"]
+      },
+      {
+        "title": "AforeCoppel",
+        "description": "Sistema de administración de fondos de retiro con alta seguridad.",
+        "technologies": ["PHP", "JavaScript", "HTML", "CSS"]
+      },
+      {
+        "title": "Servifact",
+        "description": "Plataforma de facturación electrónica para el sector primario.",
+        "technologies": ["C#", "ASP.NET", "SQL Server"]
+      }
+    ]
+  },
+  "skills": {
+    "title": "Habilidades Técnicas",
+    "subtitle": "Tecnologías con las que trabajo",
+    "categories": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "databases": "Bases de Datos",
+      "tools": "Herramientas"
+    }
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes un proyecto en mente? ¡Hablemos!",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "message": "Mensaje",
+    "send": "Enviar Mensaje",
+    "success": "¡Mensaje enviado con éxito!",
+    "error": "Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.",
+    "info": {
+      "email": "Email",
+      "phone": "Teléfono",
+      "location": "Ubicación"
+    }
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados.",
+    "downloadCV": "Descargar CV"
+  }
+}

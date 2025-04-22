@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Ramón Gracia - Desarrollador Web</title>
+    <style>
+        /* Estilos optimizados para impresión y ATS */
+        :root {
+            --primary-color: #3b82f6;
+            --secondary-color: #1d4ed8;
+            --text-color: #1f2937;
+            --light-gray: #f3f4f6;
+            --border-color: #e5e7eb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: white;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+        }
+
+        header {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: var(--primary-color);
+            margin: 20px 0 10px;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 5px;
+        }
+
+        h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .contact-info {
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 5px;
+        }
+
+        .job {
+            margin-bottom: 20px;
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .job-title {
+            font-weight: bold;
+        }
+
+        .job-company {
+            font-style: italic;
+        }
+
+        .job-date {
+            color: #666;
+        }
+
+        .job-location {
+            color: #666;
+            font-style: italic;
+        }
+
+        .job-description {
+            margin-top: 5px;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 10px;
+        }
+
+        li {
+            margin-bottom: 5px;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .skill {
+            background-color: var(--light-gray);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            z-index: 1000;
+        }
+
+        .print-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            h2 {
+                font-size: 18px;
+            }
+
+            h3 {
+                font-size: 14px;
+            }
+
+            .print-button {
+                display: none;
+            }
+
+            .page-break {
+                page-break-before: always;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="window.print()">Imprimir / Guardar como PDF</button>
+
+    <div class="container">
+        <header>
+            <h1>Ramón Gracia</h1>
+            <div class="contact-info">
+                <p>Calle Manantial de Imala #7831 Villas del Manantial, Culiacán, Sinaloa CP 80040</p>
+                <p>Teléfono: 667 121 0309 | Email: <a href="mailto:gracia123ramon@hotmail.com">gracia123ramon@hotmail.com</a></p>
+                <p>LinkedIn: <a href="https://www.linkedin.com/in/ramongracia/" target="_blank">linkedin.com/in/ramongracia</a></p>
+            </div>
+        </header>
+
+        <section>
+            <h2>Resumen Profesional</h2>
+            <p>Arquitecto de Software y Desarrollador Web con más de 5 años de experiencia en el desarrollo de aplicaciones web y sistemas empresariales. Especializado en tecnologías frontend y backend como Vue.js, .NET, Angular, TypeScript y JavaScript. Experiencia liderando equipos y diseñando arquitecturas de software escalables.</p>
+        </section>
+
+        <section>
+            <h2>Experiencia Laboral</h2>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Web Developer</h3>
+                        <p class="job-company">Go1 Technologies (PriceTravel)</p>
+                    </div>
+                    <p class="job-date">2022 - Presente</p>
+                </div>
+                <p class="job-location">Remoto - Culiacán, Sinaloa</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Desarrollo y mantenimiento de plataformas de PriceTravel utilizando Vue.js, .NET 8, AngularJS y JavaScript.</li>
+                        <li>Implementación de nuevas funcionalidades y mejoras en la experiencia de usuario.</li>
+                        <li>Colaboración en equipos multidisciplinarios para el desarrollo de soluciones tecnológicas.</li>
+                        <li>Optimización de rendimiento y escalabilidad de aplicaciones web.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Software Architect & Team Leader</h3>
+                        <p class="job-company">Afore Coppel</p>
+                    </div>
+                    <p class="job-date">2021 - 2024</p>
+                </div>
+                <p class="job-location">Culiacán, Sinaloa</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Diseño e implementación de arquitecturas de software para sistemas empresariales.</li>
+                        <li>Liderazgo de equipos de desarrollo, asignación de tareas y seguimiento de proyectos.</li>
+                        <li>Desarrollo de aplicaciones utilizando PHP, HTML y JavaScript.</li>
+                        <li>Implementación de mejores prácticas de desarrollo y metodologías ágiles.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Web Developer</h3>
+                        <p class="job-company">Azzule</p>
+                    </div>
+                    <p class="job-date">2021 - 2022</p>
+                </div>
+                <p class="job-location">Home Office - Culiacán, Sinaloa</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Desarrollo de aplicaciones web utilizando C#, JavaScript, SQL Server, Angular, Vue.js, TypeScript, HTML, CSS y .NET.</li>
+                        <li>Implementación de interfaces de usuario responsivas y accesibles.</li>
+                        <li>Integración con APIs y servicios externos.</li>
+                        <li>Optimización de consultas SQL y rendimiento de aplicaciones.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Analista de Soporte y Desarrollo</h3>
+                        <p class="job-company">Servifact</p>
+                    </div>
+                    <p class="job-date">2019 - 2020</p>
+                </div>
+                <p class="job-location">Culiacán, Sinaloa</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Desarrollo y mantenimiento de aplicaciones utilizando C#, JavaScript, SQL Server y ASP.NET.</li>
+                        <li>Soporte técnico a usuarios y resolución de incidencias.</li>
+                        <li>Implementación de mejoras en sistemas existentes.</li>
+                        <li>Documentación de procesos y sistemas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Support and System Development</h3>
+                        <p class="job-company">Sys21</p>
+                    </div>
+                    <p class="job-date">2019</p>
+                </div>
+                <p class="job-location">Culiacán, Sinaloa</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Desarrollo y mantenimiento de aplicaciones utilizando Visual Basic 6, Access, VB.NET, Visual Studio 2013/2006 y SQL Server.</li>
+                        <li>Soporte técnico a usuarios y resolución de incidencias.</li>
+                        <li>Implementación de mejoras en sistemas existentes.</li>
+                        <li>Migración de aplicaciones legacy a tecnologías más modernas.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Habilidades Técnicas</h2>
+            <div class="skills-container">
+                <span class="skill">JavaScript</span>
+                <span class="skill">TypeScript</span>
+                <span class="skill">Vue.js</span>
+                <span class="skill">Angular</span>
+                <span class="skill">React</span>
+                <span class="skill">HTML5</span>
+                <span class="skill">CSS3</span>
+                <span class="skill">SASS</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">PHP</span>
+                <span class="skill">C#</span>
+                <span class="skill">.NET</span>
+                <span class="skill">SQL Server</span>
+                <span class="skill">MySQL</span>
+                <span class="skill">Git</span>
+                <span class="skill">Docker</span>
+                <span class="skill">AWS</span>
+                <span class="skill">Figma</span>
+                <span class="skill">VS Code</span>
+                <span class="skill">Jira</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Proyectos Destacados</h2>
+
+            <div class="job">
+                <h3>PriceTravel</h3>
+                <p>Desarrollo y mantenimiento de la plataforma de reservas de viajes, implementando nuevas funcionalidades y mejorando la experiencia de usuario.</p>
+            </div>
+
+            <div class="job">
+                <h3>TiquetesBaratos</h3>
+                <p>Implementación de mejoras en la plataforma de reserva de vuelos, optimizando el rendimiento y la experiencia de usuario.</p>
+            </div>
+
+            <div class="job">
+                <h3>Azzule</h3>
+                <p>Desarrollo de sistema de gestión de cadena de suministro, implementando funcionalidades para el seguimiento y control de procesos.</p>
+            </div>
+
+            <div class="job">
+                <h3>AforeCoppel</h3>
+                <p>Diseño e implementación de arquitectura para el sistema de gestión de fondos de retiro, mejorando la seguridad y escalabilidad.</p>
+            </div>
+
+            <div class="job">
+                <h3>Servifact</h3>
+                <p>Desarrollo de sistema de facturación electrónica para el sector primario, cumpliendo con los requisitos fiscales y optimizando procesos.</p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Educación</h2>
+            <div class="job">
+                <div class="job-header">
+                    <div>
+                        <h3>Ingeniería en Sistemas Computacionales</h3>
+                        <p class="job-company">Instituto Tecnológico de Culiacán</p>
+                    </div>
+                    <p class="job-date">2016 - 2020</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Idiomas</h2>
+            <ul>
+                <li>Español: Nativo</li>
+                <li>Inglés: Intermedio</li>
+            </ul>
+        </section>
+    </div>
+
+    <!-- Scripts para generar PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+        // Script para generar el PDF al hacer clic en el botón
+        window.jsPDF = window.jspdf.jsPDF;
+
+        function generatePDF() {
+            // Ocultar el botón durante la generación del PDF
+            const printButton = document.querySelector('.print-button');
+            printButton.style.display = 'none';
+
+            const element = document.querySelector('.container');
+            const opt = {
+                margin: [10, 10, 10, 10],
+                filename: 'CV_Ramon_Gracia_Desarrollador_Web.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Usar html2canvas y jsPDF
+            html2canvas(element, {scale: 2, logging: false, useCORS: true}).then(canvas => {
+                const imgData = canvas.toDataURL('image/jpeg', 1.0);
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const pdfWidth = pdf.internal.pageSize.getWidth();
+                const pdfHeight = pdf.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+                const imgX = (pdfWidth - imgWidth * ratio) / 2;
+                const imgY = 0;
+
+                pdf.addImage(imgData, 'JPEG', imgX, imgY, imgWidth * ratio, imgHeight * ratio);
+                pdf.save('CV_Ramon_Gracia_Desarrollador_Web.pdf');
+
+                // Mostrar el botón nuevamente
+                printButton.style.display = 'block';
+            });
+        }
+
+        // Modificar el botón para usar nuestra función y generar automáticamente el PDF
+        document.addEventListener('DOMContentLoaded', function() {
+            const printButton = document.querySelector('.print-button');
+            printButton.onclick = generatePDF;
+
+            // Verificar si estamos siendo llamados desde el iframe
+            if (window.parent !== window) {
+                // Estamos en un iframe, preparar para la generación de PDF
+                printButton.style.display = 'none';
+            }
+
+            // Generar el PDF automáticamente después de un breve retraso
+            setTimeout(generatePDF, 1000);
+        });
+
+        // Exponer la función para que pueda ser llamada desde el exterior
+        window.generateCV = function() {
+            return new Promise((resolve, reject) => {
+                try {
+                    const element = document.querySelector('.container');
+                    html2canvas(element, {scale: 2, logging: false, useCORS: true}).then(canvas => {
+                        resolve(canvas);
+                    }).catch(reject);
+                } catch (error) {
+                    reject(error);
+                }
+            });
+        };
+    </script>
+</body>
+</html>

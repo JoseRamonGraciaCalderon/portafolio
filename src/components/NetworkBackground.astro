@@ -1,0 +1,148 @@
+---
+// Componente para añadir un fondo de red/malla animado a las secciones
+---
+
+<div class="network-background">
+  <canvas id="networkCanvas"></canvas>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const canvas = document.getElementById('networkCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const particleCount = 80;
+    const connectionDistance = 150;
+    const isDarkMode = document.documentElement.classList.contains('dark');
+
+    // Colores según el modo
+    let particleColor = isDarkMode ? 'rgba(96, 165, 250, 0.5)' : 'rgba(59, 130, 246, 0.3)';
+    let lineColor = isDarkMode ? 'rgba(96, 165, 250, 0.15)' : 'rgba(59, 130, 246, 0.1)';
+
+    // Función para redimensionar el canvas
+    function resizeCanvas() {
+      const networkBackground = canvas.parentElement;
+      width = networkBackground.offsetWidth;
+      height = networkBackground.offsetHeight;
+
+      canvas.width = width;
+      canvas.height = height;
+
+      // Reiniciar partículas cuando se redimensiona
+      initParticles();
+    }
+
+    // Inicializar partículas
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 3 + 1,
+          vx: Math.random() * 0.5 - 0.25,
+          vy: Math.random() * 0.5 - 0.25
+        });
+      }
+    }
+
+    // Dibujar partículas y conexiones
+    function drawParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      // Dibujar conexiones primero
+      ctx.beginPath();
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const distance = Math.sqrt(
+            Math.pow(p1.x - p2.x, 2) +
+            Math.pow(p1.y - p2.y, 2)
+          );
+
+          if (distance < connectionDistance) {
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = 0.5 * (1 - distance / connectionDistance);
+            ctx.beginPath();
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Luego dibujar partículas
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+        ctx.fillStyle = particleColor;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Actualizar posiciones de partículas
+    function updateParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Mover partículas
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Rebotar en los bordes
+        if (p.x < 0 || p.x > width) p.vx = -p.vx;
+        if (p.y < 0 || p.y > height) p.vy = -p.vy;
+      }
+    }
+
+    // Función de animación
+    function animate() {
+      updateParticles();
+      drawParticles();
+      requestAnimationFrame(animate);
+    }
+
+    // Inicializar
+    resizeCanvas();
+    animate();
+
+    // Manejar redimensionamiento de ventana
+    window.addEventListener('resize', resizeCanvas);
+
+    // Manejar cambio de tema
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.attributeName === 'class') {
+          const isDarkMode = document.documentElement.classList.contains('dark');
+          // Actualizar colores según el modo
+          particleColor = isDarkMode ? 'rgba(96, 165, 250, 0.5)' : 'rgba(59, 130, 246, 0.3)';
+          lineColor = isDarkMode ? 'rgba(96, 165, 250, 0.15)' : 'rgba(59, 130, 246, 0.1)';
+        }
+      });
+    });
+
+    observer.observe(document.documentElement, { attributes: true });
+  });
+</script>
+
+<style>
+  .network-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  #networkCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+</style>

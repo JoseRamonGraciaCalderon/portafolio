@@ -1,0 +1,315 @@
+---
+import { languages, getLangFromUrl, getLocalizedPathname } from '../i18n/utils';
+
+// Obtener el idioma actual de la URL
+const lang = getLangFromUrl(Astro.url);
+
+// Obtener la ruta actual sin el prefijo de idioma
+const currentPath = Astro.url.pathname;
+---
+
+<div class="language-picker">
+  <button class="language-btn code-btn">
+    <span class="code-syntax">lang</span>
+    <span class="code-syntax">:</span>
+    <span class="code-string">{lang.toUpperCase()}</span>
+    <span class="dropdown-arrow">▼</span>
+  </button>
+  <div class="language-dropdown">
+    {Object.entries(languages).map(([code, name]) => (
+      <a
+        href={getLocalizedPathname(currentPath, code)}
+        class={`language-option ${code === lang ? 'active' : ''}`}
+      >
+        <span class="code-syntax">lang.</span>
+        <span class={`lang-name ${code === lang ? 'current' : ''}`}>{name}</span>
+        {code === lang && <span class="code-comment">// current</span>}
+      </a>
+    ))}
+  </div>
+</div>
+
+<style>
+  .language-picker {
+    position: relative;
+    display: inline-block;
+    font-family: 'Consolas', 'Monaco', monospace;
+  }
+
+  .language-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.4rem 0.6rem;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Consolas', 'Monaco', monospace;
+    box-shadow: 0 1px 3px var(--shadow-color);
+  }
+
+  .code-btn {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .code-btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .code-btn:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease-out;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  .language-btn:hover {
+    background-color: var(--light-background);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px var(--shadow-color);
+  }
+
+  .code-syntax {
+    color: var(--primary-color);
+  }
+
+  .code-string {
+    color: var(--secondary-color);
+  }
+
+  .code-comment {
+    color: #6272a4;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.6rem;
+    margin-left: 0.25rem;
+    transition: transform 0.3s ease;
+  }
+
+  .language-picker:hover .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .language-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.5rem;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    min-width: 180px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .language-picker:hover .language-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .language-option {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.875rem;
+    position: relative;
+  }
+
+  .language-option:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .language-option:hover {
+    background-color: var(--light-background);
+  }
+
+  .language-option.active {
+    background-color: rgba(59, 130, 246, 0.1);
+  }
+
+  .lang-name {
+    margin-left: 0.25rem;
+    transition: color 0.3s ease;
+  }
+
+  .lang-name.current {
+    color: var(--primary-color);
+    font-weight: bold;
+  }
+
+  .language-option:hover .lang-name {
+    color: var(--primary-color);
+  }
+
+  /* Estilos para modo oscuro */
+  html.dark .language-btn {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  html.dark .language-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Estilos para dispositivos móviles */
+  @media (max-width: 768px) {
+    .language-dropdown {
+      right: 0;
+      width: 180px;
+    }
+
+    .language-btn {
+      padding: 0.4rem 0.6rem;
+      font-size: 0.8rem;
+    }
+
+    .show-dropdown {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transform: translateY(0) !important;
+    }
+  }
+
+  /* Estilos para pantallas muy pequeñas */
+  @media (max-width: 480px) {
+    .language-btn {
+      padding: 0.35rem 0.5rem;
+      font-size: 0.75rem;
+    }
+
+    .dropdown-arrow {
+      font-size: 0.5rem;
+    }
+
+    .language-dropdown {
+      min-width: 150px;
+    }
+
+    .language-option {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.8rem;
+    }
+  }
+</style>
+
+<script>
+  // Script para manejar el selector de idioma en dispositivos móviles
+  document.addEventListener('DOMContentLoaded', () => {
+    const languagePickers = document.querySelectorAll('.language-picker');
+
+    languagePickers.forEach(picker => {
+      const languageBtn = picker.querySelector('.language-btn');
+      const languageDropdown = picker.querySelector('.language-dropdown');
+      const dropdownArrow = picker.querySelector('.dropdown-arrow');
+
+      if (languageBtn && languageDropdown) {
+        // En dispositivos móviles, mostrar/ocultar el dropdown al hacer clic
+        languageBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          // Comprobar si estamos en móvil (ancho < 768px)
+          const isMobile = window.innerWidth < 768;
+
+          if (isMobile) {
+            // Alternar la clase para mostrar/ocultar el dropdown
+            languageDropdown.classList.toggle('show-dropdown');
+
+            // Rotar la flecha
+            if (dropdownArrow) {
+              dropdownArrow.style.transform = languageDropdown.classList.contains('show-dropdown')
+                ? 'rotate(180deg)'
+                : 'rotate(0deg)';
+            }
+          }
+        });
+
+        // Cerrar el dropdown al hacer clic en una opción
+        const languageOptions = languageDropdown.querySelectorAll('.language-option');
+        languageOptions.forEach(option => {
+          option.addEventListener('click', () => {
+            // Añadir efecto visual antes de navegar
+            option.style.backgroundColor = 'var(--primary-color)';
+            option.style.color = 'white';
+
+            // Mostrar un pequeño mensaje de carga
+            languageBtn.innerHTML = '<span class="code-syntax">loading</span><span class="code-syntax">()</span><span class="code-string">...</span>';
+          });
+        });
+
+        // Cerrar el dropdown al hacer clic fuera de él
+        document.addEventListener('click', (e) => {
+          if (!picker.contains(e.target)) {
+            languageDropdown.classList.remove('show-dropdown');
+            if (dropdownArrow) {
+              dropdownArrow.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+
+        // Cerrar el dropdown al presionar la tecla Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            languageDropdown.classList.remove('show-dropdown');
+            if (dropdownArrow) {
+              dropdownArrow.style.transform = 'rotate(0deg)';
+            }
+          }
+        });
+      }
+    });
+
+    // Ajustar el comportamiento en cambios de tamaño de ventana
+    window.addEventListener('resize', () => {
+      const dropdowns = document.querySelectorAll('.language-dropdown');
+      const arrows = document.querySelectorAll('.dropdown-arrow');
+
+      // Si el ancho es mayor a 768px, eliminar la clase show-dropdown
+      if (window.innerWidth >= 768) {
+        dropdowns.forEach(dropdown => {
+          dropdown.classList.remove('show-dropdown');
+        });
+
+        arrows.forEach(arrow => {
+          arrow.style.transform = '';
+        });
+      }
+    });
+  });
+</script>

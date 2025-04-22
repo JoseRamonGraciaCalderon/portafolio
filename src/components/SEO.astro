@@ -1,0 +1,105 @@
+---
+import { seoConfig } from '../seo-config';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonical?: string;
+  type?: string;
+  keywords?: string;
+  author?: string;
+}
+
+const {
+  title = seoConfig.defaultTitle,
+  description = seoConfig.defaultDescription,
+  image = seoConfig.defaultImage,
+  canonical = Astro.url.href,
+  type = seoConfig.type,
+  keywords = seoConfig.defaultKeywords,
+  author = seoConfig.defaultAuthor
+} = Astro.props;
+
+// Obtener la URL actual para el canonical
+const currentUrl = Astro.url.href;
+const imageUrl = new URL(image, seoConfig.baseURL).toString();
+---
+
+<!-- Metadatos primarios -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+<meta name="author" content={author} />
+<link rel="canonical" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={currentUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:site_name" content={seoConfig.siteName} />
+<meta property="og:locale" content={seoConfig.locale} />
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content={currentUrl} />
+<meta property="twitter:title" content={title} />
+<meta property="twitter:description" content={description} />
+<meta property="twitter:image" content={imageUrl} />
+{seoConfig.twitterHandle && <meta property="twitter:creator" content={seoConfig.twitterHandle} />}
+
+<!-- Configuración adicional -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="color-scheme" content={seoConfig.colorScheme} />
+<meta name="theme-color" content="#3b82f6" />
+<meta name="msapplication-TileColor" content="#3b82f6" />
+
+<!-- Structured Data / JSON-LD -->
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Ramón Gracia",
+  "url": "${seoConfig.baseURL}",
+  "image": "${seoConfig.baseURL}${seoConfig.defaultImage}",
+  "jobTitle": "Desarrollador Web & Arquitecto de Software",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Go1 Technologies (PriceTravel)"
+  },
+  "sameAs": [
+    "${seoConfig.social.linkedin}"
+  ],
+  "description": "${seoConfig.defaultDescription}",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "${seoConfig.contactPoint.email}",
+    "telephone": "${seoConfig.contactPoint.telephone}",
+    "contactType": "${seoConfig.contactPoint.contactType}"
+  }
+}
+</script>
+
+<!-- Structured Data para WebSite -->
+<script is:inline type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "${seoConfig.siteName}",
+  "url": "${seoConfig.baseURL}",
+  "description": "${seoConfig.siteDescription}",
+  "inLanguage": "${seoConfig.language}",
+  "author": {
+    "@type": "Person",
+    "name": "${seoConfig.defaultAuthor}"
+  },
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "${seoConfig.baseURL}/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>

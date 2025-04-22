@@ -1,0 +1,157 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import NetworkBackground from './NetworkBackground.astro';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id={lang === 'es' ? 'sobre-mi' : 'about-me'} class="section about">
+  <NetworkBackground />
+  <div class="container">
+    <h2 class="section-title">{t('about.title')}</h2>
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          {t('about.description')}
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <h3>{lang === 'es' ? 'Educación' : 'Education'}</h3>
+          <ul>
+            <li>
+              <span class="year">{lang === 'es' ? 'Titulado' : 'Graduated'}</span>
+              <div class="detail-content">
+                <h4>{lang === 'es' ? 'Ingeniería en Sistemas Computacionales' : 'Computer Systems Engineering'}</h4>
+                <p>Instituto Tecnológico de Culiacán, Sinaloa</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="detail-item">
+          <h3>{lang === 'es' ? 'Certificaciones' : 'Certifications'}</h3>
+          <ul>
+            <li>
+              <span class="year">2023</span>
+              <div class="detail-content">
+                <h4>{lang === 'es' ? 'Desarrollo Web Full Stack' : 'Full Stack Web Development'}</h4>
+                <p>Platzi</p>
+              </div>
+            </li>
+            <li>
+              <span class="year">2022</span>
+              <div class="detail-content">
+                <h4>{lang === 'es' ? 'Desarrollo de Aplicaciones Móviles' : 'Mobile App Development'}</h4>
+                <p>Udemy</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    background-color: var(--background-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+  }
+
+  .about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    line-height: 1.7;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .detail-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+  }
+
+  .detail-item ul {
+    list-style: none;
+  }
+
+  .detail-item li {
+    display: flex;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .year {
+    min-width: 100px;
+    font-weight: 600;
+    color: var(--secondary-color);
+  }
+
+  .detail-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-content p {
+    color: var(--text-color);
+  }
+
+  @media (max-width: 768px) {
+    .about-content {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+    }
+
+    .detail-item li {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .year {
+      min-width: auto;
+    }
+  }
+</style>

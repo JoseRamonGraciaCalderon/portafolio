@@ -1,0 +1,32 @@
+{
+  "name": "Ramón Gracia - Desarrollador Web & Arquitecto de Software",
+  "short_name": "Ramón Gracia",
+  "description": "Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "lang": "es-ES",
+  "dir": "ltr",
+  "orientation": "portrait",
+  "categories": ["portfolio", "web development", "software development"],
+  "screenshots": [
+    {
+      "src": "/images/screenshot.jpg",
+      "sizes": "1280x720",
+      "type": "image/jpeg"
+    }
+  ]
+}

@@ -1,0 +1,220 @@
+---
+// Componente para añadir un fondo animado a las secciones
+---
+
+<div class="animated-background">
+  <div class="animated-grid">
+    <div class="grid-line horizontal" style="--delay: 0s; --top: 10%;"></div>
+    <div class="grid-line horizontal" style="--delay: 2s; --top: 25%;"></div>
+    <div class="grid-line horizontal" style="--delay: 4s; --top: 40%;"></div>
+    <div class="grid-line horizontal" style="--delay: 1s; --top: 55%;"></div>
+    <div class="grid-line horizontal" style="--delay: 3s; --top: 70%;"></div>
+    <div class="grid-line horizontal" style="--delay: 5s; --top: 85%;"></div>
+    
+    <div class="grid-line vertical" style="--delay: 0.5s; --left: 10%;"></div>
+    <div class="grid-line vertical" style="--delay: 2.5s; --left: 25%;"></div>
+    <div class="grid-line vertical" style="--delay: 4.5s; --left: 40%;"></div>
+    <div class="grid-line vertical" style="--delay: 1.5s; --left: 55%;"></div>
+    <div class="grid-line vertical" style="--delay: 3.5s; --left: 70%;"></div>
+    <div class="grid-line vertical" style="--delay: 5.5s; --left: 85%;"></div>
+  </div>
+  
+  <div class="animated-particles">
+    <div class="particle" style="--size: 8px; --delay: 0s; --top: 15%; --left: 20%;"></div>
+    <div class="particle" style="--size: 12px; --delay: 2s; --top: 35%; --left: 45%;"></div>
+    <div class="particle" style="--size: 6px; --delay: 4s; --top: 65%; --left: 15%;"></div>
+    <div class="particle" style="--size: 10px; --delay: 1s; --top: 85%; --left: 75%;"></div>
+    <div class="particle" style="--size: 14px; --delay: 3s; --top: 25%; --left: 85%;"></div>
+    <div class="particle" style="--size: 7px; --delay: 5s; --top: 75%; --left: 35%;"></div>
+    <div class="particle" style="--size: 9px; --delay: 0.5s; --top: 45%; --left: 65%;"></div>
+    <div class="particle" style="--size: 11px; --delay: 2.5s; --top: 55%; --left: 25%;"></div>
+    <div class="particle" style="--size: 8px; --delay: 4.5s; --top: 15%; --left: 55%;"></div>
+    <div class="particle" style="--size: 10px; --delay: 1.5s; --top: 85%; --left: 5%;"></div>
+    <div class="particle" style="--size: 6px; --delay: 3.5s; --top: 35%; --left: 95%;"></div>
+    <div class="particle" style="--size: 12px; --delay: 5.5s; --top: 65%; --left: 50%;"></div>
+  </div>
+  
+  <div class="animated-code">
+    <div class="code-block" style="--delay: 0s; --top: 10%; --left: 5%; --width: 120px;"></div>
+    <div class="code-block" style="--delay: 2s; --top: 25%; --left: 80%; --width: 80px;"></div>
+    <div class="code-block" style="--delay: 4s; --top: 45%; --left: 15%; --width: 150px;"></div>
+    <div class="code-block" style="--delay: 1s; --top: 65%; --left: 70%; --width: 100px;"></div>
+    <div class="code-block" style="--delay: 3s; --top: 85%; --left: 25%; --width: 130px;"></div>
+    <div class="code-block" style="--delay: 5s; --top: 15%; --left: 60%; --width: 90px;"></div>
+    <div class="code-block" style="--delay: 0.5s; --top: 35%; --left: 40%; --width: 110px;"></div>
+    <div class="code-block" style="--delay: 2.5s; --top: 55%; --left: 85%; --width: 70px;"></div>
+    <div class="code-block" style="--delay: 4.5s; --top: 75%; --left: 10%; --width: 140px;"></div>
+  </div>
+</div>
+
+<style>
+  .animated-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* Líneas de cuadrícula */
+  .animated-grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .grid-line {
+    position: absolute;
+    background-color: rgba(59, 130, 246, 0.05);
+    animation: pulse 4s infinite ease-in-out;
+    animation-delay: var(--delay);
+  }
+  
+  .grid-line.horizontal {
+    top: var(--top);
+    left: 0;
+    width: 100%;
+    height: 1px;
+    transform-origin: center;
+  }
+  
+  .grid-line.vertical {
+    top: 0;
+    left: var(--left);
+    width: 1px;
+    height: 100%;
+    transform-origin: center;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(1.02);
+    }
+  }
+  
+  /* Partículas */
+  .animated-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .particle {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: rgba(59, 130, 246, 0.1);
+    top: var(--top);
+    left: var(--left);
+    animation: float 15s infinite ease-in-out;
+    animation-delay: var(--delay);
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translate(0, 0) rotate(0deg);
+      opacity: 0.2;
+    }
+    25% {
+      transform: translate(20px, 10px) rotate(90deg);
+      opacity: 0.5;
+    }
+    50% {
+      transform: translate(0, 20px) rotate(180deg);
+      opacity: 0.2;
+    }
+    75% {
+      transform: translate(-20px, 10px) rotate(270deg);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translate(0, 0) rotate(360deg);
+      opacity: 0.2;
+    }
+  }
+  
+  /* Bloques de código */
+  .animated-code {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .code-block {
+    position: absolute;
+    height: 8px;
+    width: var(--width);
+    border-radius: 4px;
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
+    top: var(--top);
+    left: var(--left);
+    animation: fade 8s infinite ease-in-out;
+    animation-delay: var(--delay);
+  }
+  
+  .code-block::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 0;
+    width: 40%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(59, 130, 246, 0.05);
+  }
+  
+  .code-block::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    right: 0;
+    width: 30%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgba(59, 130, 246, 0.05);
+  }
+  
+  @keyframes fade {
+    0%, 100% {
+      opacity: 0.2;
+      transform: translateX(0);
+    }
+    50% {
+      opacity: 0.5;
+      transform: translateX(10px);
+    }
+  }
+  
+  /* Estilos para modo oscuro */
+  html.dark .grid-line {
+    background-color: rgba(96, 165, 250, 0.05);
+  }
+  
+  html.dark .particle {
+    background-color: rgba(96, 165, 250, 0.1);
+  }
+  
+  html.dark .code-block {
+    background: linear-gradient(90deg, rgba(96, 165, 250, 0.1), rgba(96, 165, 250, 0.05));
+  }
+  
+  html.dark .code-block::before,
+  html.dark .code-block::after {
+    background-color: rgba(96, 165, 250, 0.05);
+  }
+</style>

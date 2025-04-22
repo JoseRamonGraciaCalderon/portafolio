@@ -1,0 +1,420 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id={lang === 'es' ? 'proyectos' : 'projects'} class="section projects">
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">{t('projects.title')}</h2>
+    <div class="projects-grid">
+      <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-image pricetravel-image">
+          <a href="https://www.pricetravel.com" target="_blank">
+            <img src="/public/images/pricetravel-preview.png" alt="PriceTravel Website" class="project-preview">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3>PriceTravel</h3>
+          <p>
+            {lang === 'es' ?
+              'Desarrollo y mantenimiento de la plataforma de reservaciones de viajes PriceTravel, optimizando la experiencia de usuario y el rendimiento del sitio.' :
+              'Development and maintenance of the PriceTravel travel booking platform, optimizing user experience and site performance.'}
+          </p>
+          <div class="project-tags">
+            <span>Vue.js</span>
+            <span>.NET 8</span>
+            <span>AngularJS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://www.pricetravel.com" target="_blank" class="btn-outline btn-sm">{lang === 'es' ? 'Visitar Sitio' : 'Visit Site'}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="project-image">
+          <a href="https://www.tiquetesbaratos.com/" target="_blank">
+            <img src="/images/tiquetesbaratos-preview.png" alt="Tiquetes Baratos Website" class="project-preview">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3>Tiquetes Baratos</h3>
+          <p>
+            {lang === 'es' ?
+              'Desarrollo y mantenimiento de la plataforma de reservaciones de viajes para Colombia, optimizando la experiencia de usuario y el rendimiento del sitio.' :
+              'Development and maintenance of the travel booking platform for Colombia, optimizing user experience and site performance.'}
+          </p>
+          <div class="project-tags">
+            <span>Vue.js</span>
+            <span>.NET 8</span>
+            <span>AngularJS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-links">
+            <a href="https://www.tiquetesbaratos.com/" target="_blank" class="btn-outline btn-sm">{lang === 'es' ? 'Visitar Sitio' : 'Visit Site'}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="project-image">
+          <a href="https://secure.azzule.com/supplychainprogram/login.aspx" target="_blank">
+            <img src="/images/azzule-preview.png" alt="Azzule Supply Chain Program" class="project-preview">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3>Azzule Supply Chain Program</h3>
+          <p>
+            {lang === 'es' ?
+              'Diseño y mantenimiento de módulos para la plataforma de gestión de cadena de suministro, mejorando la funcionalidad y estabilidad del sistema.' :
+              'Design and maintenance of modules for the supply chain management platform, improving system functionality and stability.'}
+          </p>
+          <div class="project-tags">
+            <span>C#</span>
+            <span>JavaScript</span>
+            <span>SQL Server</span>
+            <span>Angular</span>
+            <span>Vue.js</span>
+            <span>.NET</span>
+          </div>
+          <div class="project-links">
+            <a href="https://secure.azzule.com/supplychainprogram/login.aspx" target="_blank" class="btn-outline btn-sm">{lang === 'es' ? 'Visitar Sitio' : 'Visit Site'}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="project-image">
+          <a href="https://aforecoppel.com/" target="_blank">
+            <img src="/images/afore-preview.png" alt="Afore Coppel" class="project-preview">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3>Afore Coppel</h3>
+          <p>
+            {lang === 'es' ?
+              'Arquitectura de software y liderazgo de equipo para la plataforma de Afore Coppel, implementando mejoras en componentes PHP y optimizando la seguridad y eficiencia del sistema.' :
+              'Software architecture and team leadership for the Afore Coppel platform, implementing improvements in PHP components and optimizing system security and efficiency.'}
+          </p>
+          <div class="project-tags">
+            <span>PHP</span>
+            <span>HTML</span>
+            <span>JavaScript</span>
+            <span>{lang === 'es' ? 'Arquitectura de Software' : 'Software Architecture'}</span>
+            <span>{lang === 'es' ? 'Liderazgo de Equipo' : 'Team Leadership'}</span>
+          </div>
+          <div class="project-links">
+            <a href="https://aforecoppel.com/" target="_blank" class="btn-outline btn-sm">{lang === 'es' ? 'Visitar Sitio' : 'Visit Site'}</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+        <div class="project-image">
+          <a href="http://alt.servifact.com.mx/SectorPrimario/Login/IniciarSesion" target="_blank">
+            <img src="/images/servifact-preview.png" alt="Servifact Sector Primario" class="project-preview">
+          </a>
+        </div>
+        <div class="project-content">
+          <h3>Servifact Sector Primario</h3>
+          <p>
+            {lang === 'es' ?
+              'Desarrollo y soporte para la plataforma de facturación electrónica especializada en el sector primario, implementando soluciones eficientes para la gestión de documentos fiscales.' :
+              'Development and support for the electronic invoicing platform specialized in the primary sector, implementing efficient solutions for the management of tax documents.'}
+          </p>
+          <div class="project-tags">
+            <span>C#</span>
+            <span>JavaScript</span>
+            <span>SQL Server</span>
+            <span>ASP.NET</span>
+          </div>
+          <div class="project-links">
+            <a href="http://alt.servifact.com.mx/SectorPrimario/Login/IniciarSesion" target="_blank" class="btn-outline btn-sm">{lang === 'es' ? 'Visitar Sitio' : 'Visit Site'}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .projects {
+    background-color: var(--light-background);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background-color: var(--card-background);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.5s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+  }
+
+  .project-logo {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+  }
+
+  .project-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .project-image a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .project-image:hover .project-logo {
+    transform: scale(1.1);
+  }
+
+  .project-image:hover .project-preview {
+    transform: scale(1.05);
+  }
+
+  .pricetravel-image {
+    background-color: #fff;
+    padding: 0;
+  }
+
+  .project-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-placeholder::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotate(45deg);
+    animation: shine 6s infinite;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  .code-icon {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    font-weight: bold;
+    animation: pulse-scale 3s infinite ease-in-out;
+  }
+
+  @keyframes pulse-scale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .project-content {
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .project-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    position: relative;
+    display: inline-block;
+  }
+
+  .project-content h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  .project-card:hover .project-content h3::after {
+    width: 100%;
+  }
+
+  .project-content p {
+    color: var(--light-text-color);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-tags span {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  html.dark .project-tags span {
+    background-color: rgba(96, 165, 250, 0.15);
+  }
+
+  .project-card:hover .project-tags span {
+    background-color: rgba(59, 130, 246, 0.2);
+    transform: translateY(-2px);
+  }
+
+  html.dark .project-card:hover .project-tags span {
+    background-color: rgba(96, 165, 250, 0.25);
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .btn-sm {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .project-links .btn-outline {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .project-links .btn-outline:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+    z-index: -1;
+  }
+
+  .project-links .btn-outline:hover:before {
+    width: 100%;
+  }
+
+  .project-links .btn-outline:hover {
+    color: white;
+  }
+
+  html.dark .project-links .btn-outline:hover {
+    color: var(--background-color);
+  }
+
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>

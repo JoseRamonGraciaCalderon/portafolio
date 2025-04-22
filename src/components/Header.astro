@@ -1,0 +1,849 @@
+---
+import LanguagePicker from './LanguagePicker.astro';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header class="header">
+  <div class="code-particles-container">
+    <div class="code-particle">const</div>
+    <div class="code-particle">let</div>
+    <div class="code-particle">function</div>
+    <div class="code-particle">{}</div>
+    <div class="code-particle">=>;</div>
+    <div class="code-particle">if()</div>
+    <div class="code-particle">return</div>
+    <div class="code-particle">import</div>
+    <div class="code-particle">export</div>
+    <div class="code-particle">class</div>
+    <div class="code-particle">async</div>
+    <div class="code-particle">await</div>
+    <div class="code-particle">try{}</div>
+    <div class="code-particle">catch{}</div>
+  </div>
+  <div class="container">
+    <nav class="nav">
+      <div class="logo">
+        <a href="/">
+          <div class="typing-container">
+            <span class="code-syntax typing-item">const</span>
+            <span class="dev-name typing-item">developer</span>
+            <span class="code-syntax typing-item">=</span>
+            <span class="code-string typing-item">"Ramón"</span>
+            <span class="code-syntax typing-item">;</span>
+            <span class="cursor">|</span>
+          </div>
+        </a>
+      </div>
+      <div class="nav-links">
+        <button class="close-menu-btn" aria-label="Cerrar menú">
+          <span class="close-icon">×</span>
+        </button>
+        <a href="#sobre-mi" class="nav-link">
+          <span class="code-syntax">.</span>
+          <span class="method-name">{lang === 'es' ? 'sobreMi' : 'aboutMe'}</span>
+          <span class="code-syntax">()</span>
+          <span class="method-tooltip">// {t('nav.about')}</span>
+        </a>
+        <a href="#experiencia" class="nav-link">
+          <span class="code-syntax">.</span>
+          <span class="method-name">{lang === 'es' ? 'experiencia' : 'experience'}</span>
+          <span class="code-syntax">()</span>
+          <span class="method-tooltip">// {t('nav.experience')}</span>
+        </a>
+        <a href="#proyectos" class="nav-link">
+          <span class="code-syntax">.</span>
+          <span class="method-name">{lang === 'es' ? 'proyectos' : 'projects'}</span>
+          <span class="code-syntax">()</span>
+          <span class="method-tooltip">// {t('nav.projects')}</span>
+        </a>
+        <a href="#habilidades" class="nav-link">
+          <span class="code-syntax">.</span>
+          <span class="method-name">{lang === 'es' ? 'habilidades' : 'skills'}</span>
+          <span class="code-syntax">()</span>
+          <span class="method-tooltip">// {t('nav.skills')}</span>
+        </a>
+        <a href="#contacto" class="nav-link">
+          <span class="code-syntax">.</span>
+          <span class="method-name">{lang === 'es' ? 'contacto' : 'contact'}</span>
+          <span class="code-syntax">()</span>
+          <span class="method-tooltip">// {t('nav.contact')}</span>
+        </a>
+        <button class="dark-mode-toggle" aria-label="Activar modo oscuro">
+          <div class="theme-switch">
+            <span class="code-comment">// toggleTheme()</span>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </div>
+        </button>
+        <div class="desktop-language-picker">
+          <LanguagePicker />
+        </div>
+        <a href="/cv.html" target="_blank" class="btn btn-code">
+          <div class="btn-content">
+            <span class="code-syntax">{lang === 'es' ? 'descargar' : 'download'}</span>
+            <span class="code-syntax">(</span>
+            <span class="code-string">"CV.pdf"</span>
+            <span class="code-syntax">)</span>
+            <span class="btn-tooltip">// {t('nav.downloadCV')}</span>
+          </div>
+        </a>
+      </div>
+      <div class="header-actions">
+        <button class="dark-mode-toggle mobile-dark-mode" aria-label="Activar modo oscuro">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+        <button class="mobile-menu-btn" aria-label="Menú">
+          <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Esperar a que el DOM esté completamente cargado
+  document.addEventListener('DOMContentLoaded', function() {
+    // Manejo del menú móvil
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn && navLinks) {
+      const closeMenuBtn = document.querySelector('.close-menu-btn');
+
+      // Función para cerrar el menú
+      function closeMenu() {
+        if (navLinks && mobileMenuBtn) {
+          navLinks.classList.remove('active');
+          mobileMenuBtn.classList.remove('active');
+          document.body.classList.remove('menu-open');
+          console.log('Menu closed');
+        }
+      }
+
+      // Función simple para abrir/cerrar el menú
+      function toggleMenu() {
+        // Toggle clases
+        if (navLinks && mobileMenuBtn) {
+          navLinks.classList.toggle('active');
+          mobileMenuBtn.classList.toggle('active');
+          document.body.classList.toggle('menu-open');
+          console.log('Menu toggled:', navLinks.classList.contains('active'));
+        }
+      }
+
+      // Evento click para el botón del menú
+      mobileMenuBtn.addEventListener('click', function(e) {
+        e.stopPropagation(); // Evitar que el click se propague
+        toggleMenu();
+      });
+
+      // Evento click para el botón de cierre
+      if (closeMenuBtn) {
+        closeMenuBtn.addEventListener('click', function(e) {
+          e.stopPropagation(); // Evitar que el click se propague
+          closeMenu();
+        });
+      }
+
+      // Cerrar menú al hacer clic en un enlace
+      const links = document.querySelectorAll('.nav-links a');
+      links.forEach(link => {
+        link.addEventListener('click', closeMenu);
+      });
+
+      // Cerrar menú al hacer clic fuera del menú
+      document.addEventListener('click', function(e) {
+        const target = e.target as Node;
+        if (navLinks.classList.contains('active') &&
+            !navLinks.contains(target) &&
+            !mobileMenuBtn.contains(target)) {
+          closeMenu();
+        }
+      });
+
+      // Cerrar menú al presionar la tecla Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+          closeMenu();
+        }
+      });
+    }
+
+    // Inicializar las partículas de código con posiciones aleatorias
+    const codeParticles = document.querySelectorAll('.code-particle');
+
+    codeParticles.forEach(particle => {
+      // Posición vertical aleatoria inicial
+      const randomStartPos = Math.random() * 100;
+      particle.setAttribute('style', `top: ${randomStartPos}%`);
+
+      // Duración y retraso aleatorios para la animación
+      const randomDuration = 15 + Math.random() * 15;
+      const randomDelay = Math.random() * 10;
+      particle.setAttribute('style', `top: ${randomStartPos}%; animation-duration: ${randomDuration}s; animation-delay: ${randomDelay}s`);
+    });
+
+    // Efecto de typing para el logo
+    // Reiniciar la animación cuando el usuario vuelve a la página
+    document.addEventListener('visibilitychange', function() {
+      if (!document.hidden) {
+        const typingItems = document.querySelectorAll('.typing-item');
+        typingItems.forEach((item, index) => {
+          item.setAttribute('style', 'animation: none');
+          setTimeout(() => {
+            item.setAttribute('style', `animation: fade-in 0.1s forwards ${0.2 + index * 0.4}s`);
+          }, 10);
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--header-background);
+    box-shadow: 0 2px 10px var(--shadow-color);
+    z-index: 99999;
+    backdrop-filter: blur(10px);
+    font-family: 'Consolas', 'Monaco', monospace;
+    overflow: visible;
+  }
+
+  /* Código flotante en el fondo */
+  .code-particles-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+    opacity: 0.1;
+    pointer-events: none;
+  }
+
+  .code-particle {
+    position: absolute;
+    color: var(--primary-color);
+    font-size: 0.8rem;
+    opacity: 0.5;
+    animation: float-code 15s linear infinite;
+  }
+
+  @keyframes float-code {
+    0% {
+      transform: translateY(100%) rotate(5deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-100%) rotate(-5deg);
+      opacity: 0;
+    }
+  }
+
+  /* Posicionamiento aleatorio de partículas */
+  .code-particle:nth-child(1) { left: 10%; animation-duration: 20s; animation-delay: 0s; }
+  .code-particle:nth-child(2) { left: 20%; animation-duration: 15s; animation-delay: 1s; }
+  .code-particle:nth-child(3) { left: 30%; animation-duration: 18s; animation-delay: 2s; }
+  .code-particle:nth-child(4) { left: 40%; animation-duration: 16s; animation-delay: 3s; }
+  .code-particle:nth-child(5) { left: 50%; animation-duration: 19s; animation-delay: 4s; }
+  .code-particle:nth-child(6) { left: 60%; animation-duration: 17s; animation-delay: 5s; }
+  .code-particle:nth-child(7) { left: 70%; animation-duration: 22s; animation-delay: 6s; }
+  .code-particle:nth-child(8) { left: 80%; animation-duration: 21s; animation-delay: 7s; }
+  .code-particle:nth-child(9) { left: 15%; animation-duration: 23s; animation-delay: 8s; }
+  .code-particle:nth-child(10) { left: 25%; animation-duration: 24s; animation-delay: 9s; }
+  .code-particle:nth-child(11) { left: 35%; animation-duration: 25s; animation-delay: 10s; }
+  .code-particle:nth-child(12) { left: 45%; animation-duration: 19s; animation-delay: 11s; }
+  .code-particle:nth-child(13) { left: 55%; animation-duration: 18s; animation-delay: 12s; }
+  .code-particle:nth-child(14) { left: 65%; animation-duration: 17s; animation-delay: 13s; }
+
+  .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Logo con efecto de typing */
+  .logo a {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+
+  .logo a:hover {
+    transform: translateY(-2px);
+  }
+
+  .typing-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .typing-item {
+    opacity: 0;
+    animation: fade-in 0.1s forwards;
+  }
+
+  .typing-item:nth-child(1) { animation-delay: 0.2s; }
+  .typing-item:nth-child(2) { animation-delay: 0.6s; }
+  .typing-item:nth-child(3) { animation-delay: 1.0s; }
+  .typing-item:nth-child(4) { animation-delay: 1.4s; }
+  .typing-item:nth-child(5) { animation-delay: 1.8s; }
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .cursor {
+    display: inline-block;
+    color: var(--primary-color);
+    font-weight: bold;
+    animation: blink 1s step-end infinite;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .code-syntax {
+    color: var(--primary-color);
+  }
+
+  .dev-name {
+    color: var(--text-color);
+    font-weight: 600;
+    margin: 0 4px;
+  }
+
+  .code-string {
+    color: #f1fa8c;
+    margin: 0 4px;
+  }
+
+  html.dark .code-string {
+    color: #f1fa8c;
+  }
+
+  html.light .code-string {
+    color: #e6a700;
+  }
+
+  /* Navigation links */
+  .nav-links {
+    display: flex;
+    gap: 1.8rem;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .nav-link {
+    color: var(--text-color);
+    font-size: 0.85rem;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .method-name {
+    position: relative;
+  }
+
+  .nav-link:hover {
+    color: var(--primary-color);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
+
+  /* Tooltips para los enlaces */
+  .method-tooltip {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--card-background);
+    color: var(--text-color);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    z-index: 10;
+    color: #6272a4;
+  }
+
+  .nav-link:hover .method-tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -25px;
+  }
+
+  .code-comment {
+    color: #6272a4;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+
+  /* Dark mode toggle */
+  .dark-mode-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theme-switch {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  .dark-mode-toggle:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+    color: var(--primary-color);
+  }
+
+  .dark-mode-toggle .code-comment {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .dark-mode-toggle:hover .code-comment {
+    opacity: 1;
+    visibility: visible;
+    top: -20px;
+  }
+
+  /* Download CV button */
+  .btn-code {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 0.6rem 1rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+  }
+
+  .btn-content {
+    display: flex;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-code .code-syntax {
+    color: white;
+    transition: color 0.3s ease;
+  }
+
+  .btn-code .code-string {
+    color: #ffffa0;
+    transition: color 0.3s ease;
+  }
+
+  html.dark .btn-code .code-string {
+    color: #ffffa0;
+  }
+
+  html.light .btn-code .code-string {
+    color: #ffffa0;
+  }
+
+  .btn-tooltip {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--card-background);
+    color: #6272a4;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    z-index: 10;
+  }
+
+  .btn-code:hover .btn-tooltip {
+    opacity: 1;
+    visibility: visible;
+    top: -20px;
+  }
+
+  .btn-code:hover {
+    background-color: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .btn-code:hover .code-syntax,
+  .btn-code:hover .code-string {
+    color: white;
+  }
+
+  .btn-code::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+    z-index: 1;
+  }
+
+  .btn-code:hover::before {
+    opacity: 1;
+    animation: shine 1.5s ease-out;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  html.dark .btn-code {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  html.dark .btn-code:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Mobile menu button */
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    position: relative;
+    z-index: 10000;
+    padding: 8px;
+    margin-left: 10px;
+  }
+
+  .hamburger {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-menu-btn.active .hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: var(--primary-color);
+  }
+
+  .mobile-menu-btn.active .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-btn.active .hamburger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: var(--primary-color);
+  }
+
+  /* Asegurarse de que el botón siempre sea visible */
+  .header-actions {
+    position: relative;
+    z-index: 10000;
+  }
+
+  /* Botón de cierre del menú móvil */
+  .close-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+    z-index: 100000;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .close-menu-btn:hover {
+    transform: rotate(90deg);
+    background-color: var(--secondary-color);
+  }
+
+  .close-icon {
+    line-height: 1;
+    font-weight: bold;
+  }
+
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      background-color: var(--card-background);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      z-index: 99990;
+      display: none;
+    }
+
+    .nav-links.active {
+      display: flex;
+    }
+
+    /* Fondo para el menú móvil */
+    .nav-links.active {
+      display: flex;
+    }
+
+    /* Mostrar botón de cierre cuando el menú está activo */
+    .nav-links.active .close-menu-btn {
+      display: flex;
+    }
+
+    /* Estilos específicos para modo oscuro y claro */
+    html.dark .nav-links.active {
+      background-color: rgba(20, 20, 30, 0.95);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    html.light .nav-links.active {
+      background-color: rgba(245, 245, 250, 0.95);
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .mobile-menu-btn {
+      display: block;
+    }
+
+    .nav-link {
+      font-size: 1.1rem;
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+    }
+
+    .method-tooltip {
+      display: none;
+    }
+
+    .btn-code {
+      margin-top: 1.5rem;
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem 1rem;
+    }
+
+    .btn-tooltip {
+      display: none;
+    }
+
+    .code-particles-container {
+      display: none;
+    }
+  }
+
+  .mobile-dark-mode {
+    display: none;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .mobile-language-picker,
+  .desktop-language-picker {
+    display: flex;
+    align-items: center;
+  }
+
+  .desktop-language-picker {
+    margin: 0 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .dark-mode-toggle {
+      display: none !important;
+    }
+
+    .mobile-dark-mode {
+      display: flex !important;
+      padding: 8px;
+      margin-right: 5px;
+    }
+
+    .mobile-language-picker {
+      margin-right: 5px;
+    }
+
+    .mobile-language-picker .language-picker {
+      transform: scale(0.9);
+    }
+
+    .logo a {
+      font-size: 0.9rem;
+    }
+
+    .typing-container {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
+
+    .nav {
+      padding: 0.8rem 0;
+    }
+  }
+
+  /* Ajustes específicos para móviles pequeños */
+  @media (max-width: 480px) {
+    .logo a {
+      font-size: 0.8rem;
+    }
+
+    .typing-container {
+      max-width: 200px;
+    }
+
+    .mobile-menu-btn {
+      width: 35px;
+      height: 35px;
+      padding: 6px;
+    }
+  }
+
+  /* Tablet styles */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .nav-links {
+      gap: 1rem;
+    }
+
+    .nav-link {
+      font-size: 0.8rem;
+    }
+
+    .btn-code {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .logo a {
+      font-size: 1rem;
+    }
+
+    .method-tooltip, .btn-tooltip {
+      font-size: 0.65rem;
+    }
+
+    .code-particles-container {
+      opacity: 0.05;
+    }
+  }
+</style>

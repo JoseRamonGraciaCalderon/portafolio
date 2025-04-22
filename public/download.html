@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descargando CV...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            padding: 20px;
+        }
+        h1 {
+            color: #3b82f6;
+        }
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3b82f6;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .redirect-btn {
+            display: inline-block;
+            background-color: #3b82f6;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .redirect-btn:hover {
+            background-color: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Descargando tu CV</h1>
+        <p>Tu CV se está descargando automáticamente. Si la descarga no comienza en unos segundos, haz clic en el botón de abajo.</p>
+        <div class="loader"></div>
+        <a href="/CV_Ramon_Gracia_Desarrollador_Web.pdf" download="CV_Ramon_Gracia_Desarrollador_Web.pdf" class="redirect-btn" id="download-btn">Descargar CV</a>
+        <p><a href="/">Volver a la página principal</a></p>
+    </div>
+
+    <script>
+        // Iniciar la descarga automáticamente
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intentar descargar directamente el PDF
+            setTimeout(function() {
+                document.getElementById('download-btn').click();
+
+                // Redirigir a la página principal después de 3 segundos
+                setTimeout(function() {
+                    window.location.href = '/';
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

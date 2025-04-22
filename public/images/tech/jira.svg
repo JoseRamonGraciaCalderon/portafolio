@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs><style>.cls-1{fill:#2684ff;}.cls-2{fill:url(#linear-gradient);}.cls-3{fill:url(#linear-gradient-2);}</style><linearGradient id="linear-gradient" x1="22.67" y1="108.34" x2="49.23" y2="134.9" gradientUnits="userSpaceOnUse"><stop offset="0.18" stop-color="#0052cc"/><stop offset="1" stop-color="#2684ff"/></linearGradient><linearGradient id="linear-gradient-2" x1="37.4" y1="94.62" x2="64.28" y2="121.5" gradientUnits="userSpaceOnUse"><stop offset="0.18" stop-color="#0052cc"/><stop offset="1" stop-color="#2684ff"/></linearGradient></defs>
+  <path class="cls-1" d="M108.13,9.2A57.5,57.5,0,0,0,19.86,9.2a57.5,57.5,0,0,0,0,81.38l40.7,40.7,47.57-47.57A57.5,57.5,0,0,0,108.13,9.2ZM60.56,98.13,29.11,66.68a31.83,31.83,0,0,1,0-45,31.83,31.83,0,0,1,45,0L60.56,35.22l13.5-13.5a31.83,31.83,0,0,1,45,0,31.83,31.83,0,0,1,0,45Z"/>
+  <path class="cls-2" d="M60.56,98.13,77.42,115a31.83,31.83,0,0,1-45,0,31.83,31.83,0,0,1,0-45l16.86,16.86L60.56,98.13Z"/>
+  <path class="cls-3" d="M60.56,98.13,29.11,66.68,60.56,35.22,92,66.68Z"/>
+</svg>

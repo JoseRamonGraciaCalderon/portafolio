@@ -1,0 +1,41 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import AboutMe from '../../components/AboutMe.astro';
+import Experience from '../../components/Experience.astro';
+// Quitamos la importación de TimelineCareer
+import Projects from '../../components/Projects.astro';
+import Skills from '../../components/Skills.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Metadatos de la página para SEO
+const pageTitle = t('site.title');
+const pageDescription = t('site.description');
+---
+
+<Layout
+	title={pageTitle}
+	description={pageDescription}
+	keywords="web developer, software developer, frontend, backend, vue.js, angular, react, .NET, javascript, typescript, full-stack, Ramón Gracia, portfolio"
+	author="Ramón Gracia"
+	type="website"
+>
+	<Header />
+	<main>
+		<Hero />
+		<AboutMe />
+		<Experience />
+		<!-- Quitamos el componente TimelineCareer -->
+		<Projects />
+		<Skills />
+		<Contact />
+	</main>
+	<Footer />
+</Layout>

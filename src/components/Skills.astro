@@ -1,0 +1,431 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import NetworkBackground from './NetworkBackground.astro';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<section id={lang === 'es' ? 'habilidades' : 'skills'} class="section skills">
+  <NetworkBackground />
+  <div class="container">
+    <h2 class="section-title" data-aos="fade-up">{t('skills.title')}</h2>
+    <div class="skills-container">
+      <div class="skills-category" data-aos="fade-up" data-aos-delay="100">
+        <h3>{lang === 'es' ? 'Desarrollo Frontend' : 'Frontend Development'}</h3>
+        <div class="tech-grid">
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="150">
+            <div class="tech-icon">
+              <img src="/images/tech/html5.svg" alt="HTML5" />
+            </div>
+            <div class="tech-name">HTML5</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="200">
+            <div class="tech-icon">
+              <img src="/images/tech/css3.svg" alt="CSS3" />
+            </div>
+            <div class="tech-name">CSS3</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="tech-icon">
+              <img src="/images/tech/javascript.svg" alt="JavaScript" />
+            </div>
+            <div class="tech-name">JavaScript</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="300">
+            <div class="tech-icon">
+              <img src="/images/tech/typescript.svg" alt="TypeScript" />
+            </div>
+            <div class="tech-name">TypeScript</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="350">
+            <div class="tech-icon">
+              <img src="/images/tech/react.svg" alt="React" />
+            </div>
+            <div class="tech-name">React</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="tech-icon">
+              <img src="/images/tech/vue.svg" alt="Vue.js" />
+            </div>
+            <div class="tech-name">Vue.js</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="450">
+            <div class="tech-icon">
+              <img src="/images/tech/angular.svg" alt="Angular" />
+            </div>
+            <div class="tech-name">Angular</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="500">
+            <div class="tech-icon">
+              <img src="/images/tech/sass.svg" alt="Sass" />
+            </div>
+            <div class="tech-name">Sass</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-category" data-aos="fade-up" data-aos-delay="550">
+        <h3>{lang === 'es' ? 'Desarrollo Backend' : 'Backend Development'}</h3>
+        <div class="tech-grid">
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="600">
+            <div class="tech-icon">
+              <img src="/images/tech/nodejs.svg" alt="Node.js" />
+            </div>
+            <div class="tech-name">Node.js</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="650">
+            <div class="tech-icon">
+              <img src="/images/tech/php.svg" alt="PHP" />
+            </div>
+            <div class="tech-name">PHP</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="700">
+            <div class="tech-icon">
+              <img src="/images/tech/csharp.svg" alt="C#" />
+            </div>
+            <div class="tech-name">C#</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="750">
+            <div class="tech-icon">
+              <img src="/images/tech/dotnet.svg" alt=".NET" />
+            </div>
+            <div class="tech-name">.NET</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="800">
+            <div class="tech-icon">
+              <img src="/images/tech/mysql.svg" alt="MySQL" />
+            </div>
+            <div class="tech-name">MySQL</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="850">
+            <div class="tech-icon">
+              <img src="/images/tech/sqlserver.svg" alt="SQL Server" />
+            </div>
+            <div class="tech-name">SQL Server</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="skills-category" data-aos="fade-up" data-aos-delay="900">
+        <h3>{lang === 'es' ? 'Herramientas y Otros' : 'Tools & Others'}</h3>
+        <div class="tech-grid">
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="950">
+            <div class="tech-icon">
+              <img src="/images/tech/git.svg" alt="Git" />
+            </div>
+            <div class="tech-name">Git</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="1000">
+            <div class="tech-icon">
+              <img src="/images/tech/docker.svg" alt="Docker" />
+            </div>
+            <div class="tech-name">Docker</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="1050">
+            <div class="tech-icon">
+              <img src="/images/tech/aws.svg" alt="AWS" />
+            </div>
+            <div class="tech-name">AWS</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="1100">
+            <div class="tech-icon">
+              <img src="/images/tech/figma.svg" alt="Figma" />
+            </div>
+            <div class="tech-name">Figma</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="1150">
+            <div class="tech-icon">
+              <img src="/images/tech/vscode.svg" alt="VS Code" />
+            </div>
+            <div class="tech-name">VS Code</div>
+          </div>
+          <div class="tech-item" data-aos="fade-up" data-aos-delay="1200">
+            <div class="tech-icon">
+              <img src="/images/tech/jira.svg" alt="Jira" />
+            </div>
+            <div class="tech-name">Jira</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="code-background">
+    <div class="code-line">function {lang === 'es' ? 'desarrollador' : 'developer'}() &#123;</div>
+    <div class="code-line">  const skills = ['JavaScript', 'Vue.js', 'C#'];</div>
+    <div class="code-line">  return &#123; {lang === 'es' ? 'experiencia: true, pasion: true' : 'experience: true, passion: true'} &#125;;</div>
+    <div class="code-line">&#125;</div>
+  </div>
+</section>
+
+<script>
+  // Animación de los íconos de tecnología
+  window.addEventListener('load', function() {
+    const animateTechItems = () => {
+      const techItems = document.querySelectorAll('.tech-item');
+
+      if (techItems.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+
+        techItems.forEach(item => {
+          observer.observe(item);
+        });
+      }
+    };
+
+    // Esperar un poco para asegurarse de que todo está cargado
+    setTimeout(animateTechItems, 500);
+  });
+</script>
+
+<style>
+  .skills {
+    background-color: var(--background-color);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+  }
+
+  .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+  }
+
+  .skills-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    position: relative;
+    z-index: 2;
+  }
+
+  .skills-category {
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .skills-category:hover {
+    transform: translateY(-5px);
+  }
+
+  .skills-category h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+    position: relative;
+    display: inline-block;
+  }
+
+  .skills-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .skills-category:hover h3::after {
+    width: 100%;
+  }
+
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .tech-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: var(--card-background);
+    box-shadow: 0 4px 6px var(--shadow-color);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .tech-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tech-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px var(--shadow-color);
+  }
+
+  .tech-item:hover .tech-icon img {
+    transform: scale(1.1);
+  }
+
+  .tech-icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .tech-icon img {
+    max-width: 100%;
+    max-height: 100%;
+    transition: transform 0.3s ease;
+  }
+
+  .tech-name {
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    color: var(--text-color);
+  }
+
+  /* Efecto de brillo al hacer hover */
+  .tech-item::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+  }
+
+  .tech-item:hover::after {
+    opacity: 1;
+    animation: shine 1.5s ease-out;
+  }
+
+  @keyframes shine {
+    0% {
+      transform: translateX(-100%) rotate(45deg);
+    }
+    100% {
+      transform: translateX(100%) rotate(45deg);
+    }
+  }
+
+  /* Fondo de código */
+  .code-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40%;
+    height: 100%;
+    opacity: 0.05;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .code-line {
+    font-family: 'Consolas', 'Monaco', monospace;
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin: 0.5rem 0;
+    white-space: nowrap;
+    animation: slide-in 10s infinite linear;
+    opacity: 0;
+  }
+
+  .code-line:nth-child(1) {
+    animation-delay: 0s;
+  }
+
+  .code-line:nth-child(2) {
+    animation-delay: 2.5s;
+  }
+
+  .code-line:nth-child(3) {
+    animation-delay: 5s;
+  }
+
+  .code-line:nth-child(4) {
+    animation-delay: 7.5s;
+  }
+
+  @keyframes slide-in {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    90% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .tech-grid {
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 1rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .code-background {
+      width: 100%;
+      opacity: 0.03;
+    }
+
+    .tech-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .tech-name {
+      font-size: 0.8rem;
+    }
+
+    .tech-item {
+      padding: 0.75rem;
+    }
+  }
+</style>

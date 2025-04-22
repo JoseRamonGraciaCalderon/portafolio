@@ -1,0 +1,546 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+// Obtener el idioma actual y las traducciones
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+// Datos de experiencia laboral
+const experiences = [
+  {
+    id: 'go1',
+    title: {
+      es: 'Desarrollador Web',
+      en: 'Web Developer'
+    },
+    company: 'Go1 Technologies (PriceTravel)',
+    period: {
+      es: '2022 - Presente',
+      en: '2022 - Present'
+    },
+    location: {
+      es: 'Remoto',
+      en: 'Remote'
+    },
+    description: {
+      es: 'Desarrollo y mantenimiento de plataformas web para PriceTravel, Tiquetes Baratos, PriceTravel US, PriceTravel ES y otras aplicaciones internas, asegurando una experiencia de usuario fluida y un rendimiento optimizado. Implementación de soluciones en múltiples tecnologías modernas, adaptando cada proyecto a las necesidades específicas de cada plataforma.',
+      en: 'Development and maintenance of web platforms for PriceTravel, Tiquetes Baratos, PriceTravel US, PriceTravel ES, and other internal applications, ensuring a smooth user experience and optimized performance. Implementation of solutions in multiple modern technologies, adapting each project to the specific needs of each platform.'
+    },
+    technologies: ['Vue.js', '.NET 8', 'AngularJS', 'JavaScript'],
+    color: '#3b82f6'
+  },
+  {
+    id: 'afore',
+    title: {
+      es: 'Arquitecto de Software y Líder de Equipo',
+      en: 'Software Architect & Team Leader'
+    },
+    company: 'Afore Coppel',
+    period: {
+      es: '2021 - 2024',
+      en: '2021 - 2024'
+    },
+    location: {
+      es: 'Culiacán, Sinaloa',
+      en: 'Culiacan, Sinaloa'
+    },
+    description: {
+      es: 'Desempeñé el rol de arquitecto de software, liderando un equipo de cuatro desarrolladores en la creación y optimización de soluciones de software, asegurando una arquitectura sólida y escalable. Implementé cambios en componentes PHP, mejorando la seguridad y eficiencia mediante la eliminación de dependencias directas de APIs y bases de datos.',
+      en: 'I performed the role of software architect, leading a team of four developers in the creation and optimization of software solutions, ensuring a solid and scalable architecture. I implemented changes in PHP components, improving security and efficiency by eliminating direct dependencies on APIs and databases.'
+    },
+    technologies: ['PHP', 'JavaScript', 'HTML', 'CSS'],
+    color: '#10b981'
+  },
+  {
+    id: 'azzule',
+    title: {
+      es: 'Desarrollador Web',
+      en: 'Web Developer'
+    },
+    company: 'Azzule',
+    period: {
+      es: '2021 - 2022',
+      en: '2021 - 2022'
+    },
+    location: {
+      es: 'Home Office - Culiacán, Sinaloa',
+      en: 'Home Office - Culiacan, Sinaloa'
+    },
+    description: {
+      es: 'Diseñé y mantuve módulos de la plataforma principal, asegurando la funcionalidad y la estabilidad del sistema a través de mejoras continuas y soluciones rápidas a problemas de rendimiento. Trabajé con múltiples tecnologías y herramientas en el entorno .NET, asegurando una integración fluida y eficiente con otros sistemas y bases de datos.',
+      en: 'I designed and maintained modules of the main platform, ensuring the functionality and stability of the system through continuous improvements and quick solutions to performance issues. I worked with multiple technologies and tools in the .NET environment, ensuring smooth and efficient integration with other systems and databases.'
+    },
+    technologies: ['C#', 'JavaScript', 'SQL Server', 'Angular', 'Vue.js', 'TypeScript', 'HTML', 'CSS', '.NET'],
+    color: '#8b5cf6'
+  },
+  {
+    id: 'servifact',
+    title: {
+      es: 'Analista de Soporte y Desarrollo',
+      en: 'Support and Development Analyst'
+    },
+    company: 'Servifact',
+    period: {
+      es: '2019 - 2020',
+      en: '2019 - 2020'
+    },
+    location: {
+      es: 'Culiacán, Sinaloa',
+      en: 'Culiacan, Sinaloa'
+    },
+    description: {
+      es: 'Proporcioné soporte técnico y realicé modificaciones en la plataforma de timbrado, asegurando la correcta operación del sistema y adaptando la plataforma a nuevos requerimientos de clientes y regulaciones.',
+      en: 'I provided technical support and made modifications to the electronic invoicing platform, ensuring the correct operation of the system and adapting the platform to new customer requirements and regulations.'
+    },
+    technologies: ['C#', 'JavaScript', 'SQL Server', 'ASP.NET'],
+    color: '#ec4899'
+  },
+  {
+    id: 'sys21',
+    title: {
+      es: 'Soporte y Desarrollo de Sistema',
+      en: 'System Support and Development'
+    },
+    company: 'Sys21',
+    period: {
+      es: '2019',
+      en: '2019'
+    },
+    location: {
+      es: 'Culiacán, Sinaloa',
+      en: 'Culiacan, Sinaloa'
+    },
+    description: {
+      es: 'Atendí incidencias de soporte, realizando modificaciones y actualizaciones del sistema para satisfacer las necesidades de los clientes. Gestioné la instalación de versiones actualizadas en el sistema del cliente, asegurando una transición sin problemas y un soporte técnico oportuno.',
+      en: 'I attended to support incidents, making modifications and updates to the system to meet customer needs. I managed the installation of updated versions in the client\'s system, ensuring a smooth transition and timely technical support.'
+    },
+    technologies: ['Visual Basic 6', 'Access', 'VB.NET', 'Visual Studio 2013/2006', 'SQL Server'],
+    color: '#f59e0b'
+  }
+];
+---
+
+<div class="timeline-container">
+  <h2 class="timeline-title">{lang === 'es' ? 'Mi Trayectoria Profesional' : 'My Professional Journey'}</h2>
+  
+  <div class="timeline-navigation">
+    <button class="timeline-nav-btn prev" id="timeline-prev" aria-label={lang === 'es' ? 'Anterior' : 'Previous'}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    
+    <div class="timeline-years">
+      <div class="timeline-line"></div>
+      <div class="timeline-markers">
+        {experiences.map((exp, index) => (
+          <div class="timeline-marker" data-id={exp.id} style={`left: ${index * (100 / (experiences.length - 1))}%`}>
+            <div class="marker-dot" style={`background-color: ${exp.color}`}></div>
+            <div class="marker-year">{exp.period[lang].split(' - ')[0]}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <button class="timeline-nav-btn next" id="timeline-next" aria-label={lang === 'es' ? 'Siguiente' : 'Next'}>
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </div>
+  
+  <div class="timeline-content">
+    {experiences.map((exp) => (
+      <div class="timeline-card" id={`timeline-${exp.id}`} data-id={exp.id}>
+        <div class="timeline-card-header" style={`background-color: ${exp.color}`}>
+          <h3>{exp.title[lang]}</h3>
+          <p class="timeline-company">{exp.company}</p>
+          <p class="timeline-period">{exp.period[lang]}</p>
+        </div>
+        <div class="timeline-card-body">
+          <p class="timeline-location">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            {exp.location[lang]}
+          </p>
+          <p class="timeline-description">{exp.description[lang]}</p>
+          <div class="timeline-technologies">
+            {exp.technologies.map((tech) => (
+              <span class="timeline-tech">{tech}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Elementos del DOM
+    const prevBtn = document.getElementById('timeline-prev');
+    const nextBtn = document.getElementById('timeline-next');
+    const markers = document.querySelectorAll('.timeline-marker');
+    const cards = document.querySelectorAll('.timeline-card');
+    
+    // Estado actual
+    let currentIndex = 0;
+    const totalItems = markers.length;
+    
+    // Función para actualizar la visualización
+    function updateTimeline(index) {
+      // Actualizar índice actual
+      currentIndex = index;
+      
+      // Actualizar estado de los botones
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === totalItems - 1;
+      
+      // Actualizar marcadores
+      markers.forEach((marker, i) => {
+        if (i === currentIndex) {
+          marker.classList.add('active');
+        } else {
+          marker.classList.remove('active');
+        }
+      });
+      
+      // Actualizar tarjetas
+      cards.forEach((card, i) => {
+        if (i === currentIndex) {
+          card.classList.add('active');
+          
+          // Animar la entrada de la tarjeta
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.classList.remove('active');
+        }
+      });
+    }
+    
+    // Event listeners para los botones
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        updateTimeline(currentIndex - 1);
+      }
+    });
+    
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalItems - 1) {
+        updateTimeline(currentIndex + 1);
+      }
+    });
+    
+    // Event listeners para los marcadores
+    markers.forEach((marker, index) => {
+      marker.addEventListener('click', () => {
+        updateTimeline(index);
+      });
+    });
+    
+    // Inicializar la línea de tiempo
+    updateTimeline(0);
+    
+    // Mostrar la primera tarjeta
+    if (cards.length > 0) {
+      cards[0].classList.add('active');
+    }
+    
+    // Añadir event listener para las teclas de flecha
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        updateTimeline(currentIndex - 1);
+      } else if (e.key === 'ArrowRight' && currentIndex < totalItems - 1) {
+        updateTimeline(currentIndex + 1);
+      }
+    });
+  });
+</script>
+
+<style>
+  .timeline-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .timeline-title {
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--primary-color);
+    font-size: 2rem;
+    position: relative;
+  }
+  
+  .timeline-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background-color: var(--primary-color);
+  }
+  
+  .timeline-navigation {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .timeline-nav-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-nav-btn:hover {
+    background-color: var(--light-background);
+    color: var(--primary-color);
+  }
+  
+  .timeline-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .timeline-years {
+    flex: 1;
+    position: relative;
+    height: 40px;
+    margin: 0 20px;
+  }
+  
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--border-color);
+    transform: translateY(-50%);
+  }
+  
+  .timeline-markers {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+  }
+  
+  .timeline-marker {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .marker-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    margin-bottom: 8px;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px var(--border-color);
+  }
+  
+  .marker-year {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+  
+  .timeline-marker:hover .marker-dot,
+  .timeline-marker.active .marker-dot {
+    transform: scale(1.3);
+  }
+  
+  .timeline-marker:hover .marker-year,
+  .timeline-marker.active .marker-year {
+    font-weight: 600;
+    color: var(--primary-color);
+  }
+  
+  .timeline-content {
+    position: relative;
+    min-height: 400px;
+  }
+  
+  .timeline-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(20px);
+    border: 1px solid var(--border-color);
+  }
+  
+  .timeline-card.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .timeline-card-header {
+    padding: 20px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .timeline-card-header::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), transparent);
+    transform: rotate(45deg);
+    z-index: 1;
+  }
+  
+  .timeline-card-header h3 {
+    margin: 0 0 5px;
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-company {
+    margin: 0 0 5px;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-period {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .timeline-card-body {
+    padding: 20px;
+  }
+  
+  .timeline-location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+  
+  .timeline-description {
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+  
+  .timeline-technologies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .timeline-tech {
+    background-color: var(--light-background);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--text-color);
+  }
+  
+  /* Estilos para modo oscuro */
+  html.dark .marker-dot {
+    border-color: var(--card-background);
+    box-shadow: 0 0 0 2px var(--border-color);
+  }
+  
+  html.dark .timeline-tech {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Estilos responsivos */
+  @media (max-width: 768px) {
+    .timeline-container {
+      padding: 15px;
+    }
+    
+    .timeline-title {
+      font-size: 1.8rem;
+    }
+    
+    .timeline-card-header h3 {
+      font-size: 1.3rem;
+    }
+    
+    .timeline-company {
+      font-size: 1rem;
+    }
+    
+    .marker-year {
+      display: none;
+    }
+    
+    .timeline-content {
+      min-height: 450px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .timeline-title {
+      font-size: 1.5rem;
+    }
+    
+    .timeline-card-header {
+      padding: 15px;
+    }
+    
+    .timeline-card-body {
+      padding: 15px;
+    }
+    
+    .timeline-content {
+      min-height: 500px;
+    }
+  }
+</style>
