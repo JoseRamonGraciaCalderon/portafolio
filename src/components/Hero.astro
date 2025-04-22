@@ -545,7 +545,13 @@ const t = useTranslations(lang);
     }
 
     .floating-elements {
-      display: none; /* Ocultar elementos flotantes en pantallas muy pequeñas */
+      /* Mantener los elementos flotantes pero hacerlos más pequeños */
+      transform: scale(0.7);
+    }
+
+    .floating-element {
+      font-size: 1rem;
+      padding: 0.3rem;
     }
 
     .greeting {
@@ -579,6 +585,15 @@ const t = useTranslations(lang);
 
     .code-snippet {
       display: none; /* Ocultar el código en pantallas extremadamente pequeñas */
+    }
+
+    .floating-elements {
+      transform: scale(0.6);
+    }
+
+    .floating-element {
+      font-size: 0.9rem;
+      padding: 0.25rem;
     }
   }
 </style>
