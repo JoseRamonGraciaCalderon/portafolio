@@ -121,6 +121,9 @@ const t = useTranslations(lang);
     );
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
   }
 
   .hero .container {
@@ -181,6 +184,8 @@ const t = useTranslations(lang);
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     position: relative;
+    font-size: 0.95rem;
+    line-height: 1.4;
   }
 
   .code-snippet::before {
@@ -409,12 +414,16 @@ const t = useTranslations(lang);
 
   @media (max-width: 768px) {
     .hero {
-      padding: 7rem 0 3rem;
+      padding: 5rem 0 2rem;
+      min-height: calc(100vh - 70px); /* Ajustar para la altura del header */
+      display: flex;
+      align-items: center;
     }
 
     .hero .container {
       grid-template-columns: 1fr;
       text-align: center;
+      gap: 1rem;
     }
 
     .hero-content {
@@ -423,35 +432,94 @@ const t = useTranslations(lang);
 
     .hero-image {
       order: 1;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     .hero h2 {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+      min-height: 2rem;
     }
 
     .hero p {
-      font-size: 1rem;
-      margin: 0 auto 1.5rem;
+      font-size: 0.9rem;
+      margin: 0 auto 1rem;
+      line-height: 1.5;
     }
 
     .hero-buttons {
       justify-content: center;
+      margin-top: 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .code-snippet {
       margin: 0 auto;
+      font-size: 0.8rem;
+      padding: 0.75rem;
+      max-width: 300px;
+    }
+
+    .code-snippet pre {
+      font-size: 0.8rem;
     }
 
     .image-container {
-      width: 220px;
-      height: 220px;
+      width: 180px;
+      height: 180px;
       border-width: 3px;
       margin: 0 auto;
+    }
+
+    .floating-element {
+      font-size: 1.2rem;
+      padding: 0.4rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero {
+      padding: 4rem 0 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero h2 {
+      font-size: 1.1rem;
+    }
+
+    .hero p {
+      font-size: 0.85rem;
+    }
+
+    .image-container {
+      width: 150px;
+      height: 150px;
+    }
+
+    .code-snippet {
+      max-width: 280px;
+      padding: 0.5rem;
+    }
+
+    .code-snippet pre {
+      font-size: 0.7rem;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .hero-buttons .btn {
+      width: 80%;
+      padding: 0.6rem 1rem;
     }
   }
 </style>
