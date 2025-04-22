@@ -42,31 +42,31 @@ const t = useTranslations(lang);
         <button class="close-menu-btn" aria-label="Cerrar menú">
           <span class="close-icon">×</span>
         </button>
-        <a href="#{lang === 'es' ? 'sobre-mi' : 'about-me'}" class="nav-link">
+        <a href="#{lang === 'es' ? 'sobre-mi' : 'about-me'}" class="nav-link" data-section="about">
           <span class="code-syntax">.</span>
           <span class="method-name">{lang === 'es' ? 'sobreMi' : 'aboutMe'}</span>
           <span class="code-syntax">()</span>
           <span class="method-tooltip">// {t('nav.about')}</span>
         </a>
-        <a href="#{lang === 'es' ? 'experiencia' : 'experience'}" class="nav-link">
+        <a href="#{lang === 'es' ? 'experiencia' : 'experience'}" class="nav-link" data-section="experience">
           <span class="code-syntax">.</span>
           <span class="method-name">{lang === 'es' ? 'experiencia' : 'experience'}</span>
           <span class="code-syntax">()</span>
           <span class="method-tooltip">// {t('nav.experience')}</span>
         </a>
-        <a href="#{lang === 'es' ? 'proyectos' : 'projects'}" class="nav-link">
+        <a href="#{lang === 'es' ? 'proyectos' : 'projects'}" class="nav-link" data-section="projects">
           <span class="code-syntax">.</span>
           <span class="method-name">{lang === 'es' ? 'proyectos' : 'projects'}</span>
           <span class="code-syntax">()</span>
           <span class="method-tooltip">// {t('nav.projects')}</span>
         </a>
-        <a href="#{lang === 'es' ? 'habilidades' : 'skills'}" class="nav-link">
+        <a href="#{lang === 'es' ? 'habilidades' : 'skills'}" class="nav-link" data-section="skills">
           <span class="code-syntax">.</span>
           <span class="method-name">{lang === 'es' ? 'habilidades' : 'skills'}</span>
           <span class="code-syntax">()</span>
           <span class="method-tooltip">// {t('nav.skills')}</span>
         </a>
-        <a href="#{lang === 'es' ? 'contacto' : 'contact'}" class="nav-link">
+        <a href="#{lang === 'es' ? 'contacto' : 'contact'}" class="nav-link" data-section="contact">
           <span class="code-syntax">.</span>
           <span class="method-name">{lang === 'es' ? 'contacto' : 'contact'}</span>
           <span class="code-syntax">()</span>
