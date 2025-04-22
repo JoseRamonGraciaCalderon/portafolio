@@ -66,9 +66,36 @@ const currentUrl = Astro.url.href;
 		<!-- Fuentes y estilos -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
-		<link rel="stylesheet" href="/css/responsive.css" />
+		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+
+		<!-- Fuente crítica para el LCP -->
+		<style>
+			/* Fuente crítica para el LCP */
+			@font-face {
+				font-family: 'Inter';
+				font-style: normal;
+				font-weight: 600;
+				font-display: swap;
+				src: local('Inter SemiBold'), local('Inter-SemiBold'), url(https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2) format('woff2');
+				unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+			}
+		</style>
+		<!-- Estilos críticos para el LCP -->
+		<link rel="preload" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"></noscript>
+
+		<link rel="preload" href="/css/responsive.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+		<noscript><link rel="stylesheet" href="/css/responsive.css"></noscript>
+
+		<!-- Precargar imágenes críticas para el LCP -->
+		<link rel="preload" href="/images/webp/avatar.webp" as="image" type="image/webp" fetchpriority="high">
+
+		<!-- Script para cargar estilos de forma asíncrona -->
+		<script>
+			// Función para cargar estilos de forma asíncrona
+			!function(n){"use strict";n.loadCSS||(n.loadCSS=function(){});var o=loadCSS.relpreload={};if(o.support=function(){var e;try{e=n.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),o.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},o.poly=function(){if(!o.support())for(var t=n.document.getElementsByTagName("link"),e=0;e<t.length;e++){var a=t[e];"preload"!==a.rel||"style"!==a.getAttribute("as")||a.getAttribute("data-loadcss")||(a.setAttribute("data-loadcss",!0),o.bindMediaToggle(a))}},!o.support()){o.poly();var t=n.setInterval(o.poly,500);n.addEventListener?n.addEventListener("load",function(){o.poly(),n.clearInterval(t)}):n.attachEvent&&n.attachEvent("onload",function(){o.poly(),n.clearInterval(t)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:n.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+		</script>
 
 		<!-- Structured Data / JSON-LD -->
 		<script is:inline type="application/ld+json">
@@ -96,9 +123,10 @@ const currentUrl = Astro.url.href;
 		<ScrollToTop />
 		<Chatbot />
 
-		<script is:inline src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-		<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-		<script is:inline src="/scripts/simpleNavigation.js"></script>
+		<!-- Cargar scripts no críticos de forma asíncrona -->
+		<script is:inline defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+		<script is:inline defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<script is:inline defer src="/scripts/simpleNavigation.js"></script>
 		<script is:inline>
 			// Función para alternar entre modo claro y oscuro
 			function toggleDarkMode() {

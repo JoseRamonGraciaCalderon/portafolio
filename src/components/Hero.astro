@@ -12,7 +12,7 @@ const t = useTranslations(lang);
     <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
       <div class="greeting">{t('hero.greeting')}</div>
       <h1><span class="highlight-text">{t('hero.name')}</span></h1>
-      <h2 id="typewriter">{t('hero.title')}</h2>
+      <h2 id="typewriter" class="preload-content">{t('hero.title')}</h2>
       <p data-aos="fade-up" data-aos-delay="400">
         {t('hero.subtitle')}
       </p>
@@ -50,19 +50,27 @@ const t = useTranslations(lang);
 </section>
 
 <script define:vars={{ lang }}>
-  // Efecto de máquina de escribir
-  window.addEventListener("load", function () {
+  // Efecto de máquina de escribir optimizado para LCP
+  document.addEventListener("DOMContentLoaded", function() {
+    // Mostrar el contenido inicial inmediatamente para LCP
     const typewriterElement = document.getElementById("typewriter");
     if (!typewriterElement) return;
 
+    // Remover la clase de precarga después de que el LCP se haya completado
+    typewriterElement.classList.remove("preload-content");
+
+    // Guardar el texto inicial para mostrarlo en caso de que JS esté deshabilitado
+    const initialText = typewriterElement.textContent;
+
+    // Configurar el efecto de máquina de escribir con requestAnimationFrame para mejor rendimiento
     const phrases = lang === 'es' ? [
-      "Desarrollador de Software",
+      initialText, // Usar el texto inicial como primera frase
       "Desarrollador Frontend",
       "Desarrollador Backend",
       "Desarrollador Full Stack",
       "Creador de Soluciones Digitales",
     ] : [
-      "Software Developer",
+      initialText, // Usar el texto inicial como primera frase
       "Frontend Developer",
       "Backend Developer",
       "Full Stack Developer",
@@ -70,27 +78,38 @@ const t = useTranslations(lang);
     ];
 
     let currentPhraseIndex = 0;
-    let currentCharIndex = 0;
-    let isDeleting = false;
+    let currentCharIndex = phrases[0].length; // Comenzar con el texto completo
+    let isDeleting = true; // Comenzar borrando el texto inicial
     let typingSpeed = 100;
+    let lastTime = 0;
+    let deltaTime = 0;
 
-    function typeWriter() {
-      if (!typewriterElement) return; // Verificar nuevamente por seguridad
+    // Usar requestAnimationFrame para mejor rendimiento
+    function animateTypewriter(timestamp) {
+      if (!typewriterElement) return;
+
+      // Calcular el tiempo transcurrido
+      if (!lastTime) lastTime = timestamp;
+      deltaTime += timestamp - lastTime;
+      lastTime = timestamp;
+
+      // Solo actualizar cuando haya pasado suficiente tiempo
+      if (deltaTime < typingSpeed) {
+        requestAnimationFrame(animateTypewriter);
+        return;
+      }
+
+      // Reiniciar el contador de tiempo
+      deltaTime = 0;
 
       const currentPhrase = phrases[currentPhraseIndex];
 
       if (isDeleting) {
-        typewriterElement.textContent = currentPhrase.substring(
-          0,
-          currentCharIndex - 1,
-        );
+        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
         currentCharIndex--;
         typingSpeed = 50;
       } else {
-        typewriterElement.textContent = currentPhrase.substring(
-          0,
-          currentCharIndex + 1,
-        );
+        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
         currentCharIndex++;
         typingSpeed = 100;
       }
@@ -104,11 +123,13 @@ const t = useTranslations(lang);
         typingSpeed = 500; // Pausa antes de escribir la siguiente frase
       }
 
-      setTimeout(typeWriter, typingSpeed);
+      requestAnimationFrame(animateTypewriter);
     }
 
-    // Esperar un poco para asegurarse de que todo está cargado
-    setTimeout(typeWriter, 1500);
+    // Iniciar la animación después de un breve retraso para permitir que el LCP se complete
+    setTimeout(() => {
+      requestAnimationFrame(animateTypewriter);
+    }, 1000);
   });
 </script>
 
@@ -163,6 +184,26 @@ const t = useTranslations(lang);
     color: var(--primary-color);
     margin-bottom: 1rem;
     min-height: 2.5rem; /* Para evitar saltos durante la animación de escritura */
+    position: relative;
+  }
+
+  /* Estilo para optimizar el LCP */
+  .preload-content {
+    display: inline-block;
+    font-weight: 600; /* Asegurar que se use la fuente precargada */
+    will-change: contents; /* Optimizar para cambios de contenido */
+    contain: content; /* Mejorar rendimiento de renderizado */
+  }
+
+  .preload-content::after {
+    content: '';
+    position: absolute;
+    right: -4px;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--primary-color);
+    animation: blink 0.8s infinite;
   }
 
   .hero p {
