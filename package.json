@@ -6,11 +6,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "astro preview --host",
+    "start": "node server.js",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/node": "^9.2.0",
     "aos": "^2.3.4",
-    "astro": "^5.7.4"
+    "astro": "^5.7.4",
+    "express": "^5.1.0"
   }
 }

@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +20,11 @@ export default defineConfig({
     format: 'file'
   },
   server: {
-    port: 4321,
+    port: process.env.PORT || 4321,
     host: true
-  }
+  },
+  output: 'server',
+  adapter: node({
+    mode: 'standalone'
+  })
 });
