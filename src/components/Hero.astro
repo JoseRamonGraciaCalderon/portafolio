@@ -31,7 +31,7 @@ const t = useTranslations(lang);
     <div class="hero-image" data-aos="fade-left" data-aos-delay="400">
       <div class="image-container">
         <img
-          src="/images/avatar.jpeg"
+          src="/images/avatar.jpg"
           alt="Ramón - Foto de perfil"
           class="profile-image"
         />
@@ -113,7 +113,7 @@ const t = useTranslations(lang);
 
 <style>
   .hero {
-    padding: 8rem 0 5rem;
+    padding: 6rem 0 3rem;
     background: linear-gradient(
       135deg,
       var(--light-background) 0%,
@@ -124,6 +124,7 @@ const t = useTranslations(lang);
     min-height: 100vh;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   .hero .container {
@@ -133,6 +134,8 @@ const t = useTranslations(lang);
     align-items: center;
     position: relative;
     z-index: 2;
+    width: 100%;
+    max-width: 1200px;
   }
 
   .hero-content {
@@ -172,8 +175,8 @@ const t = useTranslations(lang);
   .hero-buttons {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;
+    margin-top: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .code-snippet {
@@ -482,44 +485,100 @@ const t = useTranslations(lang);
 
   @media (max-width: 480px) {
     .hero {
-      padding: 4rem 0 1.5rem;
+      padding: 3rem 0 1rem;
+      min-height: 100vh;
+      justify-content: center;
+    }
+
+    .hero .container {
+      gap: 0.5rem;
+      width: 100%;
+      padding: 0 1rem;
     }
 
     .hero h1 {
-      font-size: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 0.2rem;
     }
 
     .hero h2 {
-      font-size: 1.1rem;
+      font-size: 1rem;
+      min-height: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .hero p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
     }
 
     .image-container {
-      width: 150px;
-      height: 150px;
+      width: 120px;
+      height: 120px;
+      border-width: 2px;
     }
 
     .code-snippet {
-      max-width: 280px;
+      max-width: 100%;
       padding: 0.5rem;
+      margin-top: 0.5rem;
+      font-size: 0.7rem;
     }
 
     .code-snippet pre {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
 
     .hero-buttons {
       flex-direction: column;
       gap: 0.5rem;
       align-items: center;
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .hero-buttons .btn {
-      width: 80%;
-      padding: 0.6rem 1rem;
+      width: 100%;
+      padding: 0.5rem 0.8rem;
+      font-size: 0.8rem;
+    }
+
+    .floating-elements {
+      display: none; /* Ocultar elementos flotantes en pantallas muy pequeñas */
+    }
+
+    .greeting {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+    }
+  }
+
+  /* Ajustes específicos para dispositivos muy pequeños */
+  @media (max-width: 360px) {
+    .hero {
+      padding: 2rem 0 0.5rem;
+    }
+
+    .hero h1 {
+      font-size: 1.6rem;
+    }
+
+    .hero h2 {
+      font-size: 0.9rem;
+    }
+
+    .hero p {
+      font-size: 0.75rem;
+    }
+
+    .image-container {
+      width: 100px;
+      height: 100px;
+    }
+
+    .code-snippet {
+      display: none; /* Ocultar el código en pantallas extremadamente pequeñas */
     }
   }
 </style>
