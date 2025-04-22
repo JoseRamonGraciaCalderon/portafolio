@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import OptimizedImage from './OptimizedImage.astro';
 
 // Obtener el idioma actual y las traducciones
 const lang = getLangFromUrl(Astro.url);
@@ -30,7 +31,7 @@ const t = useTranslations(lang);
     </div>
     <div class="hero-image" data-aos="fade-left" data-aos-delay="400">
       <div class="image-container">
-        <img
+        <OptimizedImage
           src="/images/avatar.jpg"
           alt="Ramón - Foto de perfil"
           class="profile-image"

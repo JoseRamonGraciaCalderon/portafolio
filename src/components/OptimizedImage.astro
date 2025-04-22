@@ -1,0 +1,45 @@
+---
+// Componente para imágenes optimizadas con soporte WebP y fallback
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+}
+
+const { src, alt, class: className, width, height } = Astro.props;
+
+// Determinar la ruta de la imagen WebP
+const srcPath = src.startsWith('/') ? src : `/${src}`;
+const extension = srcPath.substring(srcPath.lastIndexOf('.'));
+const basePath = srcPath.substring(0, srcPath.lastIndexOf('.'));
+const webpSrc = `/images/webp${basePath.substring(basePath.lastIndexOf('/'))}.webp`;
+
+// Determinar si la imagen es local (para aplicar WebP)
+const isLocalImage = !src.startsWith('http');
+---
+
+{isLocalImage ? (
+  <picture>
+    <source srcset={webpSrc} type="image/webp" />
+    <source srcset={srcPath} type={`image/${extension.substring(1)}`} />
+    <img 
+      src={srcPath} 
+      alt={alt} 
+      class={className} 
+      width={width} 
+      height={height}
+      loading="lazy"
+    />
+  </picture>
+) : (
+  <img 
+    src={src} 
+    alt={alt} 
+    class={className} 
+    width={width} 
+    height={height}
+    loading="lazy"
+  />
+)}

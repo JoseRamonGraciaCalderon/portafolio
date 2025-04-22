@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import OptimizedImage from './OptimizedImage.astro';
 
 // Obtener el idioma actual y las traducciones
 const lang = getLangFromUrl(Astro.url);
@@ -13,7 +14,7 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="100">
         <div class="project-image pricetravel-image">
           <a href="https://www.pricetravel.com" target="_blank">
-            <img src="/images/pricetravel-preview.png" alt="PriceTravel Website" class="project-preview">
+            <OptimizedImage src="/images/pricetravel-preview.png" alt="PriceTravel Website" class="project-preview" />
           </a>
         </div>
         <div class="project-content">
@@ -38,7 +39,7 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="200">
         <div class="project-image">
           <a href="https://www.tiquetesbaratos.com/" target="_blank">
-            <img src="/images/tiquetesbaratos-preview.png" alt="Tiquetes Baratos Website" class="project-preview">
+            <OptimizedImage src="/images/tiquetesbaratos-preview.png" alt="Tiquetes Baratos Website" class="project-preview" />
           </a>
         </div>
         <div class="project-content">
@@ -63,7 +64,7 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="300">
         <div class="project-image">
           <a href="https://secure.azzule.com/supplychainprogram/login.aspx" target="_blank">
-            <img src="/images/azzule-preview.png" alt="Azzule Supply Chain Program" class="project-preview">
+            <OptimizedImage src="/images/azzule-preview.png" alt="Azzule Supply Chain Program" class="project-preview" />
           </a>
         </div>
         <div class="project-content">
@@ -90,7 +91,7 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="400">
         <div class="project-image">
           <a href="https://aforecoppel.com/" target="_blank">
-            <img src="/images/afore-preview.png" alt="Afore Coppel" class="project-preview">
+            <OptimizedImage src="/images/afore-preview.png" alt="Afore Coppel" class="project-preview" />
           </a>
         </div>
         <div class="project-content">
@@ -116,7 +117,7 @@ const t = useTranslations(lang);
       <div class="project-card" data-aos="fade-up" data-aos-delay="500">
         <div class="project-image">
           <a href="http://alt.servifact.com.mx/SectorPrimario/Login/IniciarSesion" target="_blank">
-            <img src="/images/servifact-preview.png" alt="Servifact Sector Primario" class="project-preview">
+            <OptimizedImage src="/images/servifact-preview.png" alt="Servifact Sector Primario" class="project-preview" />
           </a>
         </div>
         <div class="project-content">
