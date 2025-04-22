@@ -68,9 +68,10 @@ const currentUrl = Astro.url.href;
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+		<link rel="stylesheet" href="/css/responsive.css" />
 
 		<!-- Structured Data / JSON-LD -->
-		<script type="application/ld+json">
+		<script is:inline type="application/ld+json">
 		{
 			"@context": "https://schema.org",
 			"@type": "Person",
@@ -97,7 +98,8 @@ const currentUrl = Astro.url.href;
 
 		<script is:inline src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 		<script is:inline src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-		<script>
+		<script is:inline src="/scripts/fixNavigation.js"></script>
+		<script is:inline>
 			// Función para alternar entre modo claro y oscuro
 			function toggleDarkMode() {
 				const html = document.documentElement;
@@ -149,8 +151,8 @@ const currentUrl = Astro.url.href;
 				});
 
 				// Inicializar AOS solo si está disponible
-				if (typeof AOS !== 'undefined') {
-					AOS.init({
+				if (typeof window !== 'undefined' && window.AOS) {
+					window.AOS.init({
 						duration: 800,
 						easing: 'ease-in-out',
 						once: false
@@ -158,8 +160,8 @@ const currentUrl = Astro.url.href;
 				}
 
 				// Inicializar Particles.js solo si está disponible
-				if (typeof particlesJS !== 'undefined' && document.getElementById('particles-js')) {
-					particlesJS('particles-js', {
+				if (typeof window !== 'undefined' && window.particlesJS && document.getElementById('particles-js')) {
+					window.particlesJS('particles-js', {
 						particles: {
 							number: {
 								value: 50,
