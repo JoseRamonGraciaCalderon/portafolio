@@ -525,6 +525,16 @@ const t = useTranslations(lang);
     letter-spacing: 0.5px; /* Mejorar legibilidad del texto */
   }
 
+  /* Estilos específicos para los elementos dentro del botón */
+  .btn-code .function,
+  .btn-code .parameter,
+  .btn-code .parenthesis,
+  .btn-code .semicolon {
+    color: white; /* Color blanco para máximo contraste con el fondo del botón */
+    font-weight: 700;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); /* Sombra de texto más pronunciada */
+  }
+
   .btn-code:hover {
     background-color: var(--secondary-color);
     transform: translateY(-2px);
