@@ -240,25 +240,31 @@ const t = useTranslations(lang);
     }
   }
 
-  /* Fondo con gradiente para modo oscuro - Más notorio */
+  /* Fondo con gradiente para modo oscuro - Mucho más notorio */
   html.dark .hero::before {
     background: linear-gradient(90deg,
-      rgba(96, 165, 250, 0.4) 0%,
-      rgba(59, 130, 246, 0.6) 25%,
-      rgba(96, 165, 250, 0.4) 50%,
-      rgba(59, 130, 246, 0.6) 75%,
-      rgba(96, 165, 250, 0.4) 100%);
+      rgba(96, 165, 250, 0.7) 0%,
+      rgba(59, 130, 246, 0.9) 25%,
+      rgba(96, 165, 250, 0.7) 50%,
+      rgba(59, 130, 246, 0.9) 75%,
+      rgba(96, 165, 250, 0.7) 100%);
     opacity: 1;
+    background-size: 200% 100%;
+    animation-duration: 8s;
+    box-shadow: inset 0 0 100px rgba(59, 130, 246, 0.3);
   }
 
   html.dark .hero::after {
     background: linear-gradient(135deg,
-      rgba(59, 130, 246, 0.35) 0%,
-      rgba(96, 165, 250, 0.5) 25%,
-      rgba(59, 130, 246, 0.35) 50%,
-      rgba(96, 165, 250, 0.5) 75%,
-      rgba(59, 130, 246, 0.35) 100%);
-    opacity: 0.9;
+      rgba(59, 130, 246, 0.6) 0%,
+      rgba(96, 165, 250, 0.8) 25%,
+      rgba(59, 130, 246, 0.6) 50%,
+      rgba(96, 165, 250, 0.8) 75%,
+      rgba(59, 130, 246, 0.6) 100%);
+    opacity: 1;
+    background-size: 300% 300%;
+    animation-duration: 10s;
+    filter: drop-shadow(0 0 15px rgba(96, 165, 250, 0.5));
   }
 
   .hero .container {
@@ -751,16 +757,7 @@ const t = useTranslations(lang);
       opacity: 0.5;
     }
 
-    /* Ajustes especiales para modo oscuro en móviles */
-    html.dark .hero::before {
-      background-size: 200% 100%;
-      animation-duration: 8s;
-    }
 
-    html.dark .hero::after {
-      background-size: 300% 300%;
-      animation-duration: 10s;
-    }
 
     /* Ajustar animaciones para móviles */
     .hero .container::before {
