@@ -170,7 +170,7 @@ const t = useTranslations(lang);
     justify-content: center;
   }
 
-  /* Fondo con gradiente animado diagonal */
+  /* Fondo con efecto de ola con gradiente */
   .hero::before {
     content: '';
     position: absolute;
@@ -178,33 +178,27 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg,
-      rgba(59, 130, 246, 0) 0%,
-      rgba(59, 130, 246, 0.03) 25%,
+    background: linear-gradient(90deg,
+      rgba(59, 130, 246, 0.05) 0%,
+      rgba(96, 165, 250, 0.1) 25%,
       rgba(59, 130, 246, 0.05) 50%,
-      rgba(59, 130, 246, 0.03) 75%,
-      rgba(59, 130, 246, 0) 100%);
-    background-size: 400% 400%;
+      rgba(96, 165, 250, 0.1) 75%,
+      rgba(59, 130, 246, 0.05) 100%);
+    background-size: 300% 100%;
     z-index: 1;
     opacity: 0.8;
-    animation: gradient-shift 15s ease infinite;
+    animation: wave-gradient 15s ease infinite;
   }
 
-  @keyframes gradient-shift {
+  @keyframes wave-gradient {
     0% {
-      background-position: 0% 0%;
-    }
-    25% {
-      background-position: 50% 25%;
+      background-position: 0% 50%;
     }
     50% {
       background-position: 100% 50%;
     }
-    75% {
-      background-position: 50% 75%;
-    }
     100% {
-      background-position: 0% 100%;
+      background-position: 0% 50%;
     }
   }
 
@@ -216,49 +210,54 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     bottom: 0;
-    background:
-      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
-      linear-gradient(135deg, rgba(59, 130, 246, 0) 0%, rgba(59, 130, 246, 0.02) 50%, rgba(59, 130, 246, 0) 100%);
-    background-size: 200% 200%, 200% 200%, 400% 400%;
+    background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0.02) 0%,
+      rgba(96, 165, 250, 0.04) 25%,
+      rgba(59, 130, 246, 0.02) 50%,
+      rgba(96, 165, 250, 0.04) 75%,
+      rgba(59, 130, 246, 0.02) 100%);
+    background-size: 400% 400%;
     z-index: 1;
     opacity: 0.7;
-    animation: gradient-pulse 20s ease infinite;
+    animation: diagonal-wave 20s ease infinite;
   }
 
-  @keyframes gradient-pulse {
+  @keyframes diagonal-wave {
     0% {
-      background-position: 0% 0%, 100% 100%, 0% 0%;
+      background-position: 0% 0%;
     }
     25% {
-      background-position: 50% 25%, 50% 75%, 50% 25%;
+      background-position: 50% 50%;
     }
     50% {
-      background-position: 100% 50%, 0% 50%, 100% 50%;
+      background-position: 100% 100%;
     }
     75% {
-      background-position: 50% 75%, 50% 25%, 50% 75%;
+      background-position: 50% 50%;
     }
     100% {
-      background-position: 0% 100%, 100% 0%, 0% 100%;
+      background-position: 0% 0%;
     }
   }
 
   /* Fondo con gradiente para modo oscuro */
   html.dark .hero::before {
-    background: linear-gradient(135deg,
-      rgba(96, 165, 250, 0) 0%,
-      rgba(96, 165, 250, 0.04) 25%,
-      rgba(96, 165, 250, 0.06) 50%,
-      rgba(96, 165, 250, 0.04) 75%,
-      rgba(96, 165, 250, 0) 100%);
+    background: linear-gradient(90deg,
+      rgba(96, 165, 250, 0.08) 0%,
+      rgba(59, 130, 246, 0.15) 25%,
+      rgba(96, 165, 250, 0.08) 50%,
+      rgba(59, 130, 246, 0.15) 75%,
+      rgba(96, 165, 250, 0.08) 100%);
+    opacity: 0.6;
   }
 
   html.dark .hero::after {
-    background:
-      radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.04) 0%, transparent 50%),
-      linear-gradient(135deg, rgba(96, 165, 250, 0) 0%, rgba(96, 165, 250, 0.03) 50%, rgba(96, 165, 250, 0) 100%);
+    background: linear-gradient(135deg,
+      rgba(96, 165, 250, 0.03) 0%,
+      rgba(59, 130, 246, 0.06) 25%,
+      rgba(96, 165, 250, 0.03) 50%,
+      rgba(59, 130, 246, 0.06) 75%,
+      rgba(96, 165, 250, 0.03) 100%);
     opacity: 0.5;
   }
 
@@ -740,16 +739,16 @@ const t = useTranslations(lang);
       gap: 1rem;
     }
 
-    /* Ajustar animaciones de gradiente para móviles */
+    /* Ajustar animaciones de ola para móviles */
     .hero::before {
-      background-size: 300% 300%;
-      animation-duration: 12s;
+      background-size: 200% 100%;
+      animation-duration: 10s;
     }
 
     .hero::after {
-      background-size: 150% 150%, 150% 150%, 300% 300%;
-      animation-duration: 15s;
-      opacity: 0.6;
+      background-size: 300% 300%;
+      animation-duration: 12s;
+      opacity: 0.5;
     }
 
     /* Ajustar animaciones para móviles */
