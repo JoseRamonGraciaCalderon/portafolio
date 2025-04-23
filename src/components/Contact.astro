@@ -535,6 +535,24 @@ const t = useTranslations(lang);
     text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3); /* Sombra de texto más pronunciada */
   }
 
+  /* Estilos específicos para el botón en modo oscuro */
+  html.dark .btn-code {
+    background-color: #3b82f6; /* Azul más brillante para modo oscuro */
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto más pronunciada para modo oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada para modo oscuro */
+  }
+
+  /* Estilos específicos para los elementos dentro del botón en modo oscuro */
+  html.dark .btn-code .function,
+  html.dark .btn-code .parameter,
+  html.dark .btn-code .parenthesis,
+  html.dark .btn-code .semicolon {
+    color: white; /* Color blanco para máximo contraste con el fondo del botón */
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5); /* Sombra de texto más pronunciada para modo oscuro */
+  }
+
   .btn-code:hover {
     background-color: var(--secondary-color);
     transform: translateY(-2px);
@@ -542,6 +560,8 @@ const t = useTranslations(lang);
   }
 
   html.dark .btn-code:hover {
+    background-color: #60a5fa; /* Azul más claro al hacer hover en modo oscuro */
+    transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   }
 
