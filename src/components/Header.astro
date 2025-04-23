@@ -34,7 +34,8 @@ const t = useTranslations(lang);
             <span class="code-syntax typing-item">=</span>
             <span class="code-string typing-item">"Ramón"</span>
             <span class="code-syntax typing-item">;</span>
-            <span class="cursor">|</span>
+            <span class="cursor-static">|</span>
+            <span id="cursor-animated" class="cursor-animated" style="display: none;">|</span>
           </div>
         </a>
       </div>
@@ -190,6 +191,32 @@ const t = useTranslations(lang);
       particle.setAttribute('style', `top: ${randomStartPos}%; animation-duration: ${randomDuration}s; animation-delay: ${randomDelay}s`);
     });
 
+    // Función para inicializar el cursor animado después del LCP
+    function initAnimatedCursor() {
+      const staticCursor = document.querySelector('.cursor-static') as HTMLElement;
+      const animatedCursor = document.getElementById('cursor-animated') as HTMLElement;
+
+      if (staticCursor && animatedCursor) {
+        // Ocultar el cursor estático
+        staticCursor.style.display = 'none';
+
+        // Mostrar el cursor animado
+        animatedCursor.style.display = 'inline-block';
+
+        // Aplicar la animación
+        animatedCursor.style.animation = 'blink 1s step-end infinite';
+      }
+    }
+
+    // Inicializar el cursor animado después del LCP
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        setTimeout(initAnimatedCursor, 2000);
+      }, { timeout: 2000 });
+    } else {
+      setTimeout(initAnimatedCursor, 2000);
+    }
+
     // Efecto de typing para el logo
     // Reiniciar la animación cuando el usuario vuelve a la página
     document.addEventListener('visibilitychange', function() {
@@ -319,12 +346,26 @@ const t = useTranslations(lang);
     to { opacity: 1; }
   }
 
-  .cursor {
+  /* Cursor estático para el LCP */
+  .cursor-static {
+    display: inline-block;
+    color: #3b82f6; /* Color primario hardcodeado */
+    font-weight: bold;
+    margin-left: 2px;
+  }
+
+  html.dark .cursor-static {
+    color: #60a5fa; /* Color primario para modo oscuro hardcodeado */
+  }
+
+  /* Cursor animado (cargado después del LCP) */
+  .cursor-animated {
     display: inline-block;
     color: var(--primary-color);
     font-weight: bold;
-    animation: blink 1s step-end infinite;
     margin-left: 2px;
+    position: absolute;
+    right: 0;
   }
 
   @keyframes blink {
