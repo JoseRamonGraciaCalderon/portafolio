@@ -170,6 +170,62 @@ const t = useTranslations(lang);
     justify-content: center;
   }
 
+  /* Fondo con animación sutil */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.05) 0%, transparent 20%),
+      radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 100%);
+    opacity: 0.8;
+    z-index: 1;
+    animation: pulse-bg 15s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-bg {
+    0% {
+      opacity: 0.5;
+      background-position: 0% 0%;
+    }
+    50% {
+      opacity: 0.8;
+    }
+    100% {
+      opacity: 0.5;
+      background-position: 100% 100%;
+    }
+  }
+
+  /* Fondo con grid para modo oscuro */
+  html.dark .hero::before {
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.08) 0%, transparent 25%),
+      radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.08) 0%, transparent 25%),
+      linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 20px 20px, 20px 20px;
+    animation: pulse-bg-dark 15s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulse-bg-dark {
+    0% {
+      opacity: 0.3;
+      background-position: 0% 0%, 0% 0%, 0px 0px, 0px 0px;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 0.3;
+      background-position: 100% 100%, 100% 100%, 10px 10px, 10px 10px;
+    }
+  }
+
   .hero .container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -184,26 +240,29 @@ const t = useTranslations(lang);
   .hero-content {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.25rem;
+    padding: 1rem 0;
   }
 
   .greeting {
     font-size: 1.2rem;
     color: var(--text-color);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
   }
 
   .hero h1 {
     font-size: 4rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    line-height: 1;
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
   }
 
   .hero h2 {
     font-size: 2rem;
     color: var(--primary-color);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     min-height: 2.5rem; /* Para evitar saltos durante la animación de escritura */
     position: relative;
   }
@@ -250,16 +309,17 @@ const t = useTranslations(lang);
   .hero p {
     font-size: 1.1rem;
     color: var(--text-color);
-    margin-bottom: 1.5rem;
-    max-width: 500px;
+    margin-bottom: 1.75rem;
+    max-width: 520px;
     line-height: 1.7;
+    font-weight: 400;
   }
 
   .hero-buttons {
     display: flex;
-    gap: 1rem;
-    margin-top: 0.75rem;
-    margin-bottom: 1rem;
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .code-snippet {
@@ -670,11 +730,6 @@ const t = useTranslations(lang);
       width: 100px;
       height: 100px;
     }
-
-    .code-snippet {
-      display: none; /* Ocultar el código en pantallas extremadamente pequeñas */
-    }
-
     .floating-elements {
       transform: scale(0.6);
     }
