@@ -170,7 +170,7 @@ const t = useTranslations(lang);
     justify-content: center;
   }
 
-  /* Fondo con animación de oleaje */
+  /* Fondo con gradiente animado diagonal */
   .hero::before {
     content: '';
     position: absolute;
@@ -178,17 +178,37 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom,
-      transparent 0%,
-      rgba(59, 130, 246, 0.02) 20%,
-      rgba(59, 130, 246, 0.04) 40%,
-      rgba(59, 130, 246, 0.02) 60%,
-      transparent 80%);
+    background: linear-gradient(135deg,
+      rgba(59, 130, 246, 0) 0%,
+      rgba(59, 130, 246, 0.03) 25%,
+      rgba(59, 130, 246, 0.05) 50%,
+      rgba(59, 130, 246, 0.03) 75%,
+      rgba(59, 130, 246, 0) 100%);
+    background-size: 400% 400%;
     z-index: 1;
     opacity: 0.8;
+    animation: gradient-shift 15s ease infinite;
   }
 
-  /* Capas de olas */
+  @keyframes gradient-shift {
+    0% {
+      background-position: 0% 0%;
+    }
+    25% {
+      background-position: 50% 25%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    75% {
+      background-position: 50% 75%;
+    }
+    100% {
+      background-position: 0% 100%;
+    }
+  }
+
+  /* Segunda capa de gradiente para efecto de profundidad */
   .hero::after {
     content: '';
     position: absolute;
@@ -196,42 +216,49 @@ const t = useTranslations(lang);
     left: 0;
     right: 0;
     bottom: 0;
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(59, 130, 246, 0.03)'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='rgba(59, 130, 246, 0.02)'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='rgba(59, 130, 246, 0.01)'/%3E%3C/svg%3E");
-    background-position: center bottom, center bottom, center top;
-    background-size: 200% 100px, 180% 80px, 160% 60px;
-    background-repeat: repeat-x;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(59, 130, 246, 0.03) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(59, 130, 246, 0) 0%, rgba(59, 130, 246, 0.02) 50%, rgba(59, 130, 246, 0) 100%);
+    background-size: 200% 200%, 200% 200%, 400% 400%;
     z-index: 1;
     opacity: 0.7;
-    animation: wave-animation 18s linear infinite;
+    animation: gradient-pulse 20s ease infinite;
   }
 
-  @keyframes wave-animation {
+  @keyframes gradient-pulse {
     0% {
-      background-position: 0 bottom, 0 bottom, 0 top;
+      background-position: 0% 0%, 100% 100%, 0% 0%;
+    }
+    25% {
+      background-position: 50% 25%, 50% 75%, 50% 25%;
+    }
+    50% {
+      background-position: 100% 50%, 0% 50%, 100% 50%;
+    }
+    75% {
+      background-position: 50% 75%, 50% 25%, 50% 75%;
     }
     100% {
-      background-position: 200% bottom, 180% bottom, 160% top;
+      background-position: 0% 100%, 100% 0%, 0% 100%;
     }
   }
 
-  /* Fondo con oleaje para modo oscuro */
+  /* Fondo con gradiente para modo oscuro */
   html.dark .hero::before {
-    background: linear-gradient(to bottom,
-      transparent 0%,
-      rgba(96, 165, 250, 0.03) 20%,
-      rgba(96, 165, 250, 0.05) 40%,
-      rgba(96, 165, 250, 0.03) 60%,
-      transparent 80%);
+    background: linear-gradient(135deg,
+      rgba(96, 165, 250, 0) 0%,
+      rgba(96, 165, 250, 0.04) 25%,
+      rgba(96, 165, 250, 0.06) 50%,
+      rgba(96, 165, 250, 0.04) 75%,
+      rgba(96, 165, 250, 0) 100%);
   }
 
   html.dark .hero::after {
-    background-image:
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='rgba(96, 165, 250, 0.04)'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='rgba(96, 165, 250, 0.03)'/%3E%3C/svg%3E"),
-      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z' fill='rgba(96, 165, 250, 0.02)'/%3E%3C/svg%3E");
+    background:
+      radial-gradient(circle at 20% 30%, rgba(96, 165, 250, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(96, 165, 250, 0.04) 0%, transparent 50%),
+      linear-gradient(135deg, rgba(96, 165, 250, 0) 0%, rgba(96, 165, 250, 0.03) 50%, rgba(96, 165, 250, 0) 100%);
     opacity: 0.5;
   }
 
@@ -713,10 +740,16 @@ const t = useTranslations(lang);
       gap: 1rem;
     }
 
-    /* Ajustar animaciones de olas para móviles */
+    /* Ajustar animaciones de gradiente para móviles */
+    .hero::before {
+      background-size: 300% 300%;
+      animation-duration: 12s;
+    }
+
     .hero::after {
-      background-size: 300% 60px, 280% 40px, 260% 30px;
+      background-size: 150% 150%, 150% 150%, 300% 300%;
       animation-duration: 15s;
+      opacity: 0.6;
     }
 
     /* Ajustar animaciones para móviles */
