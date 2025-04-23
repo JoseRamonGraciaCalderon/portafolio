@@ -177,6 +177,37 @@ const currentUrl = Astro.url.href;
 			html.dark .greeting {
 				color: #94a3b8; /* --dark-text-color */
 			}
+
+			/* Estilos críticos para el código */
+			.code-snippet {
+				background-color: #1f2937;
+				border-radius: 8px;
+				padding: 1rem;
+				max-width: 400px;
+				overflow: hidden;
+				box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+				position: relative;
+				font-size: 0.95rem;
+				line-height: 1.4;
+				will-change: auto;
+				contain: content;
+			}
+
+			.static-code {
+				display: block;
+				line-height: 1.5;
+				color: #e5e7eb;
+				font-family: "Consolas", "Monaco", monospace;
+			}
+
+			html.dark .static-code {
+				color: #f3f4f6;
+			}
+
+			.code-snippet pre {
+				margin: 0;
+				font-size: 0.9rem;
+			}
 		</style>
 
 		<!-- Script para cargar estilos de forma asíncrona -->

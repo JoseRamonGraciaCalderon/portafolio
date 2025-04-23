@@ -25,8 +25,8 @@ const t = useTranslations(lang);
         <a href="#{lang === 'es' ? 'proyectos' : 'projects'}" class="btn" data-section="projects">{lang === 'es' ? 'Ver Proyectos' : 'See Projects'}</a>
         <a href="#{lang === 'es' ? 'contacto' : 'contact'}" class="btn btn-outline" data-section="contact">{lang === 'es' ? 'Contactar' : 'Contact'}</a>
       </div>
-      <div class="code-snippet" data-aos="fade-up" data-aos-delay="800">
-        <pre><code>const developer = &#123;
+      <div class="code-snippet" id="code-snippet" fetchpriority="high" importance="high">
+        <pre><code id="static-code" class="static-code">const developer = &#123;
   name: 'Ramón',
   skills: ['JavaScript', 'C#', 'Vue.js'],
   passion: {lang === 'es' ? "'Crear soluciones innovadoras'" : "'Creating innovative solutions'"},
@@ -167,6 +167,45 @@ const t = useTranslations(lang);
 
   // Iniciar el proceso de inicialización diferida
   deferredInit();
+
+  // Función para aplicar la animación de shimmer después del LCP
+  function initShimmerEffect() {
+    const codeSnippet = document.getElementById('code-snippet');
+    if (!codeSnippet) return;
+
+    // Crear una animación de keyframes para el shimmer
+    const shimmerAnimation = `
+      @keyframes shimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+    `;
+
+    // Añadir la animación al documento
+    const styleElement = document.createElement('style');
+    styleElement.textContent = shimmerAnimation;
+    document.head.appendChild(styleElement);
+
+    // Aplicar la animación al pseudo-elemento after
+    codeSnippet.style.setProperty('--shimmer-animation', 'shimmer 3s infinite');
+
+    // Usar requestAnimationFrame para asegurar que la animación se aplique en el momento adecuado
+    requestAnimationFrame(() => {
+      const codeSnippetAfter = document.createElement('style');
+      codeSnippetAfter.textContent = `
+        #code-snippet::after {
+          animation: var(--shimmer-animation, none);
+        }
+      `;
+      document.head.appendChild(codeSnippetAfter);
+    });
+  }
+
+  // Aplicar el efecto de shimmer después del LCP
+  window.addEventListener('load', function() {
+    setTimeout(initShimmerEffect, 1500);
+  });
 </script>
 
 <style>
@@ -292,7 +331,7 @@ const t = useTranslations(lang);
   }
 
   .code-snippet {
-    background-color: #1f2937;
+    background-color: #1f2937; /* Color hardcodeado para evitar variables CSS */
     border-radius: 8px;
     padding: 1rem;
     max-width: 400px;
@@ -301,9 +340,25 @@ const t = useTranslations(lang);
     position: relative;
     font-size: 0.95rem;
     line-height: 1.4;
+    will-change: auto; /* Optimizar para renderizado */
+    contain: content; /* Mejorar rendimiento de renderizado */
   }
 
-  .code-snippet::before {
+  /* Estilos para el código estático */
+  .static-code {
+    display: block;
+    line-height: 1.5;
+    color: #e5e7eb; /* Color hardcodeado para evitar variables CSS */
+    font-family: "Consolas", "Monaco", monospace;
+  }
+
+  /* Modo oscuro para el código estático */
+  html.dark .static-code {
+    color: #f3f4f6; /* Color más claro para modo oscuro */
+  }
+
+  /* Efecto de shimmer aplicado después del LCP */
+  #code-snippet::after {
     content: "";
     position: absolute;
     top: 0;
@@ -317,25 +372,14 @@ const t = useTranslations(lang);
       transparent
     );
     transform: translateX(-100%);
-    animation: shimmer 3s infinite;
+    pointer-events: none;
   }
 
-  @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
-  }
+  /* La animación se aplicará mediante JavaScript después del LCP */
 
   .code-snippet pre {
     margin: 0;
-    font-family: "Consolas", "Monaco", monospace;
     font-size: 0.9rem;
-    color: #e5e7eb;
-  }
-
-  .code-snippet code {
-    display: block;
-    line-height: 1.5;
   }
 
   .hero-image {
