@@ -12,7 +12,7 @@ const t = useTranslations(lang);
     <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
       <div class="greeting">{t('hero.greeting')}</div>
       <h1><span class="highlight-text">{t('hero.name')}</span></h1>
-      <h2 id="typewriter" class="preload-content">{t('hero.title')}</h2>
+      <h2 id="typewriter" class="static-content">{t('hero.title')}</h2>
       <p data-aos="fade-up" data-aos-delay="400">
         {t('hero.subtitle')}
       </p>
@@ -55,16 +55,23 @@ const t = useTranslations(lang);
 
 <script define:vars={{ lang }}>
   // Efecto de máquina de escribir optimizado para LCP
-  document.addEventListener("DOMContentLoaded", function() {
-    // Mostrar el contenido inicial inmediatamente para LCP
+  // Usar un enfoque de carga diferida para no afectar el LCP
+  let typewriterInitialized = false;
+
+  // Función para inicializar el efecto de máquina de escribir
+  function initTypewriter() {
+    if (typewriterInitialized) return;
+    typewriterInitialized = true;
+
     const typewriterElement = document.getElementById("typewriter");
     if (!typewriterElement) return;
 
-    // Remover la clase de precarga después de que el LCP se haya completado
-    typewriterElement.classList.remove("preload-content");
-
     // Guardar el texto inicial para mostrarlo en caso de que JS esté deshabilitado
     const initialText = typewriterElement.textContent;
+
+    // Cambiar la clase para aplicar el estilo de cursor
+    typewriterElement.classList.remove("static-content");
+    typewriterElement.classList.add("typewriter-content");
 
     // Configurar el efecto de máquina de escribir con requestAnimationFrame para mejor rendimiento
     const phrases = lang === 'es' ? [
@@ -130,10 +137,36 @@ const t = useTranslations(lang);
       requestAnimationFrame(animateTypewriter);
     }
 
-    // Iniciar la animación después de un breve retraso para permitir que el LCP se complete
-    setTimeout(() => {
-      requestAnimationFrame(animateTypewriter);
-    }, 1000);
+    // Iniciar la animación
+    requestAnimationFrame(animateTypewriter);
+  }
+
+  // Usar Intersection Observer para iniciar el efecto cuando el elemento sea visible
+  document.addEventListener("DOMContentLoaded", function() {
+    // Primero, asegurarse de que el LCP se complete
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        // Usar Intersection Observer para iniciar el efecto cuando el elemento sea visible
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              initTypewriter();
+              observer.disconnect(); // Desconectar después de inicializar
+            }
+          });
+        }, { threshold: 0.1 }); // Iniciar cuando al menos el 10% del elemento sea visible
+
+        const typewriterElement = document.getElementById("typewriter");
+        if (typewriterElement) {
+          observer.observe(typewriterElement);
+        }
+      }, { timeout: 2000 }); // Timeout de 2 segundos como máximo
+    } else {
+      // Fallback para navegadores que no soportan requestIdleCallback
+      setTimeout(() => {
+        initTypewriter();
+      }, 2000); // Esperar 2 segundos para asegurar que el LCP se complete
+    }
   });
 </script>
 
@@ -192,14 +225,22 @@ const t = useTranslations(lang);
   }
 
   /* Estilo para optimizar el LCP */
-  .preload-content {
+  .static-content {
     display: inline-block;
     font-weight: 600; /* Asegurar que se use la fuente precargada */
-    will-change: contents; /* Optimizar para cambios de contenido */
-    contain: content; /* Mejorar rendimiento de renderizado */
+    color: var(--primary-color);
   }
 
-  .preload-content::after {
+  /* Estilo para el efecto de máquina de escribir (aplicado después del LCP) */
+  .typewriter-content {
+    display: inline-block;
+    font-weight: 600;
+    position: relative;
+    color: var(--primary-color);
+    will-change: contents; /* Optimizar para cambios de contenido */
+  }
+
+  .typewriter-content::after {
     content: '';
     position: absolute;
     right: -4px;
@@ -208,6 +249,11 @@ const t = useTranslations(lang);
     width: 3px;
     background-color: var(--primary-color);
     animation: blink 0.8s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
   }
 
   .hero p {

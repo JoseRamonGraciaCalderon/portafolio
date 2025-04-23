@@ -89,7 +89,10 @@ const currentUrl = Astro.url.href;
 		<noscript><link rel="stylesheet" href="/css/responsive.css"></noscript>
 
 		<!-- Precargar imágenes críticas para el LCP -->
-		<link rel="preload" href="/images/webp/avatar.webp" as="image" type="image/webp" fetchpriority="high">
+		<link rel="preload" href="/images/responsive/avatar-large.webp" as="image" type="image/webp" fetchpriority="high">
+
+		<!-- Precargar fuentes críticas para el LCP -->
+		<link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
 
 		<!-- Script para cargar estilos de forma asíncrona -->
 		<script>
