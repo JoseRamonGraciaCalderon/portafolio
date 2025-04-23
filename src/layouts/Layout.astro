@@ -94,6 +94,35 @@ const currentUrl = Astro.url.href;
 		<!-- Precargar fuentes críticas para el LCP -->
 		<link rel="preload" href="https://fonts.gstatic.com/s/inter/v12/UcC73FwrK3iLTeHuS_fvQtMwCp50KnMa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
 
+		<!-- Estilos críticos inline para el LCP -->
+		<style>
+			/* Estilos críticos para el título principal */
+			.hero-title {
+				display: block;
+				font-weight: 600;
+				color: #2563eb; /* --primary-color */
+				font-size: 2rem;
+				margin-bottom: 1rem;
+				min-height: 2.5rem;
+				font-family: 'Inter', sans-serif;
+			}
+
+			/* Ocultar el elemento typewriter inicialmente */
+			.typewriter-hidden {
+				display: none;
+				height: 0;
+				overflow: hidden;
+				opacity: 0;
+				position: absolute;
+				pointer-events: none;
+			}
+
+			/* Optimizaciones para el modo oscuro */
+			html.dark .hero-title {
+				color: #60a5fa; /* --primary-color en modo oscuro */
+			}
+		</style>
+
 		<!-- Script para cargar estilos de forma asíncrona -->
 		<script>
 			// Función para cargar estilos de forma asíncrona

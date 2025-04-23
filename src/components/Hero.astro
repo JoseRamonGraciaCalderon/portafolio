@@ -12,7 +12,10 @@ const t = useTranslations(lang);
     <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
       <div class="greeting">{t('hero.greeting')}</div>
       <h1><span class="highlight-text">{t('hero.name')}</span></h1>
-      <h2 id="typewriter" class="static-content">{t('hero.title')}</h2>
+      <!-- Texto estático para LCP con alta prioridad -->
+      <h2 class="hero-title" fetchpriority="high" importance="high">{t('hero.title')}</h2>
+      <!-- Contenedor para el efecto typewriter (cargado después del LCP) -->
+      <h2 id="typewriter" class="typewriter-hidden" aria-hidden="true"></h2>
       <p data-aos="fade-up" data-aos-delay="400">
         {t('hero.subtitle')}
       </p>
@@ -54,119 +57,81 @@ const t = useTranslations(lang);
 </section>
 
 <script define:vars={{ lang }}>
-  // Efecto de máquina de escribir optimizado para LCP
-  // Usar un enfoque de carga diferida para no afectar el LCP
-  let typewriterInitialized = false;
+  // Script para el efecto de máquina de escribir, completamente separado del LCP
+  // Este script se ejecuta después de que la página esté completamente cargada
 
-  // Función para inicializar el efecto de máquina de escribir
-  function initTypewriter() {
-    if (typewriterInitialized) return;
-    typewriterInitialized = true;
+  // Esperar a que la página esté completamente cargada y el LCP se haya completado
+  window.addEventListener('load', function() {
+    // Esperar un tiempo adicional para asegurar que el LCP se haya completado
+    setTimeout(function() {
+      // Obtener el elemento estático y el elemento typewriter
+      const staticTitle = document.querySelector('.hero-title');
+      const typewriterElement = document.getElementById('typewriter');
 
-    const typewriterElement = document.getElementById("typewriter");
-    if (!typewriterElement) return;
+      if (!staticTitle || !typewriterElement) return;
 
-    // Guardar el texto inicial para mostrarlo en caso de que JS esté deshabilitado
-    const initialText = typewriterElement.textContent;
+      // Obtener el texto inicial del título estático
+      const initialText = staticTitle.textContent || '';
 
-    // Cambiar la clase para aplicar el estilo de cursor
-    typewriterElement.classList.remove("static-content");
-    typewriterElement.classList.add("typewriter-content");
+      // Configurar las frases para el efecto typewriter
+      const phrases = lang === 'es' ? [
+        initialText,
+        "Desarrollador Frontend",
+        "Desarrollador Backend",
+        "Desarrollador Full Stack",
+        "Creador de Soluciones Digitales",
+      ] : [
+        initialText,
+        "Frontend Developer",
+        "Backend Developer",
+        "Full Stack Developer",
+        "Digital Solutions Creator",
+      ];
 
-    // Configurar el efecto de máquina de escribir con requestAnimationFrame para mejor rendimiento
-    const phrases = lang === 'es' ? [
-      initialText, // Usar el texto inicial como primera frase
-      "Desarrollador Frontend",
-      "Desarrollador Backend",
-      "Desarrollador Full Stack",
-      "Creador de Soluciones Digitales",
-    ] : [
-      initialText, // Usar el texto inicial como primera frase
-      "Frontend Developer",
-      "Backend Developer",
-      "Full Stack Developer",
-      "Digital Solutions Creator",
-    ];
+      // Inicializar el elemento typewriter
+      typewriterElement.textContent = initialText;
+      typewriterElement.classList.remove('typewriter-hidden');
+      typewriterElement.classList.add('typewriter-visible');
+      typewriterElement.removeAttribute('aria-hidden');
 
-    let currentPhraseIndex = 0;
-    let currentCharIndex = phrases[0].length; // Comenzar con el texto completo
-    let isDeleting = true; // Comenzar borrando el texto inicial
-    let typingSpeed = 100;
-    let lastTime = 0;
-    let deltaTime = 0;
+      // Ocultar el título estático
+      staticTitle.style.display = 'none';
 
-    // Usar requestAnimationFrame para mejor rendimiento
-    function animateTypewriter(timestamp) {
-      if (!typewriterElement) return;
+      // Variables para el efecto de máquina de escribir
+      let currentPhraseIndex = 0;
+      let currentCharIndex = phrases[0].length;
+      let isDeleting = true;
+      let typingSpeed = 100;
 
-      // Calcular el tiempo transcurrido
-      if (!lastTime) lastTime = timestamp;
-      deltaTime += timestamp - lastTime;
-      lastTime = timestamp;
+      // Función para animar el efecto de máquina de escribir
+      function typeWriter() {
+        const currentPhrase = phrases[currentPhraseIndex];
 
-      // Solo actualizar cuando haya pasado suficiente tiempo
-      if (deltaTime < typingSpeed) {
-        requestAnimationFrame(animateTypewriter);
-        return;
-      }
-
-      // Reiniciar el contador de tiempo
-      deltaTime = 0;
-
-      const currentPhrase = phrases[currentPhraseIndex];
-
-      if (isDeleting) {
-        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
-        currentCharIndex--;
-        typingSpeed = 50;
-      } else {
-        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
-        currentCharIndex++;
-        typingSpeed = 100;
-      }
-
-      if (!isDeleting && currentCharIndex === currentPhrase.length) {
-        isDeleting = true;
-        typingSpeed = 1500; // Pausa antes de empezar a borrar
-      } else if (isDeleting && currentCharIndex === 0) {
-        isDeleting = false;
-        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-        typingSpeed = 500; // Pausa antes de escribir la siguiente frase
-      }
-
-      requestAnimationFrame(animateTypewriter);
-    }
-
-    // Iniciar la animación
-    requestAnimationFrame(animateTypewriter);
-  }
-
-  // Usar Intersection Observer para iniciar el efecto cuando el elemento sea visible
-  document.addEventListener("DOMContentLoaded", function() {
-    // Primero, asegurarse de que el LCP se complete
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        // Usar Intersection Observer para iniciar el efecto cuando el elemento sea visible
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              initTypewriter();
-              observer.disconnect(); // Desconectar después de inicializar
-            }
-          });
-        }, { threshold: 0.1 }); // Iniciar cuando al menos el 10% del elemento sea visible
-
-        const typewriterElement = document.getElementById("typewriter");
-        if (typewriterElement) {
-          observer.observe(typewriterElement);
+        if (isDeleting) {
+          typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+          currentCharIndex--;
+          typingSpeed = 50;
+        } else {
+          typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+          currentCharIndex++;
+          typingSpeed = 100;
         }
-      }, { timeout: 2000 }); // Timeout de 2 segundos como máximo
-    } else {
-      // Fallback para navegadores que no soportan requestIdleCallback
-      setTimeout(() => {
-        initTypewriter();
-      }, 2000); // Esperar 2 segundos para asegurar que el LCP se complete
-    }
+
+        if (!isDeleting && currentCharIndex === currentPhrase.length) {
+          isDeleting = true;
+          typingSpeed = 1500; // Pausa antes de empezar a borrar
+        } else if (isDeleting && currentCharIndex === 0) {
+          isDeleting = false;
+          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+          typingSpeed = 500; // Pausa antes de escribir la siguiente frase
+        }
+
+        setTimeout(typeWriter, typingSpeed);
+      }
+
+      // Iniciar el efecto de máquina de escribir
+      setTimeout(typeWriter, 1000);
+    }, 1000); // Esperar 1 segundo después de que la página esté cargada
   });
 </script>
 
@@ -225,22 +190,38 @@ const t = useTranslations(lang);
   }
 
   /* Estilo para optimizar el LCP */
-  .static-content {
-    display: inline-block;
+  .hero-title {
+    display: block;
     font-weight: 600; /* Asegurar que se use la fuente precargada */
     color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    min-height: 2.5rem;
+  }
+
+  /* Ocultar el elemento typewriter inicialmente */
+  .typewriter-hidden {
+    display: none;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
   }
 
   /* Estilo para el efecto de máquina de escribir (aplicado después del LCP) */
-  .typewriter-content {
+  .typewriter-visible {
     display: inline-block;
     font-weight: 600;
     position: relative;
     color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    min-height: 2.5rem;
     will-change: contents; /* Optimizar para cambios de contenido */
   }
 
-  .typewriter-content::after {
+  .typewriter-visible::after {
     content: '';
     position: absolute;
     right: -4px;
