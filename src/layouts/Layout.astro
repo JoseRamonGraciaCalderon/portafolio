@@ -107,6 +107,7 @@ const currentUrl = Astro.url.href;
 							performance.mark('lcp-end');
 							performance.measure('lcp', 'lcp-start', 'lcp-end');
 							console.log('LCP:', lcpEntry.startTime, 'ms');
+							console.log('LCP Element:', lcpEntry.element);
 							lcpObserver.disconnect();
 						}
 					});
@@ -116,6 +117,16 @@ const currentUrl = Astro.url.href;
 
 			// Iniciar la medición del LCP
 			measureLCP();
+
+			// Forzar el renderizado del título estático inmediatamente
+			document.addEventListener('DOMContentLoaded', function() {
+				// Asegurar que el título estático sea visible inmediatamente
+				const staticTitle = document.getElementById('static-title');
+				if (staticTitle) {
+					// Forzar un reflow para asegurar que el navegador renderice el título inmediatamente
+					void staticTitle.offsetWidth;
+				}
+			});
 		</script>
 
 		<!-- Precargar fuentes críticas para el LCP -->
@@ -124,7 +135,7 @@ const currentUrl = Astro.url.href;
 		<!-- Estilos críticos inline para el LCP -->
 		<style>
 			/* Estilos críticos para el título principal */
-			.hero-title {
+			.hero-title-static {
 				display: block;
 				font-weight: 700;
 				color: #2563eb; /* --primary-color */
@@ -137,6 +148,8 @@ const currentUrl = Astro.url.href;
 				text-rendering: optimizeLegibility;
 				-webkit-font-smoothing: antialiased;
 				-moz-osx-font-smoothing: grayscale;
+				will-change: auto;
+				contain: content;
 			}
 
 			/* Ocultar el elemento typewriter inicialmente */
@@ -150,7 +163,7 @@ const currentUrl = Astro.url.href;
 			}
 
 			/* Optimizaciones para el modo oscuro */
-			html.dark .hero-title {
+			html.dark .hero-title-static {
 				color: #60a5fa; /* --primary-color en modo oscuro */
 			}
 

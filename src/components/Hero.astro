@@ -12,10 +12,10 @@ const t = useTranslations(lang);
     <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
       <div class="greeting">{t('hero.greeting')}</div>
       <h1><span class="highlight-text">{t('hero.name')}</span></h1>
-      <!-- Texto estático para LCP con alta prioridad -->
-      <h2 class="hero-title" fetchpriority="high" importance="high" id="static-title">{t('hero.title')}</h2>
+      <!-- Texto estático para LCP con alta prioridad - Renderizado inmediato sin JavaScript -->
+      <h2 class="hero-title-static" id="static-title" fetchpriority="high" importance="high">{t('hero.title')}</h2>
       <!-- Contenedor para el efecto typewriter (cargado después del LCP) -->
-      <div id="typewriter-container" style="display: none;">
+      <div id="typewriter-container" style="display: none; position: absolute; top: 0; left: 0; width: 1px; height: 1px; overflow: hidden; opacity: 0;">
         <h2 id="typewriter" class="typewriter-hidden" aria-hidden="true"></h2>
       </div>
       <p data-aos="fade-up" data-aos-delay="400">
@@ -139,28 +139,59 @@ const t = useTranslations(lang);
 
   // Usar requestIdleCallback para iniciar el efecto cuando el navegador esté inactivo
   function deferredInit() {
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(() => {
-        // Usar un MutationObserver para detectar cuando el LCP se haya completado
-        const observer = new PerformanceObserver((entryList) => {
-          const entries = entryList.getEntries();
-          if (entries.length > 0) {
-            // El LCP se ha completado, podemos iniciar el efecto de typewriter
-            setTimeout(initTypewriter, 2000); // Esperar 2 segundos adicionales para asegurar que todo esté listo
-            observer.disconnect();
-          }
-        });
-        observer.observe({ type: 'largest-contentful-paint', buffered: true });
+    // Medir el tiempo de inicio para el LCP
+    const startTime = performance.now();
 
-        // Fallback en caso de que el PerformanceObserver no funcione
-        setTimeout(() => {
-          initTypewriter();
-        }, 3000); // Esperar 3 segundos como fallback
-      }, { timeout: 2000 });
+    // Función para verificar si el LCP ya ha ocurrido
+    function checkLCPComplete() {
+      // Si han pasado más de 5 segundos desde el inicio, asumimos que el LCP ya ocurrió
+      if (performance.now() - startTime > 5000) {
+        return true;
+      }
+
+      // Verificar si hay entradas de LCP en el Performance Timeline
+      const lcpEntries = performance.getEntriesByType('largest-contentful-paint');
+      return lcpEntries && lcpEntries.length > 0;
+    }
+
+    // Función para iniciar el efecto de typewriter de forma segura
+    function safeInitTypewriter() {
+      // Verificar que el elemento estático existe y está visible
+      const staticTitle = document.getElementById('static-title');
+      if (!staticTitle || !staticTitle.isConnected || window.getComputedStyle(staticTitle).display === 'none') {
+        console.log('Static title not ready, delaying typewriter effect');
+        setTimeout(safeInitTypewriter, 1000);
+        return;
+      }
+
+      // Iniciar el efecto de typewriter con un retraso adicional
+      setTimeout(initTypewriter, 3000);
+    }
+
+    // Usar diferentes estrategias para detectar cuando es seguro iniciar el efecto
+    if ('requestIdleCallback' in window) {
+      // Estrategia 1: Usar requestIdleCallback para esperar a que el navegador esté inactivo
+      requestIdleCallback(() => {
+        if (checkLCPComplete()) {
+          safeInitTypewriter();
+        } else {
+          // Estrategia 2: Usar PerformanceObserver como respaldo
+          try {
+            const observer = new PerformanceObserver((entryList) => {
+              observer.disconnect();
+              safeInitTypewriter();
+            });
+            observer.observe({ type: 'largest-contentful-paint', buffered: true });
+          } catch (e) {
+            // Estrategia 3: Usar un temporizador como último recurso
+            setTimeout(safeInitTypewriter, 5000);
+          }
+        }
+      }, { timeout: 4000 });
     } else {
       // Fallback para navegadores que no soportan requestIdleCallback
       window.addEventListener('load', function() {
-        setTimeout(initTypewriter, 3000); // Esperar 3 segundos después de que la página esté cargada
+        setTimeout(safeInitTypewriter, 5000);
       });
     }
   }
@@ -262,8 +293,8 @@ const t = useTranslations(lang);
     position: relative;
   }
 
-  /* Estilo para optimizar el LCP - Renderizado estático inmediato */
-  .hero-title {
+  /* Estilo para optimizar el LCP - Renderizado estático inmediato sin JavaScript */
+  .hero-title-static {
     display: block;
     font-weight: 700; /* Fuente más gruesa para mejor renderizado */
     color: #2563eb; /* Color primario hardcodeado para evitar variables CSS */
@@ -271,10 +302,17 @@ const t = useTranslations(lang);
     margin-bottom: 1rem;
     min-height: 2.5rem;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    will-change: auto;
+    contain: content;
   }
 
   /* Modo oscuro para el título estático */
-  html.dark .hero-title {
+  html.dark .hero-title-static {
     color: #60a5fa; /* Color primario para modo oscuro hardcodeado */
   }
 
