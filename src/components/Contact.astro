@@ -214,10 +214,10 @@ const t = useTranslations(lang);
 
   .terminal-body {
     padding: 1rem;
-    color: #f8f8f2;
+    color: #ffffff; /* Texto blanco para máximo contraste */
     max-height: 400px;
     overflow-y: auto;
-    background-color: #1a1a1a; /* Fondo más oscuro para mejor contraste */
+    background-color: #121212; /* Fondo aún más oscuro para mejor contraste */
   }
 
   /* Code Styles */
@@ -241,67 +241,72 @@ const t = useTranslations(lang);
   }
 
   .keyword {
-    color: #c01a72; /* Rosa aún más oscuro para mejor contraste */
+    color: #ff4d94; /* Rosa brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .variable {
-    color: #6b46c1; /* Púrpura aún más oscuro para mejor contraste */
+    color: #a78bfa; /* Púrpura brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .function {
-    color: #22a559; /* Verde aún más oscuro para mejor contraste */
+    color: #4ade80; /* Verde brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .parameter {
-    color: #c05621; /* Naranja aún más oscuro para mejor contraste */
+    color: #fb923c; /* Naranja brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .operator {
-    color: #c01a72; /* Rosa aún más oscuro para mejor contraste */
+    color: #ff4d94; /* Rosa brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .property {
-    color: #0b7285; /* Azul aún más oscuro para mejor contraste */
+    color: #22d3ee; /* Azul brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .string {
-    color: #744210; /* Amarillo aún más oscuro para mejor contraste */
+    color: #fcd34d; /* Amarillo brillante para alto contraste con fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .bracket {
-    color: #e2e8f0; /* Gris claro para mejor contraste con el fondo oscuro */
+    color: #ffffff; /* Blanco para máximo contraste con el fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .comma {
-    color: #e2e8f0; /* Gris claro para mejor contraste con el fondo oscuro */
+    color: #ffffff; /* Blanco para máximo contraste con el fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .semicolon {
-    color: #e2e8f0; /* Gris claro para mejor contraste con el fondo oscuro */
+    color: #ffffff; /* Blanco para máximo contraste con el fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .comment {
-    color: var(--comment-color); /* Usar la variable para mejor contraste */
-    font-weight: 500; /* Texto más grueso para mejor legibilidad */
+    color: #a3a3a3; /* Gris claro para mejor contraste con fondo oscuro */
+    font-weight: 600; /* Texto más grueso para mejor legibilidad */
+  }
+
+  html.dark .comment {
+    color: #d4d4d4; /* Gris más claro para modo oscuro */
+    font-weight: 600;
   }
 
   .dot {
-    color: #e2e8f0; /* Gris claro para mejor contraste con el fondo oscuro */
+    color: #ffffff; /* Blanco para máximo contraste con el fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
   .parenthesis {
-    color: #e2e8f0; /* Gris claro para mejor contraste con el fondo oscuro */
+    color: #ffffff; /* Blanco para máximo contraste con el fondo oscuro */
     font-weight: 700; /* Texto más grueso */
   }
 
@@ -437,7 +442,7 @@ const t = useTranslations(lang);
   }
 
   .quote {
-    color: #744210; /* Amarillo aún más oscuro para mejor contraste */
+    color: #fcd34d; /* Amarillo brillante para alto contraste con fondo oscuro */
     font-size: 1.2rem;
     font-weight: 700; /* Texto más grueso */
   }
