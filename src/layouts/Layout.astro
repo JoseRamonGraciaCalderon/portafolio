@@ -89,7 +89,8 @@ const currentUrl = Astro.url.href;
 		<noscript><link rel="stylesheet" href="/css/responsive.css"></noscript>
 
 		<!-- Precargar imágenes críticas para el LCP -->
-		<link rel="preload" href="/images/responsive/avatar-large.webp" as="image" type="image/webp" fetchpriority="high">
+		<link rel="preload" href="/images/responsive/avatar-xlarge.webp" as="image" type="image/webp" fetchpriority="high">
+		<link rel="preload" href="/images/responsive/avatar-xlarge-2x.webp" as="image" type="image/webp" media="(min-resolution: 2dppx)" fetchpriority="high">
 
 		<!-- Script para medir y optimizar el LCP -->
 		<script>

@@ -77,14 +77,15 @@ if (isLocalImage) {
   if (hasHighRes) {
     // Incluir versiones de alta resolución para dispositivos con pantallas de alta densidad
     // Usar la versión xlarge para pantallas de alta resolución
-    srcset = `${responsiveImages.xlarge} 1800w,
-              ${highResImages.xlarge} 1800w 2x,
-              ${responsiveImages.large} 1200w,
-              ${highResImages.large} 1200w 2x,
-              ${responsiveImages.medium} 800w,
-              ${highResImages.medium} 800w 2x,
-              ${responsiveImages.small} 400w,
-              ${highResImages.small} 400w 2x`;
+    // Importante: Ordenar de mayor a menor para que el navegador seleccione la imagen correcta
+    srcset = `${responsiveImages.xlarge} 600w,
+              ${highResImages.xlarge} 600w 2x,
+              ${responsiveImages.large} 400w,
+              ${highResImages.large} 400w 2x,
+              ${responsiveImages.medium} 240w,
+              ${highResImages.medium} 240w 2x,
+              ${responsiveImages.small} 180w,
+              ${highResImages.small} 180w 2x`;
   } else {
     // Versiones estándar para imágenes normales
     srcset = `${responsiveImages.large} 1200w,
