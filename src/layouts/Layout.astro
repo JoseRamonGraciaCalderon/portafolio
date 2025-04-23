@@ -97,6 +97,9 @@ const currentUrl = Astro.url.href;
 			/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
 			(function(w){
 				"use strict";
+				// Asegurarse de que w sea un objeto válido
+				w = w || window || {};
+
 				/* exported loadCSS */
 				var loadCSS = function( href, before, media, attributes ){
 					// Arguments explained:
@@ -170,13 +173,17 @@ const currentUrl = Astro.url.href;
 				if( typeof exports !== "undefined" ){
 					exports.loadCSS = loadCSS;
 				}
-				else {
+				else if (w) {
+					// Asegurarse de que w exista antes de asignarle propiedades
 					w.loadCSS = loadCSS;
 				}
-			}( typeof global !== "undefined" ? global : this ));
+			}( typeof global !== "undefined" ? global : (typeof window !== "undefined" ? window : this) ));
 
 			/*! loadCSS rel=preload polyfill. [c]2017 Filament Group, Inc. MIT License */
 			(function( w ){
+				// Asegurarse de que w sea un objeto válido
+				w = w || window || {};
+
 				// rel=preload support test
 				if( !w.loadCSS ){
 					return;
@@ -267,7 +274,7 @@ const currentUrl = Astro.url.href;
 						} );
 					}
 				}
-			}( typeof global !== "undefined" ? global : this ));
+			}( typeof global !== "undefined" ? global : (typeof window !== "undefined" ? window : this) ));
 		</script>
 
 		<!-- Structured Data / JSON-LD -->
