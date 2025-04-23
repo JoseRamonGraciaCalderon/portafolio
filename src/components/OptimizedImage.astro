@@ -30,14 +30,16 @@ const fileName = basePath.substring(basePath.lastIndexOf('/') + 1);
 const responsiveImages = {
   small: `/images/responsive/${fileName}-small.webp`,
   medium: `/images/responsive/${fileName}-medium.webp`,
-  large: `/images/responsive/${fileName}-large.webp`
+  large: `/images/responsive/${fileName}-large.webp`,
+  xlarge: `/images/responsive/${fileName}-xlarge.webp` // Versión extra grande para pantallas de alta resolución
 };
 
 // Rutas para imágenes de alta resolución (2x)
 const highResImages = {
   small: `/images/responsive/${fileName}-small-2x.webp`,
   medium: `/images/responsive/${fileName}-medium-2x.webp`,
-  large: `/images/responsive/${fileName}-large-2x.webp`
+  large: `/images/responsive/${fileName}-large-2x.webp`,
+  xlarge: `/images/responsive/${fileName}-xlarge-2x.webp` // Versión extra grande para pantallas de alta densidad
 };
 
 // Verificar si existen versiones de alta resolución
@@ -74,17 +76,20 @@ let srcset = '';
 if (isLocalImage) {
   if (hasHighRes) {
     // Incluir versiones de alta resolución para dispositivos con pantallas de alta densidad
-    srcset = `${responsiveImages.small} 400w,
-              ${highResImages.small} 400w 2x,
+    // Usar la versión xlarge para pantallas de alta resolución
+    srcset = `${responsiveImages.xlarge} 1800w,
+              ${highResImages.xlarge} 1800w 2x,
+              ${responsiveImages.large} 1200w,
+              ${highResImages.large} 1200w 2x,
               ${responsiveImages.medium} 800w,
               ${highResImages.medium} 800w 2x,
-              ${responsiveImages.large} 1200w,
-              ${highResImages.large} 1200w 2x`;
+              ${responsiveImages.small} 400w,
+              ${highResImages.small} 400w 2x`;
   } else {
     // Versiones estándar para imágenes normales
-    srcset = `${responsiveImages.small} 400w,
+    srcset = `${responsiveImages.large} 1200w,
               ${responsiveImages.medium} 800w,
-              ${responsiveImages.large} 1200w`;
+              ${responsiveImages.small} 400w`;
   }
 }
 
@@ -126,7 +131,7 @@ const fetchPriority = priority ? 'high' : 'auto';
       loading={loadingAttr}
       fetchpriority={fetchPriority}
       decoding={priority ? 'sync' : 'async'}
-      style={`aspect-ratio: ${aspectRatio};`}
+      style={aspectRatio ? `aspect-ratio: ${aspectRatio};` : ''}
     />
   </picture>
 ) : (
