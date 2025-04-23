@@ -13,9 +13,11 @@ const t = useTranslations(lang);
       <div class="greeting">{t('hero.greeting')}</div>
       <h1><span class="highlight-text">{t('hero.name')}</span></h1>
       <!-- Texto estático para LCP con alta prioridad -->
-      <h2 class="hero-title" fetchpriority="high" importance="high">{t('hero.title')}</h2>
+      <h2 class="hero-title" fetchpriority="high" importance="high" id="static-title">{t('hero.title')}</h2>
       <!-- Contenedor para el efecto typewriter (cargado después del LCP) -->
-      <h2 id="typewriter" class="typewriter-hidden" aria-hidden="true"></h2>
+      <div id="typewriter-container" style="display: none;">
+        <h2 id="typewriter" class="typewriter-hidden" aria-hidden="true"></h2>
+      </div>
       <p data-aos="fade-up" data-aos-delay="400">
         {t('hero.subtitle')}
       </p>
@@ -60,79 +62,111 @@ const t = useTranslations(lang);
   // Script para el efecto de máquina de escribir, completamente separado del LCP
   // Este script se ejecuta después de que la página esté completamente cargada
 
-  // Esperar a que la página esté completamente cargada y el LCP se haya completado
-  window.addEventListener('load', function() {
-    // Esperar un tiempo adicional para asegurar que el LCP se haya completado
-    setTimeout(function() {
-      // Obtener el elemento estático y el elemento typewriter
-      const staticTitle = document.querySelector('.hero-title');
-      const typewriterElement = document.getElementById('typewriter');
+  // Función para iniciar el efecto de typewriter
+  function initTypewriter() {
+    // Obtener el elemento estático y el contenedor del typewriter
+    const staticTitle = document.getElementById('static-title');
+    const typewriterContainer = document.getElementById('typewriter-container');
+    const typewriterElement = document.getElementById('typewriter');
 
-      if (!staticTitle || !typewriterElement) return;
+    if (!staticTitle || !typewriterElement || !typewriterContainer) return;
 
-      // Obtener el texto inicial del título estático
-      const initialText = staticTitle.textContent || '';
+    // Obtener el texto inicial del título estático
+    const initialText = staticTitle.textContent || '';
 
-      // Configurar las frases para el efecto typewriter
-      const phrases = lang === 'es' ? [
-        initialText,
-        "Desarrollador Frontend",
-        "Desarrollador Backend",
-        "Desarrollador Full Stack",
-        "Creador de Soluciones Digitales",
-      ] : [
-        initialText,
-        "Frontend Developer",
-        "Backend Developer",
-        "Full Stack Developer",
-        "Digital Solutions Creator",
-      ];
+    // Configurar las frases para el efecto typewriter
+    const phrases = lang === 'es' ? [
+      initialText,
+      "Desarrollador Frontend",
+      "Desarrollador Backend",
+      "Desarrollador Full Stack",
+      "Creador de Soluciones Digitales",
+    ] : [
+      initialText,
+      "Frontend Developer",
+      "Backend Developer",
+      "Full Stack Developer",
+      "Digital Solutions Creator",
+    ];
 
-      // Inicializar el elemento typewriter
-      typewriterElement.textContent = initialText;
-      typewriterElement.classList.remove('typewriter-hidden');
-      typewriterElement.classList.add('typewriter-visible');
-      typewriterElement.removeAttribute('aria-hidden');
+    // Mostrar el contenedor del typewriter
+    typewriterContainer.style.display = 'block';
 
-      // Ocultar el título estático
-      staticTitle.style.display = 'none';
+    // Inicializar el elemento typewriter
+    typewriterElement.textContent = initialText;
+    typewriterElement.classList.remove('typewriter-hidden');
+    typewriterElement.classList.add('typewriter-visible');
+    typewriterElement.removeAttribute('aria-hidden');
 
-      // Variables para el efecto de máquina de escribir
-      let currentPhraseIndex = 0;
-      let currentCharIndex = phrases[0].length;
-      let isDeleting = true;
-      let typingSpeed = 100;
+    // Ocultar el título estático
+    staticTitle.style.display = 'none';
 
-      // Función para animar el efecto de máquina de escribir
-      function typeWriter() {
-        const currentPhrase = phrases[currentPhraseIndex];
+    // Variables para el efecto de máquina de escribir
+    let currentPhraseIndex = 0;
+    let currentCharIndex = phrases[0].length;
+    let isDeleting = true;
+    let typingSpeed = 100;
 
-        if (isDeleting) {
-          typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
-          currentCharIndex--;
-          typingSpeed = 50;
-        } else {
-          typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
-          currentCharIndex++;
-          typingSpeed = 100;
-        }
+    // Función para animar el efecto de máquina de escribir
+    function typeWriter() {
+      const currentPhrase = phrases[currentPhraseIndex];
 
-        if (!isDeleting && currentCharIndex === currentPhrase.length) {
-          isDeleting = true;
-          typingSpeed = 1500; // Pausa antes de empezar a borrar
-        } else if (isDeleting && currentCharIndex === 0) {
-          isDeleting = false;
-          currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-          typingSpeed = 500; // Pausa antes de escribir la siguiente frase
-        }
-
-        setTimeout(typeWriter, typingSpeed);
+      if (isDeleting) {
+        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+        currentCharIndex--;
+        typingSpeed = 50;
+      } else {
+        typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+        currentCharIndex++;
+        typingSpeed = 100;
       }
 
-      // Iniciar el efecto de máquina de escribir
-      setTimeout(typeWriter, 1000);
-    }, 1000); // Esperar 1 segundo después de que la página esté cargada
-  });
+      if (!isDeleting && currentCharIndex === currentPhrase.length) {
+        isDeleting = true;
+        typingSpeed = 1500; // Pausa antes de empezar a borrar
+      } else if (isDeleting && currentCharIndex === 0) {
+        isDeleting = false;
+        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+        typingSpeed = 500; // Pausa antes de escribir la siguiente frase
+      }
+
+      setTimeout(typeWriter, typingSpeed);
+    }
+
+    // Iniciar el efecto de máquina de escribir
+    setTimeout(typeWriter, 500);
+  }
+
+  // Usar requestIdleCallback para iniciar el efecto cuando el navegador esté inactivo
+  function deferredInit() {
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(() => {
+        // Usar un MutationObserver para detectar cuando el LCP se haya completado
+        const observer = new PerformanceObserver((entryList) => {
+          const entries = entryList.getEntries();
+          if (entries.length > 0) {
+            // El LCP se ha completado, podemos iniciar el efecto de typewriter
+            setTimeout(initTypewriter, 2000); // Esperar 2 segundos adicionales para asegurar que todo esté listo
+            observer.disconnect();
+          }
+        });
+        observer.observe({ type: 'largest-contentful-paint', buffered: true });
+
+        // Fallback en caso de que el PerformanceObserver no funcione
+        setTimeout(() => {
+          initTypewriter();
+        }, 3000); // Esperar 3 segundos como fallback
+      }, { timeout: 2000 });
+    } else {
+      // Fallback para navegadores que no soportan requestIdleCallback
+      window.addEventListener('load', function() {
+        setTimeout(initTypewriter, 3000); // Esperar 3 segundos después de que la página esté cargada
+      });
+    }
+  }
+
+  // Iniciar el proceso de inicialización diferida
+  deferredInit();
 </script>
 
 <style>
@@ -189,14 +223,20 @@ const t = useTranslations(lang);
     position: relative;
   }
 
-  /* Estilo para optimizar el LCP */
+  /* Estilo para optimizar el LCP - Renderizado estático inmediato */
   .hero-title {
     display: block;
-    font-weight: 600; /* Asegurar que se use la fuente precargada */
-    color: var(--primary-color);
+    font-weight: 700; /* Fuente más gruesa para mejor renderizado */
+    color: #2563eb; /* Color primario hardcodeado para evitar variables CSS */
     font-size: 2rem;
     margin-bottom: 1rem;
     min-height: 2.5rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  /* Modo oscuro para el título estático */
+  html.dark .hero-title {
+    color: #60a5fa; /* Color primario para modo oscuro hardcodeado */
   }
 
   /* Ocultar el elemento typewriter inicialmente */
@@ -212,13 +252,12 @@ const t = useTranslations(lang);
   /* Estilo para el efecto de máquina de escribir (aplicado después del LCP) */
   .typewriter-visible {
     display: inline-block;
-    font-weight: 600;
+    font-weight: 700;
     position: relative;
     color: var(--primary-color);
     font-size: 2rem;
     margin-bottom: 1rem;
     min-height: 2.5rem;
-    will-change: contents; /* Optimizar para cambios de contenido */
   }
 
   .typewriter-visible::after {
