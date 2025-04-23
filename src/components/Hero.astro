@@ -170,7 +170,7 @@ const t = useTranslations(lang);
     justify-content: center;
   }
 
-  /* Fondo con efecto de ola con gradiente */
+  /* Fondo con efecto de ola con gradiente - Más notorio */
   .hero::before {
     content: '';
     position: absolute;
@@ -179,15 +179,15 @@ const t = useTranslations(lang);
     right: 0;
     bottom: 0;
     background: linear-gradient(90deg,
-      rgba(59, 130, 246, 0.05) 0%,
-      rgba(96, 165, 250, 0.1) 25%,
-      rgba(59, 130, 246, 0.05) 50%,
-      rgba(96, 165, 250, 0.1) 75%,
-      rgba(59, 130, 246, 0.05) 100%);
+      rgba(229, 0, 115, 0.15) 0%,
+      rgba(92, 69, 255, 0.25) 25%,
+      rgba(229, 0, 115, 0.15) 50%,
+      rgba(92, 69, 255, 0.25) 75%,
+      rgba(229, 0, 115, 0.15) 100%);
     background-size: 300% 100%;
     z-index: 1;
-    opacity: 0.8;
-    animation: wave-gradient 15s ease infinite;
+    opacity: 1;
+    animation: wave-gradient 12s ease infinite;
   }
 
   @keyframes wave-gradient {
@@ -202,7 +202,7 @@ const t = useTranslations(lang);
     }
   }
 
-  /* Segunda capa de gradiente para efecto de profundidad */
+  /* Segunda capa de gradiente para efecto de profundidad - Más notorio */
   .hero::after {
     content: '';
     position: absolute;
@@ -211,15 +211,15 @@ const t = useTranslations(lang);
     right: 0;
     bottom: 0;
     background: linear-gradient(135deg,
-      rgba(59, 130, 246, 0.02) 0%,
-      rgba(96, 165, 250, 0.04) 25%,
-      rgba(59, 130, 246, 0.02) 50%,
-      rgba(96, 165, 250, 0.04) 75%,
-      rgba(59, 130, 246, 0.02) 100%);
+      rgba(92, 69, 255, 0.1) 0%,
+      rgba(229, 0, 115, 0.18) 25%,
+      rgba(92, 69, 255, 0.1) 50%,
+      rgba(229, 0, 115, 0.18) 75%,
+      rgba(92, 69, 255, 0.1) 100%);
     background-size: 400% 400%;
     z-index: 1;
-    opacity: 0.7;
-    animation: diagonal-wave 20s ease infinite;
+    opacity: 0.8;
+    animation: diagonal-wave 15s ease infinite;
   }
 
   @keyframes diagonal-wave {
@@ -240,25 +240,25 @@ const t = useTranslations(lang);
     }
   }
 
-  /* Fondo con gradiente para modo oscuro */
+  /* Fondo con gradiente para modo oscuro - Más notorio */
   html.dark .hero::before {
     background: linear-gradient(90deg,
-      rgba(96, 165, 250, 0.08) 0%,
-      rgba(59, 130, 246, 0.15) 25%,
-      rgba(96, 165, 250, 0.08) 50%,
-      rgba(59, 130, 246, 0.15) 75%,
-      rgba(96, 165, 250, 0.08) 100%);
-    opacity: 0.6;
+      rgba(229, 0, 115, 0.25) 0%,
+      rgba(92, 69, 255, 0.4) 25%,
+      rgba(229, 0, 115, 0.25) 50%,
+      rgba(92, 69, 255, 0.4) 75%,
+      rgba(229, 0, 115, 0.25) 100%);
+    opacity: 0.8;
   }
 
   html.dark .hero::after {
     background: linear-gradient(135deg,
-      rgba(96, 165, 250, 0.03) 0%,
-      rgba(59, 130, 246, 0.06) 25%,
-      rgba(96, 165, 250, 0.03) 50%,
-      rgba(59, 130, 246, 0.06) 75%,
-      rgba(96, 165, 250, 0.03) 100%);
-    opacity: 0.5;
+      rgba(92, 69, 255, 0.2) 0%,
+      rgba(229, 0, 115, 0.3) 25%,
+      rgba(92, 69, 255, 0.2) 50%,
+      rgba(229, 0, 115, 0.3) 75%,
+      rgba(92, 69, 255, 0.2) 100%);
+    opacity: 0.7;
   }
 
   .hero .container {
