@@ -2,10 +2,10 @@
 export const seoConfig = {
   baseURL: 'https://ramongracia.com', // Cambia esto a tu dominio real cuando lo tengas
   siteName: 'Ramón Gracia - Desarrollador Web & Arquitecto de Software',
-  siteDescription: 'Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack',
+  siteDescription: 'Portafolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack',
   defaultImage: '/images/ramon-gracia-preview.jpg',
   defaultTitle: 'Ramón Gracia - Desarrollador Web & Arquitecto de Software',
-  defaultDescription: 'Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack',
+  defaultDescription: 'Portafolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack',
   defaultKeywords: 'desarrollador web, desarrollador software, frontend, backend, vue.js, angular, react, .NET, javascript, typescript, full-stack, Ramón Gracia, portfolio',
   defaultAuthor: 'Ramón Gracia',
   twitterHandle: '@ramongracia', // Cambia esto a tu handle de Twitter si lo tienes
@@ -19,6 +19,7 @@ export const seoConfig = {
   },
   social: {
     linkedin: 'https://www.linkedin.com/in/ramongracia/',
+    github: 'https://github.com/JoseRamonGraciaCalderon',
     // Añade otras redes sociales si las tienes
   },
   // Información de contacto para schema.org
