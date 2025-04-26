@@ -4,10 +4,11 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && node public/generate-cv.mjs",
     "preview": "astro preview",
     "start": "node server.js",
-    "astro": "astro"
+    "astro": "astro",
+    "generate-cv": "node public/generate-cv.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^9.2.0",
@@ -16,6 +17,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "puppeteer": "^24.7.2",
     "sharp": "^0.34.1"
   }
 }
