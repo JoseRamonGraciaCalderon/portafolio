@@ -440,14 +440,21 @@ const currentUrl = Astro.url.href;
 		<script is:inline defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 		<script is:inline defer src="/scripts/simpleNavigation.js"></script>
 		<!-- EmailJS para el formulario de contacto -->
-		<script is:inline defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 		<script is:inline>
 			(function() {
-				// Inicializar EmailJS con tu clave pública
-				emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza con tu clave pública de EmailJS
+				// Inicializar EmailJS con tu clave pública cuando el DOM esté cargado
+				document.addEventListener('DOMContentLoaded', function() {
+					if (typeof emailjs !== 'undefined') {
+						emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza con tu clave pública de EmailJS
+						console.log("EmailJS inicializado correctamente");
+					} else {
+						console.error("EmailJS no está disponible");
+					}
+				});
 			})();
 		</script>
-		<script is:inline defer src="/js/contact-form.js"></script>
+		<script is:inline src="/js/contact-form.js"></script>
 		<script is:inline>
 			// Función para alternar entre modo claro y oscuro
 			function toggleDarkMode() {
