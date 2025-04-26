@@ -82,7 +82,7 @@ const t = useTranslations(lang);
         <div class="desktop-language-picker">
           <LanguagePicker />
         </div>
-        <a href="/cv.html" target="_blank" class="btn btn-code">
+        <a href={lang === 'es' ? '/cv-es.pdf' : '/cv-en.pdf'} download class="btn btn-code">
           <div class="btn-content">
             <span class="code-syntax">{lang === 'es' ? 'descargar' : 'download'}</span>
             <span class="code-syntax">(</span>
