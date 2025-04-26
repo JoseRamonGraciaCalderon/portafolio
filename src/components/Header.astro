@@ -230,6 +230,59 @@ const t = useTranslations(lang);
         });
       }
     });
+
+    // Función para detectar qué sección está visible y marcar el enlace correspondiente como activo
+    function highlightActiveSection() {
+      // Obtener todas las secciones
+      const sections = document.querySelectorAll('section[id]');
+      // Obtener todos los enlaces de navegación
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      // Calcular la posición actual del scroll
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      // Verificar qué sección está visible
+      sections.forEach(section => {
+        const htmlSection = section as HTMLElement;
+        const sectionTop = htmlSection.offsetTop - 100; // Ajuste para el header
+        const sectionBottom = sectionTop + htmlSection.offsetHeight;
+        const sectionId = htmlSection.getAttribute('id');
+
+        // Si la posición de scroll está dentro de la sección y la sección tiene un ID
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom && sectionId) {
+          // Remover la clase 'active' de todos los enlaces
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+          });
+
+          // Determinar qué sección es para encontrar el enlace correspondiente
+          let sectionType = '';
+          if (sectionId && (sectionId.includes('sobre-mi') || sectionId.includes('about-me'))) {
+            sectionType = 'about';
+          } else if (sectionId && (sectionId.includes('experiencia') || sectionId.includes('experience'))) {
+            sectionType = 'experience';
+          } else if (sectionId && (sectionId.includes('proyectos') || sectionId.includes('projects'))) {
+            sectionType = 'projects';
+          } else if (sectionId && (sectionId.includes('habilidades') || sectionId.includes('skills'))) {
+            sectionType = 'skills';
+          } else if (sectionId && (sectionId.includes('contacto') || sectionId.includes('contact'))) {
+            sectionType = 'contact';
+          }
+
+          // Añadir la clase 'active' al enlace correspondiente
+          if (sectionType) {
+            const activeLink = document.querySelector(`.nav-link[data-section="${sectionType}"]`);
+            if (activeLink) {
+              activeLink.classList.add('active');
+            }
+          }
+        }
+      });
+    }
+
+    // Ejecutar la función al cargar la página y al hacer scroll
+    window.addEventListener('scroll', highlightActiveSection);
+    window.addEventListener('load', highlightActiveSection);
   });
 </script>
 
@@ -433,8 +486,13 @@ const t = useTranslations(lang);
     transition: width 0.3s ease;
   }
 
-  .nav-link:hover::after {
+  .nav-link:hover::after,
+  .nav-link.active::after {
     width: 100%;
+  }
+
+  .nav-link.active {
+    color: var(--primary-color);
   }
 
   /* Tooltips para los enlaces */
