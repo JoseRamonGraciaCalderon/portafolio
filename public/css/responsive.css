@@ -5,11 +5,11 @@
   .container {
     padding: 0 1rem;
   }
-  
+
   .section {
     padding: 4rem 0;
   }
-  
+
   .section-title {
     font-size: 2.2rem !important;
     margin-bottom: 2.5rem !important;
@@ -21,16 +21,16 @@
   .container {
     padding: 0 1rem;
   }
-  
+
   .section {
     padding: 3rem 0;
   }
-  
+
   .section-title {
     font-size: 2rem !important;
     margin-bottom: 2rem !important;
   }
-  
+
   /* Ajuste para el padding-top de las secciones para compensar el header */
   section[id] {
     scroll-margin-top: 70px;
@@ -42,38 +42,38 @@
   .container {
     padding: 0 0.8rem;
   }
-  
+
   .section {
     padding: 2.5rem 0;
   }
-  
+
   .section-title {
     font-size: 1.8rem !important;
     margin-bottom: 1.5rem !important;
   }
-  
+
   /* Ajuste para el padding-top de las secciones para compensar el header */
   section[id] {
     scroll-margin-top: 60px;
   }
-  
+
   /* Reducir tamaño de texto en general */
   body {
     font-size: 0.9rem;
   }
-  
+
   h1 {
     font-size: 1.8rem !important;
   }
-  
+
   h2 {
     font-size: 1.6rem !important;
   }
-  
+
   h3 {
     font-size: 1.4rem !important;
   }
-  
+
   p {
     font-size: 0.9rem !important;
     line-height: 1.5 !important;
@@ -85,38 +85,38 @@
   .container {
     padding: 0 0.6rem;
   }
-  
+
   .section {
     padding: 2rem 0;
   }
-  
+
   .section-title {
     font-size: 1.6rem !important;
     margin-bottom: 1.2rem !important;
   }
-  
+
   /* Reducir tamaño de texto en general */
   body {
     font-size: 0.85rem;
   }
-  
+
   h1 {
     font-size: 1.6rem !important;
   }
-  
+
   h2 {
     font-size: 1.4rem !important;
   }
-  
+
   h3 {
     font-size: 1.2rem !important;
   }
-  
+
   p {
     font-size: 0.85rem !important;
     line-height: 1.4 !important;
   }
-  
+
   /* Ajustar botones para pantallas muy pequeñas */
   .btn {
     padding: 0.6rem 1rem !important;
@@ -138,16 +138,16 @@ section[id] {
   .timeline-item {
     padding-left: 80px !important;
   }
-  
+
   .timeline::before,
   .timeline::after {
     left: 60px !important;
   }
-  
+
   .timeline-dot {
     left: 56px !important;
   }
-  
+
   .timeline-date {
     width: 50px !important;
     font-size: 0.8rem !important;
@@ -158,21 +158,21 @@ section[id] {
   .timeline-item {
     padding-left: 60px !important;
   }
-  
+
   .timeline::before,
   .timeline::after {
     left: 40px !important;
   }
-  
+
   .timeline-dot {
     left: 36px !important;
   }
-  
+
   .timeline-date {
     width: 35px !important;
     font-size: 0.7rem !important;
   }
-  
+
   .tags span {
     padding: 0.2rem 0.5rem !important;
     font-size: 0.7rem !important;
@@ -180,24 +180,39 @@ section[id] {
 }
 
 /* Ajustes para mejorar la visualización de proyectos en dispositivos móviles */
+@media (max-width: 768px) {
+  .project-card {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .project-image {
+    height: auto !important;
+    width: 100% !important;
+  }
+
+  .project-image a,
+  .project-preview {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: cover !important;
+    aspect-ratio: 16/9 !important;
+  }
+}
+
 @media (max-width: 480px) {
   .project-card {
     margin-bottom: 1.5rem !important;
   }
-  
-  .project-image {
-    height: 150px !important;
-  }
-  
+
   .project-content h3 {
     font-size: 1.1rem !important;
   }
-  
+
   .project-content p {
     font-size: 0.8rem !important;
     margin-bottom: 0.8rem !important;
   }
-  
+
   .project-tags span {
     font-size: 0.7rem !important;
     padding: 0.2rem 0.4rem !important;
@@ -209,16 +224,16 @@ section[id] {
   .skills-container {
     gap: 1rem !important;
   }
-  
+
   .skill-item {
     padding: 0.8rem !important;
   }
-  
+
   .skill-icon {
     width: 40px !important;
     height: 40px !important;
   }
-  
+
   .skill-name {
     font-size: 0.8rem !important;
   }
@@ -231,11 +246,11 @@ section[id] {
     padding: 0.8rem !important;
     font-size: 0.9rem !important;
   }
-  
+
   .contact-info-item {
     padding: 0.8rem !important;
   }
-  
+
   .contact-info-item h3 {
     font-size: 1rem !important;
   }
