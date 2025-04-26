@@ -81,7 +81,7 @@ const t = useTranslations(lang);
             <span class="form-comment">// {lang === 'es' ? 'Envíame un mensaje y te responderé lo antes posible' : 'Send me a message and I will reply as soon as possible'}</span>
           </div>
         </div>
-        <form>
+        <form id="contact-form">
           <div class="form-group">
             <label for="name"><span class="keyword">const</span> name <span class="operator">=</span></label>
             <div class="input-wrapper">
@@ -118,8 +118,17 @@ const t = useTranslations(lang);
             </div>
           </div>
 
-          <button type="submit" class="btn btn-code">
+          <div class="form-status-container">
+            <div id="form-status"
+              data-sending={lang === 'es' ? 'Enviando mensaje...' : 'Sending message...'}
+              data-success={lang === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!'}
+              data-error={lang === 'es' ? 'Error al enviar el mensaje. Inténtalo de nuevo.' : 'Error sending message. Please try again.'}>
+            </div>
+          </div>
+
+          <button type="submit" id="submit-button" class="btn btn-code">
             <span class="function">sendMessage</span><span class="parenthesis">(</span><span class="parameter">message</span><span class="parenthesis">)</span><span class="semicolon">;</span>
+            <span class="sending-indicator"></span>
           </button>
         </form>
       </div>
@@ -563,6 +572,88 @@ const t = useTranslations(lang);
     background-color: #60a5fa; /* Azul más claro al hacer hover en modo oscuro */
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Estilos para el estado del formulario */
+  .form-status-container {
+    margin-bottom: 1rem;
+    min-height: 24px;
+  }
+
+  #form-status {
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: none;
+  }
+
+  #form-status.visible {
+    opacity: 1;
+    display: block;
+  }
+
+  #form-status.info {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    border-left: 4px solid #0ea5e9;
+  }
+
+  #form-status.success {
+    background-color: #dcfce7;
+    color: #166534;
+    border-left: 4px solid #22c55e;
+  }
+
+  #form-status.error {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border-left: 4px solid #ef4444;
+  }
+
+  html.dark #form-status.info {
+    background-color: #075985;
+    color: #e0f2fe;
+    border-left: 4px solid #0ea5e9;
+  }
+
+  html.dark #form-status.success {
+    background-color: #14532d;
+    color: #dcfce7;
+    border-left: 4px solid #22c55e;
+  }
+
+  html.dark #form-status.error {
+    background-color: #7f1d1d;
+    color: #fee2e2;
+    border-left: 4px solid #ef4444;
+  }
+
+  /* Estilos para el indicador de envío */
+  .sending-indicator {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid white;
+    border-radius: 50%;
+    margin-left: 8px;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .btn-code.sending .sending-indicator {
+    display: inline-block;
+  }
+
+  .btn-code.sending {
+    opacity: 0.8;
+    cursor: not-allowed;
   }
 
   /* Social Links */

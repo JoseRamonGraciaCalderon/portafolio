@@ -14,7 +14,7 @@ interface Props {
 
 const {
 	title = "Ramón Gracia - Desarrollador Web & Arquitecto de Software",
-	description = "Portfolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack",
+	description = "Portafolio profesional de Ramón Gracia, desarrollador de software con experiencia en Vue.js, Angular, React, .NET y desarrollo web full-stack",
 	image = "/images/ramon-gracia-preview.jpg",
 	canonical = Astro.url.href,
 	type = "website",
@@ -53,7 +53,7 @@ const currentUrl = Astro.url.href;
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:image" content={new URL(image, currentUrl)} />
-		<meta property="og:site_name" content="Portfolio de Ramón Gracia" />
+		<meta property="og:site_name" content="Portafolio de Ramón Gracia" />
 		<meta property="og:locale" content="es_ES" />
 
 		<!-- Twitter -->
@@ -439,6 +439,15 @@ const currentUrl = Astro.url.href;
 		<script is:inline defer src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 		<script is:inline defer src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 		<script is:inline defer src="/scripts/simpleNavigation.js"></script>
+		<!-- EmailJS para el formulario de contacto -->
+		<script is:inline defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+		<script is:inline>
+			(function() {
+				// Inicializar EmailJS con tu clave pública
+				emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza con tu clave pública de EmailJS
+			})();
+		</script>
+		<script is:inline defer src="/js/contact-form.js"></script>
 		<script is:inline>
 			// Función para alternar entre modo claro y oscuro
 			function toggleDarkMode() {
