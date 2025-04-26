@@ -446,7 +446,23 @@ const currentUrl = Astro.url.href;
 				// Inicializar EmailJS con tu clave pública cuando el DOM esté cargado
 				document.addEventListener('DOMContentLoaded', function() {
 					if (typeof emailjs !== 'undefined') {
-						emailjs.init("YOUR_PUBLIC_KEY"); // Reemplaza con tu clave pública de EmailJS
+						emailjs.init({
+							publicKey: 'YOUR_PUBLIC_KEY', // Reemplaza con tu clave pública de EmailJS
+							// No permitir navegadores sin interfaz
+							blockHeadless: true,
+							blockList: {
+								// Bloquear estos correos
+								list: ['spam@example.com', 'test@example.com'],
+								// La variable que contiene la dirección de correo
+								watchVariable: 'email',
+							},
+							limitRate: {
+								// Establecer el límite de tasa para la aplicación
+								id: 'contact-form',
+								// Permitir 1 solicitud cada 10 segundos
+								throttle: 10000,
+							},
+						});
 						console.log("EmailJS inicializado correctamente");
 					} else {
 						console.error("EmailJS no está disponible");
