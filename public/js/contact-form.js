@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Enviar los datos usando EmailJS
       await emailjs.send(
-        'service_contact', // Reemplazar con tu Service ID
-        'template_contact', // Reemplazar con tu Template ID
+        'service_hehozt8', // Reemplazar con tu Service ID
+        'template_ls5n931', // Reemplazar con tu Template ID
         {
           name: formDataObj.name,
           email: formDataObj.email,
